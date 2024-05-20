@@ -1,4 +1,5 @@
-import '@/assets/styles/globals.css'
+import '../assets/styles/globals.css'
+import Navbar from '../components/Navbar'
 
 export const metadata = {
 	title: 'Kimpactify Store | Find your affordable wears.',
@@ -10,8 +11,9 @@ const layout = ({ children }) => {
 	return (
 		<html lang='en'>
 			<body>
-				<div>
-					<div className=''>{children}</div>
+				<div className=''>
+					<Navbar />
+					<main className=''>{children}</main>
 				</div>
 			</body>
 		</html>

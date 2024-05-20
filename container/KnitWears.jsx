@@ -1,15 +1,15 @@
 import React from 'react'
-import Card from '../components/Card'
 import imgOne from '../assets/imgs/cloth-1.png'
 import imgTwo from '../assets/imgs/cloth-2.png'
 import Heading from '../components/Heading'
 import More from '../components/More'
+import Card from '../components/Card'
 
-const AfricanWear = () => {
+const KnitWears = () => {
 	return (
 		<div className=' mt-[3rem]'>
 			<div className=' flex justify-between items-center mb-[2rem]'>
-				<Heading text={'African Wears'} />
+				<Heading text={'Knit Wears/Sweaters'} />
 				<More link={'/categories/african-wears'} />
 			</div>
 			<div className=' flex justify-between'>
@@ -53,4 +53,4 @@ const AfricanWear = () => {
 	)
 }
 
-export default AfricanWear
+export default KnitWears

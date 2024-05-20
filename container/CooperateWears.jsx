@@ -1,16 +1,16 @@
 import React from 'react'
+import Heading from '../components/Heading'
 import Card from '../components/Card'
+import More from '../components/More'
 import imgOne from '../assets/imgs/cloth-1.png'
 import imgTwo from '../assets/imgs/cloth-2.png'
-import Heading from '../components/Heading'
-import More from '../components/More'
 
-const AfricanWear = () => {
+const CooperateWears = () => {
 	return (
 		<div className=' mt-[3rem]'>
 			<div className=' flex justify-between items-center mb-[2rem]'>
-				<Heading text={'African Wears'} />
-				<More link={'/categories/african-wears'} />
+				<Heading text={'Cooperate Wears'} />
+				<More link={'/categories/cooperate-wears'} />
 			</div>
 			<div className=' flex justify-between'>
 				<Card
@@ -53,4 +53,4 @@ const AfricanWear = () => {
 	)
 }
 
-export default AfricanWear
+export default CooperateWears

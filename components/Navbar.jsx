@@ -6,9 +6,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import CategoryNav from './CategoryNav'
 import { IoChevronForward } from 'react-icons/io5'
+import { motion } from 'framer-motion'
 
 const Navbar = () => {
 	const [isCategory, setIsCategory] = useState(false)
+
+	const variants = {
+		open: { opacity: 1, x: 0 },
+		closed: { opacity: 0, x: '-100%' },
+	}
 
 	return (
 		<div className=''>
@@ -41,8 +47,7 @@ const Navbar = () => {
 					</ul>
 				</div>
 			</div>
-
-			{isCategory && <CategoryNav setIsCategory={setIsCategory} />}
+				<CategoryNav isCategory={isCategory} setIsCategory={setIsCategory} />
 		</div>
 	)
 }

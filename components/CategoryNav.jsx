@@ -1,13 +1,22 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { IoChevronForward } from 'react-icons/io5'
+import { motion } from 'framer-motion'
 
-const CategoryNav = ({ setIsCategory }) => {
+const CategoryNav = ({ isCategory, setIsCategory }) => {
+	const variants = {
+		open: { opacity: 1, y: 0 },
+		closed: { opacity: 0, y: '-200%' },
+	}
+
 	return (
-		<div
-			className='bg-white mx-auto mt-[1rem] shadow-sm px-[3rem] py-[1rem] rounded-sm absolute left-0 right-0'
-			onMouseEnter={() => setIsCategory(true)}
+		<motion.div
+			animate={isCategory ? 'open' : 'closed'}
+			variants={variants}
+			className='bg-white mx-auto mt-[1rem] shadow-sm px-[3rem] py-[1rem] rounded-sm absolute left-0 right-0 overflow-x-hidden'
 			onMouseLeave={() => setIsCategory(false)}
 		>
 			<div className=' grid grid-cols-5 justify-items-center'>
@@ -181,7 +190,7 @@ const CategoryNav = ({ setIsCategory }) => {
 					</Link>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	)
 }
 

@@ -1,6 +1,7 @@
 import '../assets/styles/globals.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import CategeoryNav from '../components/CategoryNav'
 
 export const metadata = {
 	title: 'Kimpactify Store | Find your affordable wears.',
@@ -14,6 +15,7 @@ const layout = ({ children }) => {
 			<body>
 				<div className=''>
 					<Navbar />
+
 					<main className=''>{children}</main>
 					<Footer />
 				</div>

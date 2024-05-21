@@ -1,9 +1,17 @@
+'use client'
+
 import React from 'react'
 import { BtnPrimary, BtnSecondary } from './Buttons'
+import { motion } from 'framer-motion'
 
 const Banner = () => {
 	return (
-		<div className=' flex bg-[#F7D977] mt-[3rem] rounded-2xl p-[3rem]'>
+		<motion.div
+			initial={{ x: 200 }}
+			whileInView={{ x: 0 }}
+			viewport={{ once: false }}
+			className=' flex bg-[#F7D977] mt-[3rem] rounded-2xl p-[3rem]'
+		>
 			<div className=' w-[60%]'>
 				<h1 className=' font-bold text-[3rem] leading-[1.2]'>
 					Lorem Ipsum dolor, Lorem Ipsum dolor
@@ -19,7 +27,7 @@ const Banner = () => {
 			</div>
 
 			<div className=''></div>
-		</div>
+		</motion.div>
 	)
 }
 

@@ -5,7 +5,7 @@ import KnitWears from '../container/KnitWears'
 
 const HomePage = () => {
 	return (
-		<div className=' w-[90vw] mx-auto'>
+		<div className=' w-[90vw] mx-auto overflow-x-hidden'>
 			<Banner />
 			<AfricanWear />
 			<CooperateWears />

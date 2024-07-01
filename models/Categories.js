@@ -1,7 +1,10 @@
 import { Schema, model, models } from 'mongoose'
 
 const CategoriesSchema = new Schema({
-	category: {
+	param: {
+		type: String,
+	},
+	title: {
 		type: String,
 	},
 	products: [

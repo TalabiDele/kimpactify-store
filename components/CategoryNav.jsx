@@ -23,7 +23,7 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 				{/* African Wears */}
 				<div className=' flex flex-col'>
 					<Link
-						href={'/african-wears'}
+						href={'/categories/african-wears'}
 						className=' flex items-center text-[#1E65FF] font-medium gap-1 uppercase mb-[1rem]'
 					>
 						African Wears <IoChevronForward />
@@ -93,7 +93,7 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 				{/* Cooperate Wears */}
 				<div className=' flex flex-col'>
 					<Link
-						href={'/cooperate-wears'}
+						href={'/categories/cooperate-wears'}
 						className=' flex items-center text-[#1E65FF] font-medium gap-1 uppercase mb-[1rem]'
 					>
 						Cooperate Wears <IoChevronForward />
@@ -115,7 +115,7 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 				{/* Knit Wears */}
 				<div className=' flex flex-col'>
 					<Link
-						href={'/knit-wears'}
+						href={'/categories/knit-wears'}
 						className=' flex items-center text-[#1E65FF] font-medium gap-1 uppercase mb-[1rem]'
 					>
 						Knit Wears/Sweaters <IoChevronForward />
@@ -137,7 +137,7 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 				{/* 2 piece set */}
 				<div className=' flex flex-col'>
 					<Link
-						href={'/two-piece-set'}
+						href={'categories/two-piece-set'}
 						className=' flex items-center text-[#1E65FF] font-medium gap-1 uppercase mb-[1rem]'
 					>
 						2 Piece Set <IoChevronForward />
@@ -159,7 +159,7 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 				{/* Wrap Wears */}
 				<div className=' flex flex-col'>
 					<Link
-						href={'/wrap-wears'}
+						href={'/categories/wrap-wears'}
 						className=' flex items-center text-[#1E65FF] font-medium gap-1 uppercase mb-[1rem]'
 					>
 						Wrap Wears <IoChevronForward />

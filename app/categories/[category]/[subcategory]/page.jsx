@@ -29,16 +29,12 @@ const SubCategory = () => {
 				const productCategory = await fetchSubCategories(subcategory)
 				setProducts(productCategory)
 
-				console.log(products)
+				console.log(productCategory)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
 				setLoading(false)
 			}
-
-			// if(products === null) {
-
-			// }
 		}
 
 		// fetchSubCategoryTitle(subcategory)
@@ -46,11 +42,9 @@ const SubCategory = () => {
 		const fetchSubTitle = async () => {
 			if (!subcategory) return
 
-			console.log(subcategory)
-
 			try {
 				const categoryTitle = await fetchSubCategoryTitle(subcategory)
-				// setTitle(categoryTitle[0]?.title)
+				setTitle(categoryTitle[0]?.title)
 				console.log(categoryTitle)
 			} catch (error) {
 				console.error('Error fetching products', error)

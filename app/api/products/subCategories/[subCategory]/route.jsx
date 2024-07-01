@@ -8,13 +8,17 @@ export const GET = async (request, { params }) => {
 
 		const param = params.subCategory
 
+		console.log(param)
+
 		const categories = await SubCategory.find({ param: param })
 
-		console.log(categories[0]._id)
+		console.log(categories[0]?._id)
 
 		const products = await Product.find({
-			subCategory: categories[0]._id,
+			subCategory: categories[0]?._id,
 		})
+
+		console.log(products)
 
 		return new Response(JSON.stringify(products), {
 			status: 200,

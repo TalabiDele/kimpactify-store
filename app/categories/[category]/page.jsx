@@ -51,11 +51,7 @@ const Category = () => {
 
 	// console.log('products', products)
 
-	return (
-		<div>
-			<CardDisplay products={products} title={title} />
-		</div>
-	)
+	return <div>{/* <CardDisplay products={products} title={title} /> */}</div>
 }
 
 export default Category

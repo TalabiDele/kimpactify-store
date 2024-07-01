@@ -16,11 +16,10 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 		<motion.div
 			animate={isCategory ? 'open' : 'closed'}
 			variants={variants}
-			className='bg-white mx-auto mt-[1rem] shadow-sm px-[3rem] py-[1rem] rounded-sm absolute left-0 right-0 overflow-x-hidden'
+			className='bg-white mx-auto mt-[1rem] shadow-sm px-[3rem] py-[1rem] rounded-sm absolute left-0 right-0 overflow-x-hidden z-[100]'
 			onMouseLeave={() => setIsCategory(false)}
 		>
 			<div className=' grid grid-cols-5 justify-items-center'>
-				{/* African Wears */}
 				<div className=' flex flex-col'>
 					<Link
 						href={'/categories/african-wears'}
@@ -89,7 +88,6 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 						Nigerian Suit Style
 					</Link>
 				</div>
-
 				{/* Cooperate Wears */}
 				<div className=' flex flex-col'>
 					<Link
@@ -111,7 +109,6 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 						Tops
 					</Link>
 				</div>
-
 				{/* Knit Wears */}
 				<div className=' flex flex-col'>
 					<Link
@@ -133,7 +130,6 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 						Machine Knitted Wears
 					</Link>
 				</div>
-
 				{/* 2 piece set */}
 				<div className=' flex flex-col'>
 					<Link
@@ -143,7 +139,7 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 						2 Piece Set <IoChevronForward />
 					</Link>
 					<Link
-						href={'/categories/two-piece-set/bubu'}
+						href={'/categories/two-piece-set/bubu-plain-ankara'}
 						className=' mb-[0.5rem] text-sm'
 					>
 						Bubu Plain & Ankara
@@ -155,7 +151,6 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 						Crop Tops
 					</Link>
 				</div>
-
 				{/* Wrap Wears */}
 				<div className=' flex flex-col'>
 					<Link

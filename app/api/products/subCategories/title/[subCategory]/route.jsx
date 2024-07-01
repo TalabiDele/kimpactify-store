@@ -9,9 +9,9 @@ export const GET = async (request, { params }) => {
 
 		const slug = params.subCategory
 
-		console.log(slug)
-
 		const categories = await SubCategory.find({ param: slug })
+
+		console.log('categories', categories)
 
 		return new Response(JSON.stringify(categories), {
 			status: 200,

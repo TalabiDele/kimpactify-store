@@ -31,8 +31,6 @@ async function fetchTitle(param) {
 }
 
 async function fetchSubCategories(subCategory) {
-	console.log(subCategory)
-
 	try {
 		const res = await fetch(
 			`${process.env.NEXT_PUBLIC_API_DOMAIN}/products/subCategories/${subCategory}`
@@ -49,7 +47,7 @@ async function fetchSubCategories(subCategory) {
 }
 
 async function fetchSubCategoryTitle(param) {
-	console.log(param)
+	console.log(process.env.NEXT_PUBLIC_API_DOMAIN)
 
 	try {
 		const res = await fetch(
@@ -59,8 +57,6 @@ async function fetchSubCategoryTitle(param) {
 		if (!res.ok) {
 			throw new Error('Failed to fetch data')
 		}
-
-		// console.log(res.json())
 
 		return res.json()
 	} catch (error) {

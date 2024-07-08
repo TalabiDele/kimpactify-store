@@ -1,13 +1,17 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Heading from '../components/Heading'
 import { FaStar } from 'react-icons/fa'
 import { BtnCard, BtnFill } from '../components/Buttons'
 import { MdOutlineShoppingCart } from 'react-icons/md'
+import Context from '../context/Context'
+import toast from 'react-hot-toast'
 
 const ProductDetails = ({ product }) => {
 	const [quantity, setQuantity] = useState(1)
+
+	const { cart, setCart } = useContext(Context)
 
 	const handlePlus = () => {
 		setQuantity(quantity + 1)
@@ -16,6 +20,30 @@ const ProductDetails = ({ product }) => {
 	const handleMinus = () => {
 		if (quantity !== 1) {
 			setQuantity(quantity - 1)
+		}
+	}
+
+	const handleCart = () => {
+		if (cart?.length === 0) {
+			setCart([...cart, product])
+
+			toast.success('Item added to cart', {
+				duration: 6000,
+			})
+		} else {
+			cart?.map((item) => {
+				if (item?.Id === product?._id) {
+					toast.error('Item already in cart', {
+						duration: 6000,
+					})
+				} else {
+					setCart([...cart, product])
+
+					toast.success('Item added to cart', {
+						duration: 6000,
+					})
+				}
+			})
 		}
 	}
 
@@ -62,7 +90,9 @@ const ProductDetails = ({ product }) => {
 
 				<div className=' flex gap-[1rem] mt-[1rem]'>
 					<BtnFill text={'Buy now'} />
-					<BtnCard text={'Add to cart'} icon={<MdOutlineShoppingCart />} />
+					<div className='' onClick={handleCart}>
+						<BtnCard text={'Add to cart'} icon={<MdOutlineShoppingCart />} />
+					</div>
 				</div>
 			</div>
 		</div>

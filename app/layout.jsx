@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CategeoryNav from '../components/CategoryNav'
 import { Provider } from '../context/Context'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
 	title: 'Kimpactify Store | Find your affordable wears.',
@@ -16,6 +17,7 @@ const layout = ({ children }) => {
 			<html lang='en'>
 				<body>
 					<div className=''>
+						<Toaster />
 						<Navbar />
 
 						<main className=''>{children}</main>

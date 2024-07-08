@@ -20,10 +20,20 @@ export const BtnSecondary = ({ text }) => {
 	)
 }
 
-export const BtnCard = ({ text }) => {
+export const BtnCard = ({ text, icon }) => {
 	return (
 		<div>
-			<button className=' bg-none border border-[#1E65FF] rounded-md text-[#1E65FF] py-[0.3rem] px-[1rem] text-[0.8rem]'>
+			<button className=' bg-none border border-[#1E65FF] rounded-md text-[#1E65FF] py-[0.3rem] px-[1rem] text-[0.8rem] flex gap-1 font-medium items-center'>
+				{text} {icon}
+			</button>
+		</div>
+	)
+}
+
+export const BtnFill = ({ text }) => {
+	return (
+		<div>
+			<button className=' bg-[#1E65FF] border border-[#1E65FF] rounded-md text-[#fff] py-[0.3rem] px-[1rem] text-[0.8rem] font-medium'>
 				{text}
 			</button>
 		</div>

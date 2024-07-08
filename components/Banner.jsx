@@ -10,7 +10,7 @@ const Banner = () => {
 			initial={{ x: 200 }}
 			whileInView={{ x: 0 }}
 			viewport={{ once: false }}
-			className=' flex bg-[#F7D977] mt-[3rem] rounded-2xl p-[3rem]'
+			className=' flex bg-[#ffd138] mt-[3rem] rounded-2xl p-[3rem]'
 		>
 			<div className=' w-[60%]'>
 				<h1 className=' font-bold text-[3rem] leading-[1.2]'>

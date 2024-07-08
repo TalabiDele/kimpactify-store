@@ -8,7 +8,7 @@ import Heading from '../components/Heading'
 import More from '../components/More'
 import { motion } from 'framer-motion'
 
-const CardDisplay = ({ products, title }) => {
+const CardDisplay = ({ products, title, category }) => {
 	// console.log(products)
 
 	return (
@@ -19,17 +19,19 @@ const CardDisplay = ({ products, title }) => {
 			className=' mt-[3rem] w-[90vw] mx-auto'
 		>
 			<div className=' flex justify-between items-center mb-[2rem]'>
-				<Heading text={title} />
+				<Heading text={title?.title} />
 				{/* <More link={`/categories/${}`} /> */}
 			</div>
 			<div className=' flex justify-between'>
 				{products?.map((product) => (
 					<Card
+						key={product?._id}
 						img={imgOne}
 						title={product?.title}
 						description={product?.description}
 						amount={`$${product?.pricing}`}
 						rating={`[${product?.rating}]`}
+						link={`/categories/${category?.param}/${title?.param}/${product?._id}`}
 					/>
 				))}
 			</div>

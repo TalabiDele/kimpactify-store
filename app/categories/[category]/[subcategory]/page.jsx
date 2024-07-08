@@ -2,8 +2,9 @@
 
 import { useParams } from 'next/navigation'
 import {
-	fetchSubCategoryTitle,
+	fetchCategoryTitle,
 	fetchSubCategories,
+	fetchSubCategoryTitle,
 } from '../../../../utils/requests'
 import React, { useEffect, useState } from 'react'
 import CardDisplay from '../../../../container/CardDisplay'
@@ -12,24 +13,17 @@ const SubCategory = () => {
 	const [products, setProducts] = useState(null)
 	const [title, setTitle] = useState('')
 	const [loading, setLoading] = useState(true)
+	const [category, setCategory] = useState(null)
 
 	const { subcategory } = useParams()
-
-	// console.log(useParams)
-
-	// console.log(subcategory)
 
 	useEffect(() => {
 		const fetchProducts = async () => {
 			if (!subcategory) return
 
-			console.log(subcategory)
-
 			try {
 				const productCategory = await fetchSubCategories(subcategory)
 				setProducts(productCategory)
-
-				console.log(productCategory)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
@@ -37,15 +31,34 @@ const SubCategory = () => {
 			}
 		}
 
-		// fetchSubCategoryTitle(subcategory)
-
 		const fetchSubTitle = async () => {
 			if (!subcategory) return
 
 			try {
 				const categoryTitle = await fetchSubCategoryTitle(subcategory)
-				setTitle(categoryTitle[0]?.title)
-				console.log(categoryTitle)
+				setTitle(categoryTitle[0])
+			} catch (error) {
+				console.error('Error fetching products', error)
+			} finally {
+				setLoading(false)
+			}
+		}
+
+		const fetchTitle = async () => {
+			// if (!products) return
+
+			try {
+				const productCategory = await fetchSubCategories(subcategory)
+
+				if (productCategory) {
+					console.log(productCategory[0]?._id)
+					const categoryTitle = await fetchCategoryTitle(
+						productCategory[0]?._id
+					)
+					setCategory(categoryTitle[0])
+
+					console.log(categoryTitle)
+				}
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
@@ -55,11 +68,12 @@ const SubCategory = () => {
 
 		fetchProducts()
 		fetchSubTitle()
+		fetchTitle()
 	}, [subcategory])
 
 	return (
 		<div>
-			<CardDisplay products={products} title={title} />
+			<CardDisplay products={products} title={title} category={category} />
 		</div>
 	)
 }

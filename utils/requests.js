@@ -47,11 +47,45 @@ async function fetchSubCategories(subCategory) {
 }
 
 async function fetchSubCategoryTitle(param) {
-	console.log(process.env.NEXT_PUBLIC_API_DOMAIN)
+	// console.log(param)
 
 	try {
 		const res = await fetch(
 			`${process.env.NEXT_PUBLIC_API_DOMAIN}/products/subCategories/title/${param}`
+		)
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch data')
+		}
+
+		return res.json()
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+async function fetchCategoryTitle(param) {
+	console.log(param)
+
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_API_DOMAIN}/categories/${param}`
+		)
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch data')
+		}
+
+		return res.json()
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+async function fetchProduct(param) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_API_DOMAIN}/products/${param}`
 		)
 
 		if (!res.ok) {
@@ -69,4 +103,6 @@ export {
 	fetchTitle,
 	fetchSubCategories,
 	fetchSubCategoryTitle,
+	fetchCategoryTitle,
+	fetchProduct,
 }

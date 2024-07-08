@@ -2,8 +2,9 @@ import Image from 'next/image'
 import React from 'react'
 import { FaStar } from 'react-icons/fa'
 import { BtnCard } from './Buttons'
+import Link from 'next/link'
 
-const Card = ({ img, title, description, amount, rating, id }) => {
+const Card = ({ img, title, description, amount, rating, id, link }) => {
 	return (
 		<div>
 			<div
@@ -32,7 +33,9 @@ const Card = ({ img, title, description, amount, rating, id }) => {
 						</div>
 					</div>
 
-					<BtnCard text={'Buy now'} />
+					<Link href={link}>
+						<BtnCard text={'Buy now'} />
+					</Link>
 				</div>
 			</div>
 		</div>

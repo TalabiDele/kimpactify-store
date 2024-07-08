@@ -1,15 +1,19 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import logo from '../assets/imgs/kimptrendz-logo.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import CategoryNav from './CategoryNav'
 import { IoChevronForward } from 'react-icons/io5'
 import { motion } from 'framer-motion'
+import { BsCart3 } from 'react-icons/bs'
+import Context from '../context/Context'
 
 const Navbar = () => {
 	const [isCategory, setIsCategory] = useState(false)
+
+	const { cart } = useContext(Context)
 
 	const variants = {
 		open: { opacity: 1, x: 0 },
@@ -40,6 +44,14 @@ const Navbar = () => {
 							</Link>
 						</li>
 						<li>
+							<Link href={'/cart'} className=' relative'>
+								<BsCart3 className='' fontSize={20} />
+								<div className=' text-sm bg-black text-[#fff] text-center rounded-full absolute w-[1rem] h-[1rem] flex items-center justify-center -top-[0.5rem] -right-[0.5rem]'>
+									{cart?.length}
+								</div>
+							</Link>
+						</li>
+						<li>
 							<button className=' border text-[#8996A2] border-[#8996A2] py-[0.5rem] px-[1rem] rounded-2xl'>
 								Sign in
 							</button>
@@ -47,7 +59,7 @@ const Navbar = () => {
 					</ul>
 				</div>
 			</div>
-				<CategoryNav isCategory={isCategory} setIsCategory={setIsCategory} />
+			<CategoryNav isCategory={isCategory} setIsCategory={setIsCategory} />
 		</div>
 	)
 }

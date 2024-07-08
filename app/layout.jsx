@@ -2,6 +2,7 @@ import '../assets/styles/globals.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CategeoryNav from '../components/CategoryNav'
+import { Provider } from '../context/Context'
 
 export const metadata = {
 	title: 'Kimpactify Store | Find your affordable wears.',
@@ -11,16 +12,18 @@ export const metadata = {
 
 const layout = ({ children }) => {
 	return (
-		<html lang='en'>
-			<body>
-				<div className=''>
-					<Navbar />
+		<Provider>
+			<html lang='en'>
+				<body>
+					<div className=''>
+						<Navbar />
 
-					<main className=''>{children}</main>
-					<Footer />
-				</div>
-			</body>
-		</html>
+						<main className=''>{children}</main>
+						<Footer />
+					</div>
+				</body>
+			</html>
+		</Provider>
 	)
 }
 

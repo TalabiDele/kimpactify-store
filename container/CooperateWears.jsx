@@ -27,6 +27,7 @@ const CooperateWears = () => {
 					description={"Capturing Life's Precious Moments."}
 					amount={'$199.99'}
 					rating={'[4.5]'}
+					link={'/'}
 				/>
 				<Card
 					img={imgTwo}
@@ -34,6 +35,7 @@ const CooperateWears = () => {
 					description={"Capturing Life's Precious Moments."}
 					amount={'$199.99'}
 					rating={'[4.5]'}
+					link={'/'}
 				/>
 				<Card
 					img={imgOne}
@@ -41,6 +43,7 @@ const CooperateWears = () => {
 					description={"Capturing Life's Precious Moments."}
 					amount={'$199.99'}
 					rating={'[4.5]'}
+					link={'/'}
 				/>
 				<Card
 					img={imgTwo}
@@ -48,6 +51,7 @@ const CooperateWears = () => {
 					description={"Capturing Life's Precious Moments."}
 					amount={'$199.99'}
 					rating={'[4.5]'}
+					link={'/'}
 				/>
 				<Card
 					img={imgTwo}
@@ -55,6 +59,7 @@ const CooperateWears = () => {
 					description={"Capturing Life's Precious Moments."}
 					amount={'$199.99'}
 					rating={'[4.5]'}
+					link={'/'}
 				/>
 			</div>
 		</motion.div>

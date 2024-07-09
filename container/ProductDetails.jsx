@@ -13,6 +13,8 @@ const ProductDetails = ({ product }) => {
 
 	const { cart, setCart } = useContext(Context)
 
+	console.log('cart', cart, product)
+
 	const handlePlus = () => {
 		setQuantity(quantity + 1)
 	}
@@ -25,25 +27,44 @@ const ProductDetails = ({ product }) => {
 
 	const handleCart = () => {
 		if (cart?.length === 0) {
-			setCart([...cart, product])
+			setCart((prevCart) => {
+				return [...prevCart, { ...product, quantity: 1 }]
+			})
 
 			toast.success('Item added to cart', {
 				duration: 6000,
 			})
 		} else {
-			cart?.map((item) => {
-				if (item?.Id === product?._id) {
-					toast.error('Item already in cart', {
-						duration: 6000,
-					})
-				} else {
-					setCart([...cart, product])
+			const itemId = cart?.find((item) => item?._id === product?._id)
 
-					toast.success('Item added to cart', {
-						duration: 6000,
-					})
-				}
-			})
+			if (itemId) {
+				toast.error('Item already in cart', {
+					duration: 6000,
+				})
+			} else {
+				setCart((prevCart) => {
+					const existingProductIndex = prevCart.findIndex(
+						(item) => item._id === product._id
+					)
+
+					console.log(prevCart)
+
+					if (existingProductIndex !== -1) {
+						// Product already in cart, update the quantity
+						return prevCart.map((item, index) =>
+							index === existingProductIndex
+								? { ...item, quantity: (item.quantity || 1) + 1 }
+								: item
+						)
+					} else {
+						return [...prevCart, { ...product, quantity: 1 }]
+					}
+				})
+
+				toast.success('Item added to cart', {
+					duration: 6000,
+				})
+			}
 		}
 	}
 

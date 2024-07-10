@@ -1,13 +1,15 @@
+'use client'
+
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { BtnFill, BtnWide } from './Buttons'
+import PayModal from './PayModal'
 
-const OrderSummary = ({ orders, quantity }) => {
-	// const uniqueItems = Array.from(
-	// 	new Map(orders.map((item) => [item.id, item])).values()
-	// )
-
-	// console.log(orders, uniqueItems)
+const OrderSummary = ({ orders }) => {
+	const [amount, setAmount] = useState()
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [isPay, setIsPay] = useState(false)
 
 	const calculateTotal = () => {
 		return orders.reduce((acc, item) => {
@@ -15,8 +17,23 @@ const OrderSummary = ({ orders, quantity }) => {
 		}, 0)
 	}
 
+	const handleCheckout = () => {
+		setIsPay(true)
+
+		setAmount(calculateTotal())
+	}
+
 	return (
 		<div>
+			<PayModal
+				amount={amount}
+				name={name}
+				setName={setName}
+				email={email}
+				setEmail={setEmail}
+				isPay={isPay}
+				setIsPay={setIsPay}
+			/>
 			<div className=' w-[25vw] bg-[#fff] shadow-xl rounded-md p-[1rem]'>
 				<h1 className='text-xl font-bold mb-[1rem]'>Order Summary</h1>
 				{orders?.length === 0 ? (
@@ -24,7 +41,6 @@ const OrderSummary = ({ orders, quantity }) => {
 				) : (
 					<div className=' border-b border-[#DFE2E6] pb-[1rem] text-[#5D6B82]'>
 						{orders?.map((order, index) => (
-							// orders?.filter((item) => (
 							<div className=' flex justify-between  items-center '>
 								<div className=''>
 									<p className=' text-sm font-medium'>{order?.title}</p>
@@ -42,7 +58,7 @@ const OrderSummary = ({ orders, quantity }) => {
 					<p className=' font-bold'>${calculateTotal()}</p>
 				</div>
 
-				<div className=' w-full'>
+				<div className=' w-full' onClick={handleCheckout}>
 					<BtnWide text={'Checkout'} />
 				</div>
 			</div>

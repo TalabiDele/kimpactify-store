@@ -39,3 +39,13 @@ export const BtnFill = ({ text }) => {
 		</div>
 	)
 }
+
+export const BtnWide = ({ text }) => {
+	return (
+		<div>
+			<button className=' bg-[#1E65FF] border border-[#1E65FF] rounded-md text-[#fff] py-[0.3rem] px-[1rem] text-[0.8rem] font-medium w-full'>
+				{text}
+			</button>
+		</div>
+	)
+}

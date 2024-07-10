@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { FaStar } from 'react-icons/fa'
 import { BtnCard, BtnFill } from './Buttons'
 import OrderSummary from './OrderSummary'
+import toast from 'react-hot-toast'
 
 const CartItem = () => {
 	const [orders, setOrders] = useState([])
@@ -53,8 +54,14 @@ const CartItem = () => {
 	}
 
 	const handleRemove = (id) => {
-		const filteredItems = items.filter((item) => item.id !== id)
-		setItems(filteredItems)
+		const filteredItems = cart?.filter((item) => item._id !== id)
+
+		console.log(filteredItems)
+		setCart(filteredItems)
+
+		toast.success('Product removed from cart!', {
+			duration: 6000,
+		})
 	}
 
 	return (
@@ -121,7 +128,7 @@ const CartItem = () => {
 							{/* <div className='' onClick={() => handleOrder(item)}>
 							<BtnFill text={'Buy now'} />
 						</div> */}
-							<div className='' onClick={() => handleRemove(item)}>
+							<div className='' onClick={() => handleRemove(item?._id)}>
 								<BtnCard text={'Remove item'} />
 							</div>
 						</div>

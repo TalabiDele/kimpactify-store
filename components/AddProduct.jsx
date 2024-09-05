@@ -34,7 +34,7 @@ const formSchema = z.object({
 	sizes: z.string().transform((v) => Number(v) || 0),
 })
 
-const AddProduct = ({ product, categories }) => {
+const AddProduct = ({ product, categories, setIsAdd }) => {
 	const [subCategories, setSubCategories] = useState()
 	const [loading, setLoading] = useState(true)
 
@@ -46,10 +46,14 @@ const AddProduct = ({ product, categories }) => {
 				console.log(resSubCategories)
 
 				setSubCategories(resSubCategories)
+
+				setIsAdd(false)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
 				setLoading(false)
+
+				setIsAdd(false)
 			}
 		}
 

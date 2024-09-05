@@ -4,6 +4,13 @@ const SubCategorySchema = new Schema({
 	param: {
 		type: String,
 	},
+	products: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Products',
+			required: true,
+		},
+	],
 	title: {
 		type: String,
 	},

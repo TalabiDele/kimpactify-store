@@ -25,6 +25,8 @@ export const PUT = async (request, { params }) => {
 	try {
 		const { values } = await request.json()
 
+		console.log(params)
+
 		console.log(values)
 		await connectDB()
 		const param = params.product
@@ -39,5 +41,23 @@ export const PUT = async (request, { params }) => {
 	} catch (error) {
 		console.log(error)
 		return new Response('Something went wrong', { status: 500 })
+	}
+}
+
+export const DELETE = async (request, { params }) => {
+	try {
+		await connectDB()
+		const param = params.product
+
+		const productDelete = await Product.findById(param)
+
+		await productDelete.deleteOne()
+
+		return new Response(JSON.stringify({ message: 'Product deleted' }), {
+			status: 200,
+		})
+	} catch (error) {
+		console.log(error)
+		return new Response(error, { status: 500 })
 	}
 }

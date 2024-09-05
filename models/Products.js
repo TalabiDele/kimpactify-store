@@ -1,4 +1,5 @@
 import { Schema, model, models } from 'mongoose'
+import SubCategory from './SubCategories'
 
 const ProductSchema = new Schema(
 	{
@@ -29,7 +30,7 @@ const ProductSchema = new Schema(
 		},
 		subCategory: {
 			type: Schema.Types.ObjectId,
-			ref: 'SubCategory',
+			ref: SubCategory.modelName,
 		},
 		quantity: {
 			type: Number,

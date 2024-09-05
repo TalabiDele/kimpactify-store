@@ -15,11 +15,12 @@ import { LuMoreHorizontal } from 'react-icons/lu'
 import EditProductModal from './EditProductModal'
 import AddProduct from './AddProduct'
 import { MdOutlineDelete } from 'react-icons/md'
+import DeleteProduct from './DeleteProductModal'
 
 export function ProductTable({ productItem, categories }) {
 	const [isEdit, setIsEdit] = useState(false)
 	const [productEdit, setProductEdit] = useState()
-	const [isAdd, setIsAdd] = useState()
+	const [isDelete, setIsDelete] = useState(false)
 
 	console.log(productItem)
 
@@ -32,13 +33,24 @@ export function ProductTable({ productItem, categories }) {
 	}
 
 	const handleDelete = (item) => {
+		setIsDelete(true)
 		console.log(item)
+
+		setProductEdit(item)
 	}
 
 	return (
 		<div className=' mt-[1rem] bg-white rounded-md border-gray-400 h-[70vh] overflow-y-scroll'>
 			{isEdit && (
 				<EditProductModal product={productEdit} categories={categories} />
+			)}
+
+			{isDelete && (
+				<DeleteProduct
+					isDelete={isDelete}
+					setIsDelete={setIsDelete}
+					product={productEdit}
+				/>
 			)}
 
 			<Table className=''>
@@ -70,9 +82,9 @@ export function ProductTable({ productItem, categories }) {
 									<LuMoreHorizontal />
 								</div>
 							</TableCell>
-							<TableCell className='text-right '>
+							<TableCell className=' '>
 								<div
-									className='h-[2rem] w-[2rem] flex items-center justify-center transition-all duration-100 ease-in-out cursor-pointer rounded-full text-red-600 hover:bg-gray-200'
+									className='h-[2rem] w-[2rem] flex items-center justify-center transition-all duration-100 ease-in-out cursor-pointer rounded-full text-red-600 hover:bg-gray-200 text-xl'
 									onClick={() => handleDelete(product)}
 								>
 									<MdOutlineDelete />

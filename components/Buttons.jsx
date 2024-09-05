@@ -49,3 +49,23 @@ export const BtnWide = ({ text }) => {
 		</div>
 	)
 }
+
+export const BtnCancel = ({ text }) => {
+	return (
+		<div>
+			<button className=' bg-gray-300 border rounded-md text-[#000] py-[0.3rem] px-[1rem] text-[0.8rem] font-medium w-full'>
+				{text}
+			</button>
+		</div>
+	)
+}
+
+export const BtnDelete = ({ text }) => {
+	return (
+		<div>
+			<button className=' bg-red-600 border rounded-md text-[#fff] py-[0.3rem] px-[1rem] text-[0.8rem] font-medium w-full'>
+				{text}
+			</button>
+		</div>
+	)
+}

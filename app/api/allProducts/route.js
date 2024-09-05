@@ -6,8 +6,8 @@ export const GET = async (request) => {
 		await connectDB()
 
 		const products = await Product.find({})
-			.populate('category')
 			.populate('subCategory')
+			.populate('category')
 			.exec()
 
 		return new Response(JSON.stringify(products), {
@@ -15,6 +15,6 @@ export const GET = async (request) => {
 		})
 	} catch (error) {
 		console.log(error)
-		return new Response('Something went wrong', { status: 500 })
+		return new Response(error, { status: 500 })
 	}
 }

@@ -15,7 +15,7 @@ const DashboardProducts = ({ productItem, setProductItem, categories }) => {
 
 	return (
 		<div className=''>
-			{isAdd && <AddProduct categories={categories} />}
+			{isAdd && <AddProduct categories={categories} setIsAdd={setIsAdd} />}
 			<div className=' mb-[4rem]'>
 				<Heading text={'Products'} />
 			</div>

@@ -1,7 +1,7 @@
-import Banner from '../components/Banner'
-import AfricanWear from '../container/AfricanWear'
-import CooperateWears from '../container/CooperateWears'
-import KnitWears from '../container/KnitWears'
+import Banner from '/components/Banner'
+import AfricanWear from '/container/AfricanWear'
+import CooperateWears from '/container/CooperateWears'
+import KnitWears from '/container/KnitWears'
 
 const HomePage = () => {
 	return (

@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import { fetchCategories, fetchTitle } from '../../../utils/requests'
-import CardDisplay from '../../../container/CardDisplay'
+import { fetchCategories, fetchTitle } from '/utils/requests'
+import CardDisplay from '/container/CardDisplay'
 
 const Category = () => {
 	const [products, setProducts] = useState(null)
@@ -51,7 +51,11 @@ const Category = () => {
 
 	// console.log('products', products)
 
-	return <div>{/* <CardDisplay products={products} title={title} /> */}</div>
+	return (
+		<div>
+			<CardDisplay products={products} title={title} />
+		</div>
+	)
 }
 
 export default Category

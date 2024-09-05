@@ -98,6 +98,66 @@ async function fetchProduct(param) {
 	}
 }
 
+async function fetchAllProducts() {
+	try {
+		const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/allProducts`)
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch data')
+		}
+
+		return res.json()
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+async function fetchAllCategories() {
+	try {
+		const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/categories`)
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch data')
+		}
+
+		return res.json()
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+async function fetchAllSubCategories() {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_API_DOMAIN}/subCategories`
+		)
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch data')
+		}
+
+		return res.json()
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+async function editProduct(request) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_API_DOMAIN}/subCategories`
+		)
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch data')
+		}
+
+		return res.json()
+	} catch (error) {
+		console.log(error)
+	}
+}
+
 export {
 	fetchCategories,
 	fetchTitle,
@@ -105,4 +165,7 @@ export {
 	fetchSubCategoryTitle,
 	fetchCategoryTitle,
 	fetchProduct,
+	fetchAllProducts,
+	fetchAllSubCategories,
+	fetchAllCategories,
 }

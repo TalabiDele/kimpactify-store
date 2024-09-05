@@ -1,4 +1,4 @@
-import CartContainer from '../../container/CartContainer'
+import CartContainer from '/container/CartContainer'
 import React from 'react'
 
 const page = () => {

@@ -1,8 +1,7 @@
-import '../assets/styles/globals.css'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import CategeoryNav from '../components/CategoryNav'
-import { Provider } from '../context/Context'
+import '/assets/styles/globals.css'
+import Navbar from '/components/Navbar'
+import Footer from '/components/Footer'
+import { Provider } from '/context/Context'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
@@ -19,7 +18,6 @@ const layout = ({ children }) => {
 					<div className=''>
 						<Toaster />
 						<Navbar />
-
 						<main className=''>{children}</main>
 						<Footer />
 					</div>

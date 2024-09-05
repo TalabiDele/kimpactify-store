@@ -5,9 +5,9 @@ import {
 	fetchCategoryTitle,
 	fetchSubCategories,
 	fetchSubCategoryTitle,
-} from '../../../../utils/requests'
+} from '/utils/requests'
 import React, { useEffect, useState } from 'react'
-import CardDisplay from '../../../../container/CardDisplay'
+import CardDisplay from '/container/CardDisplay'
 
 const SubCategory = () => {
 	const [products, setProducts] = useState(null)

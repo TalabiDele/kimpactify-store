@@ -14,6 +14,12 @@ const CategoriesSchema = new Schema({
 			required: true,
 		},
 	],
+	subCategories: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'SubCategories',
+		},
+	],
 })
 
 const Category = models.Category || model('Category', CategoriesSchema)

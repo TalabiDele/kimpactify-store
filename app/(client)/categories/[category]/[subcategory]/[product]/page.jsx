@@ -2,8 +2,8 @@
 
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { fetchProduct } from '../../../../../utils/requests'
-import ProductContainer from '../../../../../container/ProductContainer'
+import { fetchProduct } from '/utils/requests'
+import ProductContainer from '/container/ProductContainer'
 
 const Product = () => {
 	const [productItem, setProductItem] = useState(null)

@@ -9,7 +9,7 @@ const ProductSchema = new Schema(
 		},
 		description: {
 			type: String,
-			required: [true, 'Description is required'],
+			// required: [true, 'Description is required'],
 		},
 		image: [
 			{
@@ -24,13 +24,22 @@ const ProductSchema = new Schema(
 			type: Number,
 		},
 		category: {
-			type: String,
-			required: [true, 'Category is required'],
+			type: Schema.Types.ObjectId,
+			ref: 'Category',
 		},
 		subCategory: {
-			type: String,
-			required: [true, 'Sub Category is required'],
+			type: Schema.Types.ObjectId,
+			ref: 'SubCategory',
 		},
+		quantity: {
+			type: Number,
+			required: true,
+		},
+		sizes: [
+			{
+				type: String,
+			},
+		],
 	},
 	{
 		timestamps: true,

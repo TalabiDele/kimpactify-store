@@ -16,10 +16,10 @@ const DashboardProducts = ({ productItem, setProductItem, categories }) => {
 	return (
 		<div className=''>
 			{isAdd && <AddProduct categories={categories} setIsAdd={setIsAdd} />}
-			<div className=' mb-[4rem]'>
+			<div className=''>
 				<Heading text={'Products'} />
 			</div>
-			<div className=' flex items-center justify-between'>
+			<div className=' flex items-center justify-between mt-[4rem]'>
 				<SearchInput placeholder={'product'} />
 				<div className='' onClick={() => setIsAdd(true)}>
 					<BtnFill text={'Add product'} />

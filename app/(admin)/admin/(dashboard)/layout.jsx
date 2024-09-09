@@ -20,7 +20,7 @@ const DashboardLayout = async ({ children }) => {
 			<html lang='en'>
 				<body>
 					<main className=''>
-						<div className=' bg-[#F1EDED] flex items-start gap-5 fixed right-0 left-0 top-0 bottom-0'>
+						<div className=' bg-[#fff] flex items-start gap-5 fixed right-0 left-0 top-0 bottom-0'>
 							<SideNav />
 							<div className=' my-[2rem] w-full px-[2rem]'>{children}</div>
 						</div>

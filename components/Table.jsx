@@ -40,7 +40,7 @@ export function ProductTable({ productItem, categories }) {
 	}
 
 	return (
-		<div className=' mt-[1rem] bg-white rounded-md border-gray-400 h-[70vh] overflow-y-scroll'>
+		<div className=' mt-[1rem] bg-white rounded-md border border-gray-200 h-[70vh] overflow-y-scroll'>
 			{isEdit && (
 				<EditProductModal product={productEdit} categories={categories} />
 			)}
@@ -54,7 +54,6 @@ export function ProductTable({ productItem, categories }) {
 			)}
 
 			<Table className=''>
-				<TableCaption>A list of products.</TableCaption>
 				<TableHeader>
 					<TableRow>
 						<TableHead className=''>Name</TableHead>

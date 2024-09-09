@@ -31,7 +31,7 @@ const formSchema = z.object({
 	subCategory: z.string(),
 	pricing: z.string().transform((v) => Number(v) || 0),
 	quantity: z.string().transform((v) => Number(v) || 0),
-	sizes: z.string().transform((v) => Number(v) || 0),
+	// sizes: z.string().transform((v) => Number(v) || 0),
 })
 
 const EditProductModal = ({ product, categories }) => {
@@ -61,18 +61,18 @@ const EditProductModal = ({ product, categories }) => {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			title: product?.title,
-			category: product?.category,
-			subCategory: product?.subCategory,
+			category: product?.category.title,
+			subCategory: product?.subCategory.title,
 			quantity: Math.floor(product?.quantity),
 			pricing: Math.floor(product?.pricing),
-			sizes: Math.floor(product?.sizes),
+			// sizes: Math.floor(product?.sizes),
 		},
 	})
 
 	const handleSubmit = async (values) => {
 		// values.preventDefault()
 
-		console.log(product)
+		console.log(values)
 
 		try {
 			const response = await fetch(`/api/products/${product?._id}`, {
@@ -80,8 +80,12 @@ const EditProductModal = ({ product, categories }) => {
 				headers: {
 					'content-type': 'application/json',
 				},
-				body: JSON.stringify(values),
+				body: JSON.stringify({ values }),
 			})
+
+			const data = response.json()
+
+			console.log(data)
 
 			// response.status === 201 && router.push('/admin/auth/login')
 		} catch (error) {

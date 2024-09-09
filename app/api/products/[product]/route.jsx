@@ -23,24 +23,34 @@ export const GET = async (request, { params }) => {
 
 export const PUT = async (request, { params }) => {
 	try {
+		await connectDB()
 		const { values } = await request.json()
 
-		console.log(params)
+		// const data = await request.json()
 
 		console.log(values)
-		await connectDB()
+
+		// console.log(values)
 		const param = params.product
+
+		// console.log(values)
+
 		const existingProduct = await Product.findById(param)
 		if (!existingProduct) {
 			return new Response('Product does not exist!', { status: 404 })
 		}
-		const updatedProduct = await Product.findByIdAndUpdate(param, values)
+		const updatedProduct = await Product.findByIdAndUpdate(param, values, {
+			new: true,
+		})
+
+		await updatedProduct.save()
+
 		return new Response(JSON.stringify(updatedProduct), {
 			status: 200,
 		})
 	} catch (error) {
 		console.log(error)
-		return new Response('Something went wrong', { status: 500 })
+		return new Response(error, { status: 500 })
 	}
 }
 

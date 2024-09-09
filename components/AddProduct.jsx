@@ -47,13 +47,13 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 
 				setSubCategories(resSubCategories)
 
-				setIsAdd(false)
+				// setIsAdd(false)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
 				setLoading(false)
 
-				setIsAdd(false)
+				// setIsAdd(false)
 			}
 		}
 
@@ -89,9 +89,16 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 
 			console.log(response)
 
+			if (response.ok) {
+				setIsAdd(false)
+			}
+
+			// setIsAdd(false)
 			// response.status === 201 && router.push('/admin/auth/login')
 		} catch (error) {
 			console.log(error.message)
+		} finally {
+			setIsAdd(false)
 		}
 	}
 

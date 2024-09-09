@@ -3,23 +3,18 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-  /* Customize the scrollbar width */
   width: 0.2rem;
   border-radius: 20px;
   margin: 0.5rem 0rem;
-  /* background-color: #ccc; */
 }
 
 ::-webkit-scrollbar-track {
-  /* Customize the scrollbar track */
-  /* background-color: #ccc; */
   border-radius: 20px;
   height: 10rem;
   width: 0.2rem;
 }
 
 ::-webkit-scrollbar-thumb {
-  /* Customize the scrollbar thumb */
   background-color: #ccc;
   border-radius: 20px;
 }

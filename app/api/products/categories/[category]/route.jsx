@@ -22,3 +22,45 @@ export const GET = async (request, { params }) => {
 		return new Response('Something went wrong', { status: 500 })
 	}
 }
+
+export const PUT = async (request, { params }) => {
+	try {
+		await connectDB()
+		const { values, subIds } = await request.json()
+
+		// const data = await request.json()
+
+		console.log(values)
+
+		const subCategoryValues = {
+			title: values.title,
+			subCategories: subIds,
+		}
+
+		// console.log(values)
+		const param = params.category
+
+		// console.log(values)
+
+		const existingCategory = await Category.findById(param)
+		if (!existingCategory) {
+			return new Response('Category does not exist!', { status: 404 })
+		}
+		const updatedCategory = await Category.findByIdAndUpdate(
+			param,
+			subCategoryValues,
+			{
+				new: true,
+			}
+		)
+
+		await updatedCategory.save()
+
+		return new Response(JSON.stringify(updatedCategory), {
+			status: 200,
+		})
+	} catch (error) {
+		console.log(error)
+		return new Response(error, { status: 500 })
+	}
+}

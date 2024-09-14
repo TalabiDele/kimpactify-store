@@ -5,13 +5,13 @@ export const GET = async (request) => {
 	try {
 		await connectDB()
 
-		const categories = await Category.find({})
+		const categories = await Category.find({}).populate('subCategories').exec()
 
 		return new Response(JSON.stringify(categories), {
 			status: 200,
 		})
 	} catch (error) {
 		console.log(error)
-		return new Response('Something went wrong', { status: 500 })
+		return new Response(error, { status: 500 })
 	}
 }

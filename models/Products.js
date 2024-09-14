@@ -1,5 +1,6 @@
 import { Schema, model, models } from 'mongoose'
 import SubCategory from './SubCategories'
+import Category from '/models/Categories'
 
 const ProductSchema = new Schema(
 	{
@@ -27,10 +28,12 @@ const ProductSchema = new Schema(
 		category: {
 			type: Schema.Types.ObjectId,
 			ref: 'Category',
+			// ref: Category.modelName,
 		},
 		subCategory: {
 			type: Schema.Types.ObjectId,
-			ref: SubCategory.modelName,
+			// ref: SubCategory.modelName,
+			ref: 'SubCategory',
 		},
 		quantity: {
 			type: Number,
@@ -48,5 +51,7 @@ const ProductSchema = new Schema(
 )
 
 const Product = models.Product || model('Product', ProductSchema)
+
+// module.exports = Product
 
 export default Product

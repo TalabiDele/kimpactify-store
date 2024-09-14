@@ -49,7 +49,8 @@ export function ProductTable({ productItem, categories }) {
 				<DeleteProduct
 					isDelete={isDelete}
 					setIsDelete={setIsDelete}
-					product={productEdit}
+					id={productEdit}
+					type={'product'}
 				/>
 			)}
 
@@ -69,8 +70,8 @@ export function ProductTable({ productItem, categories }) {
 					{productItem?.map((product) => (
 						<TableRow key={product.id} className=' font-medium'>
 							<TableCell className='font-medium'>{product.title}</TableCell>
-							<TableCell>{product.category.title}</TableCell>
-							<TableCell>{product.subCategory.title}</TableCell>
+							<TableCell>{product?.category?.title}</TableCell>
+							<TableCell>{product?.subCategory?.title}</TableCell>
 							<TableCell className='text-right'>{product.quantity}</TableCell>
 							<TableCell className='text-right'>${product.pricing}</TableCell>
 							<TableCell className='text-right '>

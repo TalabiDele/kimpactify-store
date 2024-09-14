@@ -35,7 +35,7 @@ export function CategoryTable({ categories }) {
 		setIsDelete(true)
 		console.log(item)
 
-		setProductEdit(item)
+		setCategoryEdit(item._id)
 	}
 
 	return (
@@ -46,7 +46,8 @@ export function CategoryTable({ categories }) {
 				<DeleteProduct
 					isDelete={isDelete}
 					setIsDelete={setIsDelete}
-					product={productEdit}
+					id={categoryEdit}
+					type={'category'}
 				/>
 			)}
 

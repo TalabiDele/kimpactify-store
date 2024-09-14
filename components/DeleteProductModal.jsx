@@ -26,22 +26,38 @@ import { useRouter } from 'next/navigation'
 import { fetchAllSubCategories } from '../utils/requests'
 import { BtnCancel, BtnDelete } from './Buttons'
 
-const DeleteProduct = ({ product, isDelete, setIsDelete }) => {
+const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
+	console.log(id)
+
 	const handleDelete = async () => {
-		console.log(product._id)
+		if (type === 'product') {
+			try {
+				const response = await fetch(`/api/products/${id}`, {
+					method: 'DELETE',
+				})
 
-		try {
-			const response = await fetch(`/api/products/${product._id}`, {
-				method: 'DELETE',
-			})
+				console.log(response)
 
-			console.log(response)
+				setIsDelete(false)
 
-			setIsDelete(false)
+				// response.status === 201 && router.push('/admin/auth/login')
+			} catch (error) {
+				console.log(error.message)
+			}
+		} else {
+			try {
+				const response = await fetch(`/api/products/categories/${id}`, {
+					method: 'DELETE',
+				})
 
-			// response.status === 201 && router.push('/admin/auth/login')
-		} catch (error) {
-			console.log(error.message)
+				console.log(response)
+
+				setIsDelete(false)
+
+				// response.status === 201 && router.push('/admin/auth/login')
+			} catch (error) {
+				console.log(error.message)
+			}
 		}
 	}
 
@@ -50,7 +66,7 @@ const DeleteProduct = ({ product, isDelete, setIsDelete }) => {
 			<div className=''>
 				<div className='flex items-center h-[100vh] flex-col justify-center'>
 					<div className='w-[30vw] mx-auto bg-white rounded-lg p-[1rem] grid gap-3 justify-items-center'>
-						<h1 className=''>Are you sure you want to delete product?</h1>
+						<h1 className=''>Are you sure you want to delete {type}?</h1>
 						<div className=' flex gap-4'>
 							<div className='' onClick={() => setIsDelete(false)}>
 								<BtnCancel text={'Cancel'} />

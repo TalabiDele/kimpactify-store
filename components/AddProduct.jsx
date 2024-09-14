@@ -23,7 +23,7 @@ import {
 import { Input } from '/components/shadcn/components/ui/input'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { fetchAllSubCategories } from '../utils/requests'
+import { fetchAllCategories, fetchAllSubCategories } from '../utils/requests'
 
 const formSchema = z.object({
 	title: z.string(),
@@ -37,28 +37,44 @@ const formSchema = z.object({
 const AddProduct = ({ product, categories, setIsAdd }) => {
 	const [subCategories, setSubCategories] = useState()
 	const [loading, setLoading] = useState(true)
+	const [category, setCategory] = useState()
 
 	useEffect(() => {
-		const fetchSubCategories = async () => {
+		const fetchCategories = async () => {
 			try {
-				const resSubCategories = await fetchAllSubCategories()
+				const resCategories = await fetchAllCategories()
 
-				console.log(resSubCategories)
+				console.log(resCategories)
 
-				setSubCategories(resSubCategories)
-
-				// setIsAdd(false)
+				setCategory(resCategories)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
 				setLoading(false)
-
-				// setIsAdd(false)
 			}
 		}
 
+		fetchCategories()
+		// const fetchSubCategories = async () => {
+		// 	try {
+		// 		const resSubCategories = await fetchAllSubCategories()
+
+		// 		console.log(resSubCategories)
+
+		// 		setSubCategories(resSubCategories)
+
+		// 		// setIsAdd(false)
+		// 	} catch (error) {
+		// 		console.error('Error fetching products', error)
+		// 	} finally {
+		// 		setLoading(false)
+
+		// 		// setIsAdd(false)
+		// 	}
+		// }
+
 		console.log(product)
-		fetchSubCategories()
+		// fetchSubCategories()
 	}, [])
 
 	const form = useForm({
@@ -100,6 +116,18 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 		} finally {
 			setIsAdd(false)
 		}
+	}
+
+	const handleOnChange = (values) => {
+		// form.onChange()
+
+		console.log(values, category)
+
+		const filtered = category?.filter((cat) => values === cat?._id)
+
+		console.log(filtered)
+
+		setSubCategories(filtered[0]?.subCategories)
 	}
 
 	return (
@@ -199,7 +227,7 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 										<FormItem className='w-[50%]'>
 											<FormLabel>Category</FormLabel>
 											<Select
-												onValueChange={field.onChange}
+												onValueChange={handleOnChange}
 												defaultValue={field.value}
 												className='w-[100%]'
 											>

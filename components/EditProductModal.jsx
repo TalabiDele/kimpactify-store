@@ -61,8 +61,8 @@ const EditProductModal = ({ product, categories }) => {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			title: product?.title,
-			category: product?.category._id,
-			subCategory: product?.subCategory._id,
+			category: product?.category?._id,
+			subCategory: product?.subCategory?._id,
 			quantity: Math.floor(product?.quantity),
 			pricing: Math.floor(product?.pricing),
 			// sizes: Math.floor(product?.sizes),

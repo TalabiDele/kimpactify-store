@@ -64,3 +64,21 @@ export const PUT = async (request, { params }) => {
 		return new Response(error, { status: 500 })
 	}
 }
+
+export const DELETE = async (request, { params }) => {
+	try {
+		await connectDB()
+		const param = params.category
+
+		const categoryDelete = await Category.findById(param)
+
+		await categoryDelete.deleteOne()
+
+		return new Response(JSON.stringify({ message: 'Category deleted' }), {
+			status: 200,
+		})
+	} catch (error) {
+		console.log(error)
+		return new Response(error, { status: 500 })
+	}
+}

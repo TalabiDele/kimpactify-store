@@ -23,7 +23,7 @@ import {
 import { Input } from '/components/shadcn/components/ui/input'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { fetchAllSubCategories } from '../utils/requests'
+import { fetchAllCategories, fetchAllSubCategories } from '../utils/requests'
 
 const formSchema = z.object({
 	title: z.string(),
@@ -37,15 +37,16 @@ const formSchema = z.object({
 const EditProductModal = ({ product, categories }) => {
 	const [subCategories, setSubCategories] = useState()
 	const [loading, setLoading] = useState(true)
+	const [category, setCategory] = useState()
 
 	useEffect(() => {
-		const fetchSubCategories = async () => {
+		const fetchCategories = async () => {
 			try {
-				const resSubCategories = await fetchAllSubCategories()
+				const resCategories = await fetchAllCategories()
 
-				console.log(resSubCategories)
+				console.log(resCategories)
 
-				setSubCategories(resSubCategories)
+				setCategory(resCategories)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
@@ -53,8 +54,24 @@ const EditProductModal = ({ product, categories }) => {
 			}
 		}
 
-		console.log(product)
-		fetchSubCategories()
+		fetchCategories()
+
+		// const fetchSubCategories = async () => {
+		// 	try {
+		// 		const resSubCategories = await fetchAllSubCategories()
+
+		// 		console.log(resSubCategories)
+
+		// 		setSubCategories(resSubCategories)
+		// 	} catch (error) {
+		// 		console.error('Error fetching products', error)
+		// 	} finally {
+		// 		setLoading(false)
+		// 	}
+		// }
+
+		// console.log(product)
+		// fetchSubCategories()
 	}, [])
 
 	const form = useForm({
@@ -91,6 +108,18 @@ const EditProductModal = ({ product, categories }) => {
 		} catch (error) {
 			console.log(error.message)
 		}
+	}
+
+	const handleOnChange = (values) => {
+		// form.onChange()
+
+		console.log(values, category)
+
+		const filtered = category?.filter((cat) => values === cat?._id)
+
+		console.log(filtered)
+
+		setSubCategories(filtered[0]?.subCategories)
 	}
 
 	return (
@@ -190,7 +219,7 @@ const EditProductModal = ({ product, categories }) => {
 										<FormItem className='w-[50%]'>
 											<FormLabel>Category</FormLabel>
 											<Select
-												onValueChange={field.onChange}
+												onValueChange={handleOnChange}
 												defaultValue={field.value}
 												className='w-[100%]'
 											>
@@ -227,13 +256,27 @@ const EditProductModal = ({ product, categories }) => {
 														<SelectValue placeholder='Select a sub category' />
 													</SelectTrigger>
 												</FormControl>
-												<SelectContent>
-													{subCategories?.map((category) => (
-														<SelectItem value={category._id} key={category.id}>
-															{category.title}
+												{subCategories?.length < 1 ? (
+													<SelectContent>
+														<SelectItem
+															value={product?.subCategory?._id}
+															key={product?.subCategory?.id}
+														>
+															{product?.subCategory?.title}
 														</SelectItem>
-													))}
-												</SelectContent>
+													</SelectContent>
+												) : (
+													<SelectContent>
+														{subCategories?.map((category) => (
+															<SelectItem
+																value={category._id}
+																key={category.id}
+															>
+																{category.title}
+															</SelectItem>
+														))}
+													</SelectContent>
+												)}
 											</Select>
 											<FormMessage />
 										</FormItem>

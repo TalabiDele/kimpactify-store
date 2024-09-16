@@ -17,14 +17,23 @@ export const GET = async (request) => {
 }
 
 export const POST = async (request) => {
-	const { values } = await request.json()
+	const { values, category } = await request.json()
 
-	console.log(values)
+	const product = {
+		pricing: values.pricing,
+		quantity: values.quantity,
+		sizes: values.sizes,
+		title: values.title,
+		subCategory: values.subCategory,
+		category: category,
+	}
+
+	console.log(product)
 
 	try {
 		await connectDB()
 
-		const newProduct = new Product(values)
+		const newProduct = new Product(product)
 		await newProduct.save()
 
 		return new Response(JSON.stringify(newProduct), {

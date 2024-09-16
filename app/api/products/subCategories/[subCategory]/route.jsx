@@ -12,13 +12,13 @@ export const GET = async (request, { params }) => {
 
 		const categories = await SubCategory.find({ param: param })
 
-		console.log(categories[0]?._id)
+		console.log('api categories', categories[0]._id)
 
 		const products = await Product.find({
 			subCategory: categories[0]?._id,
 		})
 
-		console.log(products)
+		console.log('products', products)
 
 		return new Response(JSON.stringify(products), {
 			status: 200,

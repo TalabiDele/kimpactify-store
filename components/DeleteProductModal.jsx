@@ -32,7 +32,7 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 	const handleDelete = async () => {
 		if (type === 'product') {
 			try {
-				const response = await fetch(`/api/products/${id}`, {
+				const response = await fetch(`/api/products/${id._id}`, {
 					method: 'DELETE',
 				})
 
@@ -46,7 +46,7 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 			}
 		} else {
 			try {
-				const response = await fetch(`/api/products/categories/${id}`, {
+				const response = await fetch(`/api/products/categories/${id._id}`, {
 					method: 'DELETE',
 				})
 

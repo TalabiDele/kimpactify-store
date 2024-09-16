@@ -22,7 +22,7 @@ const CardDisplay = ({ products, title, category }) => {
 				<Heading text={title?.title} />
 				{/* <More link={`/categories/${}`} /> */}
 			</div>
-			<div className=' flex justify-between'>
+			<div className=' flex gap-[1rem] items-center flex-wrap'>
 				{products?.map((product) => (
 					<Card
 						key={product?._id}

@@ -17,6 +17,8 @@ const SubCategory = () => {
 
 	const { subcategory } = useParams()
 
+	console.log(subcategory)
+
 	useEffect(() => {
 		const fetchProducts = async () => {
 			if (!subcategory) return
@@ -24,6 +26,8 @@ const SubCategory = () => {
 			try {
 				const productCategory = await fetchSubCategories(subcategory)
 				setProducts(productCategory)
+
+				console.log(productCategory)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
@@ -49,6 +53,8 @@ const SubCategory = () => {
 
 			try {
 				const productCategory = await fetchSubCategories(subcategory)
+
+				console.log('product category', productCategory)
 
 				if (productCategory) {
 					console.log(productCategory[0]?._id)

@@ -39,6 +39,8 @@ const EditProductModal = ({ product, categories }) => {
 	const [loading, setLoading] = useState(true)
 	const [category, setCategory] = useState()
 
+	console.log(product)
+
 	useEffect(() => {
 		const fetchCategories = async () => {
 			try {

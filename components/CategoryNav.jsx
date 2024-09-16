@@ -133,7 +133,7 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 				{/* 2 piece set */}
 				<div className=' flex flex-col'>
 					<Link
-						href={'categories/two-piece-set'}
+						href={'/categories/two-piece-set'}
 						className=' flex items-center text-[#1E65FF] font-medium gap-1 uppercase mb-[1rem]'
 					>
 						2 Piece Set <IoChevronForward />

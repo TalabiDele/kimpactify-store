@@ -27,7 +27,7 @@ import { fetchAllCategories, fetchAllSubCategories } from '../utils/requests'
 
 const formSchema = z.object({
 	title: z.string(),
-	category: z.string(),
+	// category: z.string(),
 	subCategory: z.string(),
 	pricing: z.string().transform((v) => Number(v) || 0),
 	quantity: z.string().transform((v) => Number(v) || 0),
@@ -38,6 +38,8 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 	const [subCategories, setSubCategories] = useState()
 	const [loading, setLoading] = useState(true)
 	const [category, setCategory] = useState()
+	const [currentCategory, setCurrentCategory] = useState()
+	const [data, setData] = useState({})
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -81,7 +83,7 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			title: '',
-			category: '',
+			// category: '',
 			subCategory: '',
 			quantity: 0,
 			pricing: 0,
@@ -92,7 +94,11 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 	const handleSubmit = async (values) => {
 		// values.preventDefault()
 
-		console.log(product)
+		console.log(currentCategory, values)
+
+		setData({ values, category: currentCategory })
+
+		// console.log(data)
 
 		try {
 			const response = await fetch(`/api/products`, {
@@ -100,7 +106,7 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 				headers: {
 					'content-type': 'application/json',
 				},
-				body: JSON.stringify({ values }),
+				body: JSON.stringify({ values, category: currentCategory }),
 			})
 
 			console.log(response)
@@ -119,9 +125,9 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 	}
 
 	const handleOnChange = (values) => {
-		// form.onChange()
+		console.log(values)
 
-		console.log(values, category)
+		setCurrentCategory(values)
 
 		const filtered = category?.filter((cat) => values === cat?._id)
 

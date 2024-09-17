@@ -1,29 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { Button } from '/components/shadcn/components/ui/button'
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '/components/shadcn/components/ui/form'
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '/components/shadcn/components/ui/select'
-import { Input } from '/components/shadcn/components/ui/input'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { fetchAllSubCategories } from '../utils/requests'
+import React from 'react'
 import { BtnCancel, BtnDelete } from './Buttons'
 
 const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
@@ -32,7 +9,7 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 	const handleDelete = async () => {
 		if (type === 'product') {
 			try {
-				const response = await fetch(`/api/products/${id._id}`, {
+				const response = await fetch(`/api/products/${id}`, {
 					method: 'DELETE',
 				})
 
@@ -46,7 +23,7 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 			}
 		} else {
 			try {
-				const response = await fetch(`/api/products/categories/${id._id}`, {
+				const response = await fetch(`/api/products/categories/${id}`, {
 					method: 'DELETE',
 				})
 

@@ -13,6 +13,9 @@ export const GET = async (request, { params }) => {
 		const products = await Product.find({
 			category: categories[0]._id,
 		})
+			.populate('subCategory')
+			.populate('category')
+			.exec()
 
 		return new Response(JSON.stringify(products), {
 			status: 200,

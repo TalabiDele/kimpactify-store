@@ -1,15 +1,19 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import DashboardProducts from '/container/DashboardProducts'
 import { fetchAllProducts, fetchAllCategories } from '/utils/requests'
+import Context from '/context/Context'
 
 const ProductsPage = () => {
-	const [loading, setLoading] = useState(false)
 	const [productItem, setProductItem] = useState()
 	const [categories, setCategories] = useState()
 
+	const { loading, setLoading } = useContext(Context)
+
 	useEffect(() => {
+		setLoading(true)
+
 		const fetchProducts = async () => {
 			try {
 				const resProduct = await fetchAllProducts()

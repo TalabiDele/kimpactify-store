@@ -1,14 +1,18 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DashboardCategories from '/container/DashboardCategories'
 import { fetchAllCategories } from '/utils/requests'
+import Context from '/context/Context'
 
 const AdminCategories = () => {
 	const [categories, setCategories] = useState()
-	const [loading, setLoading] = useState(false)
+
+	const { loading, setLoading } = useContext(Context)
 
 	useEffect(() => {
+		setLoading(true)
+
 		const fetchCategories = async () => {
 			try {
 				const resCategories = await fetchAllCategories()

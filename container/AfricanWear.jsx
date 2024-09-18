@@ -8,7 +8,7 @@ import Heading from '../components/Heading'
 import More from '../components/More'
 import { motion } from 'framer-motion'
 
-const AfricanWear = () => {
+const AfricanWear = ({ africanWears }) => {
 	return (
 		<motion.div
 			initial={{ x: '-100%' }}
@@ -20,47 +20,21 @@ const AfricanWear = () => {
 				<Heading text={'African Wears'} />
 				<More link={'/categories/african-wears'} />
 			</div>
-			<div className=' flex justify-between'>
-				<Card
-					img={imgOne}
-					title={'Canon Camera'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgTwo}
-					title={'Sony Headphones'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgOne}
-					title={'Canon Camera'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgTwo}
-					title={'Sony Headphones'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgTwo}
-					title={'Sony Headphones'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
+			<div className=' grid grid-cols-5 justify-items-center items-center gap-[1rem] flex-wrap'>
+				{africanWears?.map(
+					(african, index) =>
+						index <= 5 - 1 && (
+							<Card
+								img={imgOne}
+								title={african?.title}
+								description={african?.description}
+								amount={`$${african?.pricing}`}
+								rating={`[${african?.rating}]`}
+								link={`/categories/${african?.category?.param}/${african?.subCategory?.param}/${african?._id}`}
+								key={african?._id}
+							/>
+						)
+				)}
 			</div>
 		</motion.div>
 	)

@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useContext } from 'react'
 import { MdSpaceDashboard } from 'react-icons/md'
 import { RiBox3Fill } from 'react-icons/ri'
 import { BiSolidCategoryAlt } from 'react-icons/bi'
@@ -10,8 +12,12 @@ import Image from 'next/image'
 import { doLogout } from '/app/actions'
 import { MdLogout } from 'react-icons/md'
 import { IoHome } from 'react-icons/io5'
+import Context from '/context/Context'
+import { Skeleton } from '/components/shadcn/components/ui/skeleton'
 
 const SideNav = () => {
+	const { loading, setLoading } = useContext(Context)
+
 	const navItems = [
 		{
 			name: 'Dashboard',
@@ -53,14 +59,18 @@ const SideNav = () => {
 						// objectFit='contain'
 					/>
 					{navItems.map((nav, index) => (
-						<li className='' key={index}>
-							<Link
-								href={nav.link}
-								className=' flex items-center gap-2 text-gray-600 p-[0.5rem] hover:bg-[#F1EDED] rounded-md'
-							>
-								{nav.icon}
-								{nav.name}
-							</Link>
+						<li
+							className='text-gray-600 p-[0.5rem] hover:bg-[#F1EDED] rounded-md'
+							key={index}
+						>
+							{loading ? (
+								<Skeleton className='h-4 w-[100px]' />
+							) : (
+								<Link href={nav.link} className=' flex items-center gap-2 '>
+									{nav.icon}
+									{nav.name}
+								</Link>
+							)}
 						</li>
 					))}
 				</ul>

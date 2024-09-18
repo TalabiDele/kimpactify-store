@@ -79,7 +79,11 @@ const SubCategory = () => {
 
 	return (
 		<div>
-			<CardDisplay products={products} title={title} category={category} />
+			<CardDisplay
+				products={products}
+				title={title?.title}
+				category={category}
+			/>
 		</div>
 	)
 }

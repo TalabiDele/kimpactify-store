@@ -30,6 +30,7 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { fetchAllSubCategories } from '../utils/requests'
+import { BtnCancel } from './Buttons'
 
 const formSchema = z.object({
 	title: z.string(),
@@ -88,6 +89,10 @@ const AddCategory = ({ product, categories, setIsAdd }) => {
 			})
 
 			const data = response.json()
+
+			if (response.ok) {
+				setIsAdd(false)
+			}
 
 			console.log(data)
 
@@ -244,9 +249,14 @@ const AddCategory = ({ product, categories, setIsAdd }) => {
 								))}
 							</div>
 
-							<Button type='submit' className='mt-[1rem]'>
-								Submit
-							</Button>
+							<div className=' items-center justify-between flex-row-reverse flex gap-3 mt-[1rem]'>
+								<div className='' onClick={() => setIsAdd(false)}>
+									<BtnCancel text={'Cancel'} />
+								</div>
+								<Button type='submit' className=' py-[0.3rem]'>
+									Submit
+								</Button>
+							</div>
 						</form>
 					</div>
 				</Form>

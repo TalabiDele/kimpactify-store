@@ -8,7 +8,7 @@ import imgOne from '../assets/imgs/cloth-1.png'
 import imgTwo from '../assets/imgs/cloth-2.png'
 import { motion } from 'framer-motion'
 
-const CooperateWears = () => {
+const CooperateWears = ({ corporateWears }) => {
 	return (
 		<motion.div
 			initial={{ x: 200 }}
@@ -20,47 +20,18 @@ const CooperateWears = () => {
 				<Heading text={'Cooperate Wears'} />
 				<More link={'/categories/cooperate-wears'} />
 			</div>
-			<div className=' flex justify-between'>
-				<Card
-					img={imgOne}
-					title={'Canon Camera'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgTwo}
-					title={'Sony Headphones'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgOne}
-					title={'Canon Camera'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgTwo}
-					title={'Sony Headphones'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgTwo}
-					title={'Sony Headphones'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
+			<div className=' grid grid-cols-5 justify-items-center gap-[1rem] items-center'>
+				{corporateWears?.map((wear) => (
+					<Card
+						img={imgOne}
+						title={wear?.title}
+						description={wear?.description}
+						amount={`$${wear?.pricing}`}
+						rating={`[${wear?.rating}]`}
+						link={`/categories/${wear?.category?.param}/${wear?.subCategory?.param}/${wear?._id}`}
+						key={wear?._id}
+					/>
+				))}
 			</div>
 		</motion.div>
 	)

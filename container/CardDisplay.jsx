@@ -9,8 +9,6 @@ import More from '../components/More'
 import { motion } from 'framer-motion'
 
 const CardDisplay = ({ products, title, category }) => {
-	// console.log(products)
-
 	return (
 		<motion.div
 			initial={{ x: '-100%' }}
@@ -19,7 +17,7 @@ const CardDisplay = ({ products, title, category }) => {
 			className=' mt-[3rem] w-[90vw] mx-auto'
 		>
 			<div className=' flex justify-between items-center mb-[2rem]'>
-				<Heading text={title?.title} />
+				<Heading text={title} />
 				{/* <More link={`/categories/${}`} /> */}
 			</div>
 			<div className=' flex gap-[1rem] items-center flex-wrap'>
@@ -31,7 +29,7 @@ const CardDisplay = ({ products, title, category }) => {
 						description={product?.description}
 						amount={`$${product?.pricing}`}
 						rating={`[${product?.rating}]`}
-						link={`/categories/${category?.param}/${title?.param}/${product?._id}`}
+						link={`/categories/${product?.category?.param}/${product?.subCategory?.param}/${product?._id}`}
 					/>
 				))}
 			</div>

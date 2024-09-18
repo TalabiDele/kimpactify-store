@@ -8,7 +8,7 @@ import More from '../components/More'
 import Card from '../components/Card'
 import { motion } from 'framer-motion'
 
-const KnitWears = () => {
+const KnitWears = ({ knitWear }) => {
 	return (
 		<motion.div
 			initial={{ x: '-100%' }}
@@ -20,47 +20,18 @@ const KnitWears = () => {
 				<Heading text={'Knit Wears/Sweaters'} />
 				<More link={'/categories/african-wears'} />
 			</div>
-			<div className=' flex justify-between'>
-				<Card
-					img={imgOne}
-					title={'Canon Camera'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgTwo}
-					title={'Sony Headphones'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgOne}
-					title={'Canon Camera'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgTwo}
-					title={'Sony Headphones'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
-				<Card
-					img={imgTwo}
-					title={'Sony Headphones'}
-					description={"Capturing Life's Precious Moments."}
-					amount={'$199.99'}
-					rating={'[4.5]'}
-					link={'/'}
-				/>
+			<div className=' grid grid-cols-5 justify-items-center gap-[1rem] items-center'>
+				{knitWear?.map((wear) => (
+					<Card
+						img={imgOne}
+						title={wear?.title}
+						description={wear?.description}
+						amount={`$${wear?.pricing}`}
+						rating={`[${wear?.rating}]`}
+						link={`/categories/${wear?.category?.param}/${wear?.subCategory?.param}/${wear?._id}`}
+						key={wear?._id}
+					/>
+				))}
 			</div>
 		</motion.div>
 	)

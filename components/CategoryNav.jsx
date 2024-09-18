@@ -91,19 +91,19 @@ const CategoryNav = ({ isCategory, setIsCategory }) => {
 				{/* Cooperate Wears */}
 				<div className=' flex flex-col'>
 					<Link
-						href={'/categories/cooperate-wears'}
+						href={'/categories/corporate-wears'}
 						className=' flex items-center text-[#1E65FF] font-medium gap-1 uppercase mb-[1rem]'
 					>
-						Cooperate Wears <IoChevronForward />
+						Corporate Wears <IoChevronForward />
 					</Link>
 					<Link
-						href={'/categories/cooperate-wears/pants'}
+						href={'/categories/corporate-wears/pants'}
 						className=' mb-[0.5rem] text-sm'
 					>
 						Pants
 					</Link>
 					<Link
-						href={'/categories/cooperate-wears/tops'}
+						href={'/categories/corporate-wears/tops'}
 						className=' mb-[0.5rem] text-sm'
 					>
 						Tops

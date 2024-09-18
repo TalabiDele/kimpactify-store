@@ -6,9 +6,9 @@ import Link from 'next/link'
 
 const Card = ({ img, title, description, amount, rating, id, link }) => {
 	return (
-		<div>
+		<div className=' max-sm:grid max-sm:justify-center max-sm:w-[90vw]'>
 			<div
-				className=' bg-white p-[1rem] rounded-md mb-[2rem] text-[#5C5C5C] w-[15rem] grid'
+				className=' bg-white p-[1rem] rounded-md mb-[2rem] text-[#5C5C5C] w-[15rem] grid  max-sm:mx-auto max-sm:w-[17rem]'
 				style={{ boxShadow: '0px 0px 10px #cfcfcf7d' }}
 			>
 				<div className=' w-[10rem] h-[12rem] justify-self-center'>

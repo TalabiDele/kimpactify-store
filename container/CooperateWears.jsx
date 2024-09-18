@@ -20,7 +20,7 @@ const CooperateWears = ({ corporateWears }) => {
 				<Heading text={'Cooperate Wears'} />
 				<More link={'/categories/cooperate-wears'} />
 			</div>
-			<div className=' grid grid-cols-5 justify-items-center gap-[1rem] items-center'>
+			<div className=' flex flex-wrap gap-[1rem] items-center'>
 				{corporateWears?.map((wear) => (
 					<Card
 						img={imgOne}

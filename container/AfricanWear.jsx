@@ -20,7 +20,7 @@ const AfricanWear = ({ africanWears }) => {
 				<Heading text={'African Wears'} />
 				<More link={'/categories/african-wears'} />
 			</div>
-			<div className=' grid grid-cols-5 justify-items-center items-center gap-[1rem] flex-wrap'>
+			<div className=' flex flex-wrap items-center gap-[1rem]'>
 				{africanWears?.map(
 					(african, index) =>
 						index <= 5 - 1 && (

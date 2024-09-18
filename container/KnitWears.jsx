@@ -20,7 +20,7 @@ const KnitWears = ({ knitWear }) => {
 				<Heading text={'Knit Wears/Sweaters'} />
 				<More link={'/categories/african-wears'} />
 			</div>
-			<div className=' grid grid-cols-5 justify-items-center gap-[1rem] items-center'>
+			<div className=' flex flex-wrap gap-[1rem] items-center'>
 				{knitWear?.map((wear) => (
 					<Card
 						img={imgOne}

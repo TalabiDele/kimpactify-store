@@ -43,7 +43,7 @@ const HomePage = () => {
 	}, [])
 
 	return (
-		<div className=' w-[90vw] mx-auto overflow-x-hidden'>
+		<div className=' w-[95vw] max-sm:w-[90vw] mx-auto overflow-x-hidden'>
 			<Banner />
 			<AfricanWear africanWears={africanWears} />
 			<CooperateWears corporateWears={corporateWears} />

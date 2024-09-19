@@ -36,8 +36,9 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 				console.log(response)
 
 				if (response.ok) {
-					setIsDelete(false)
 					fetchCategories()
+					setIsDelete(false)
+					toast.success('Category deleted!', { duration: 6000 })
 				}
 
 				// response.status === 201 && router.push('/admin/auth/login')

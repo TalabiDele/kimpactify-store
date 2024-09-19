@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -31,6 +31,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { fetchAllSubCategories } from '../utils/requests'
 import { BtnCancel } from './Buttons'
+import Context from '../context/Context'
+import toast from 'react-hot-toast'
 
 const formSchema = z.object({
 	title: z.string(),
@@ -46,6 +48,8 @@ const EditCategories = ({ category, setIsEdit }) => {
 	const [currentCategory, setCurrentCategory] = useState()
 	const [categorySub, setCategorySub] = useState([])
 	const [subIds, setSubIds] = useState([])
+
+	const { fetchCategories } = useContext(Context)
 
 	useEffect(() => {
 		if (category?.subCategories.length > 0) {
@@ -121,11 +125,13 @@ const EditCategories = ({ category, setIsEdit }) => {
 				}
 			)
 
-			const data = response.json()
+			const data = await response.json()
 
-			console.log(data)
-
-			// response.status === 201 && router.push('/admin/auth/login')
+			if (response.ok) {
+				fetchCategories()
+				setIsEdit(false)
+				toast.success(`${data.title} has been edited!`, { duration: 6000 })
+			}
 		} catch (error) {
 			console.log(error.message)
 		}

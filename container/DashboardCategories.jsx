@@ -9,10 +9,10 @@ import AddCategory from '../components/AddCategory'
 import { Skeleton } from '/components/shadcn/components/ui/skeleton'
 import Context from '/context/Context'
 
-const DashboardCategories = ({ categories }) => {
+const DashboardCategories = () => {
 	const [isAdd, setIsAdd] = useState(false)
 
-	const { loading, setLoading } = useContext(Context)
+	const { loading, categories } = useContext(Context)
 
 	return (
 		<div>

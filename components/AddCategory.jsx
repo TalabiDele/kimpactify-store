@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -31,19 +31,23 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { fetchAllSubCategories } from '../utils/requests'
 import { BtnCancel } from './Buttons'
+import Context from '../context/Context'
+import toast from 'react-hot-toast'
 
 const formSchema = z.object({
 	title: z.string(),
 	param: z.string(),
 })
 
-const AddCategory = ({ product, categories, setIsAdd }) => {
+const AddCategory = ({ setIsAdd }) => {
 	const [subCategories, setSubCategories] = useState()
 	const [loading, setLoading] = useState(true)
 	const [category, setCategory] = useState()
 	const [categorySub, setCategorySub] = useState([])
 	const [subIds, setSubIds] = useState([])
 	const [currentCategory, setCurrentCategory] = useState()
+
+	const { fetchCategories } = useContext(Context)
 
 	useEffect(() => {
 		const fetchSubCategories = async () => {
@@ -88,10 +92,12 @@ const AddCategory = ({ product, categories, setIsAdd }) => {
 				body: JSON.stringify({ values, subIds }),
 			})
 
-			const data = response.json()
+			const data = await response.json()
 
 			if (response.ok) {
 				setIsAdd(false)
+				fetchCategories()
+				toast.success('Category created!', { duration: 6000 })
 			}
 
 			console.log(data)

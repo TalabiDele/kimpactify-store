@@ -109,8 +109,6 @@ const AddCategory = ({ setIsAdd }) => {
 	}
 
 	const addSubCategories = () => {
-		console.log(subCategories)
-
 		setSubIds((prevItems) => {
 			// Check if the item with the same id exists
 			if (!prevItems.some((item) => item === currentCategory._id)) {

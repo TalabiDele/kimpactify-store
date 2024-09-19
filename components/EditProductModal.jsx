@@ -20,6 +20,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '/components/shadcn/components/ui/select'
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from '/components/shadcn/components/ui/tooltip'
 import { Input } from '/components/shadcn/components/ui/input'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -34,19 +40,22 @@ const formSchema = z.object({
 	subCategory: z.string(),
 	pricing: z.string().transform((v) => Number(v) || 0),
 	quantity: z.string().transform((v) => Number(v) || 0),
-	// sizes: z.string().transform((v) => Number(v) || 0),
 })
 
 const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 	const [subCategories, setSubCategories] = useState()
 	const [loading, setLoading] = useState(true)
 	const [category, setCategory] = useState()
+	const [productSizes, setProductSizes] = useState([])
+	const [currentSize, setCurrentSize] = useState()
 
 	const { fetchProducts } = useContext(Context)
 
 	console.log(product)
 
 	useEffect(() => {
+		setProductSizes(product?.sizes)
+
 		const fetchCategories = async () => {
 			try {
 				const resCategories = await fetchAllCategories()
@@ -64,6 +73,8 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 		fetchCategories()
 	}, [])
 
+	const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+
 	const form = useForm({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -72,7 +83,6 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 			subCategory: product?.subCategory?._id,
 			quantity: Math.floor(product?.quantity),
 			pricing: Math.floor(product?.pricing),
-			// sizes: Math.floor(product?.sizes),
 		},
 	})
 
@@ -87,7 +97,7 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 				headers: {
 					'content-type': 'application/json',
 				},
-				body: JSON.stringify({ values }),
+				body: JSON.stringify({ values, sizes: productSizes }),
 			})
 
 			console.log(response)
@@ -120,6 +130,26 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 		console.log(filtered)
 
 		setSubCategories(filtered[0]?.subCategories)
+	}
+
+	const addSizes = () => {
+		setProductSizes((prevItems) => {
+			// Check if the item with the same id exists
+			if (!prevItems.some((item) => item === currentSize)) {
+				return [...prevItems, currentSize]
+			}
+			return prevItems
+		})
+
+		console.log(productSizes)
+	}
+
+	const handleSelectChange = (value) => {
+		const filtered = sizes.filter((size) => size === value)
+
+		console.log(filtered[0])
+
+		setCurrentSize(filtered[0])
 	}
 
 	return (
@@ -167,46 +197,6 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 											<FormMessage />
 										</FormItem>
 									)}
-								/>
-							</div>
-							<div className=' flex gap-3'>
-								<FormField
-									control={form.control}
-									name='quantity'
-									render={({ field }) => {
-										return (
-											<FormItem>
-												<FormLabel>Quantity</FormLabel>
-												<FormControl>
-													<Input
-														placeholder='Enter quantity'
-														type='number'
-														{...field}
-													/>
-												</FormControl>
-												<FormMessage />
-											</FormItem>
-										)
-									}}
-								/>
-								<FormField
-									control={form.control}
-									name='sizes'
-									render={({ field }) => {
-										return (
-											<FormItem>
-												<FormLabel>Sizes</FormLabel>
-												<FormControl>
-													<Input
-														placeholder='Enter sizes'
-														type='number'
-														{...field}
-													/>
-												</FormControl>
-												<FormMessage />
-											</FormItem>
-										)
-									}}
 								/>
 							</div>
 
@@ -282,6 +272,87 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 										</FormItem>
 									)}
 								/>
+							</div>
+
+							<div className=' flex gap-3'>
+								<FormField
+									control={form.control}
+									name='quantity'
+									render={({ field }) => {
+										return (
+											<FormItem>
+												<FormLabel>Quantity</FormLabel>
+												<FormControl>
+													<Input
+														placeholder='Enter quantity'
+														type='number'
+														{...field}
+													/>
+												</FormControl>
+												<FormMessage />
+											</FormItem>
+										)
+									}}
+								/>
+								<div className='flex gap-2 items-end'>
+									<FormField
+										control={form.control}
+										name='sizes'
+										render={({ field }) => {
+											return (
+												<FormItem className='w-[7rem]'>
+													<FormLabel>Sizes</FormLabel>
+													<Select
+														onValueChange={handleSelectChange}
+														defaultValue={field.value}
+														className='w-[50%]'
+													>
+														<FormControl>
+															<SelectTrigger>
+																<SelectValue placeholder='Select a sizes' />
+															</SelectTrigger>
+														</FormControl>
+														<SelectContent>
+															{sizes?.map((size, index) => (
+																<SelectItem value={size} key={index}>
+																	{size}
+																</SelectItem>
+															))}
+														</SelectContent>
+													</Select>
+													<FormMessage />
+												</FormItem>
+											)
+										}}
+									/>
+
+									<div className='' onClick={addSizes}>
+										<div className='mt-[1rem] cursor-pointer bg-[#000] text-white rounded-md font-medium p-[0.5rem]'>
+											Add
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div className=' flex gap-2 items-center flex-wrap'>
+								{productSizes?.map((size, index) => (
+									<TooltipProvider>
+										<Tooltip>
+											<TooltipTrigger asChild>
+												<p
+													className=' bg-blue-100 rounded-md p-[0.3rem] text-sm text-blue-600 cursor-pointer'
+													key={index}
+													onClick={() => handleRemove(size)}
+												>
+													{size}
+												</p>
+											</TooltipTrigger>
+											<TooltipContent>
+												<p>Click to remove</p>
+											</TooltipContent>
+										</Tooltip>
+									</TooltipProvider>
+								))}
 							</div>
 
 							<div className=' items-center justify-between flex-row-reverse flex gap-3 mt-[1rem]'>

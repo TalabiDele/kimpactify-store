@@ -1,5 +1,6 @@
 import connectDB from '../../../config/database'
 import Product from '../../../models/Products'
+import cloudinary from '/config/cloudinary'
 
 export const GET = async (request) => {
 	try {
@@ -17,18 +18,23 @@ export const GET = async (request) => {
 }
 
 export const POST = async (request) => {
-	const { values, category } = await request.json()
+	const { values, category, sizes } = await request.json()
 
 	const product = {
 		pricing: values.pricing,
 		quantity: values.quantity,
-		sizes: values.sizes,
+		sizes: sizes,
 		title: values.title,
 		subCategory: values.subCategory,
 		category: category,
 	}
 
-	console.log(product)
+	// upload images to cloudinary
+
+	const imageUploadPromises = []
+
+	// for (const image of images) {
+	// }
 
 	try {
 		await connectDB()

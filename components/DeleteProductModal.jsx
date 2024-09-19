@@ -1,23 +1,29 @@
 'use client'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { BtnCancel, BtnDelete } from './Buttons'
+import Context from '../context/Context'
+import toast from 'react-hot-toast'
 
 const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 	console.log(id)
 
+	const { fetchProducts, fetchCategories } = useContext(Context)
+
 	const handleDelete = async () => {
 		if (type === 'product') {
 			try {
-				const response = await fetch(`/api/products/${id}`, {
+				const response = await fetch(`/api/products/${id._id}`, {
 					method: 'DELETE',
 				})
 
-				console.log(response)
-
-				setIsDelete(false)
-
-				// response.status === 201 && router.push('/admin/auth/login')
+				if (response.ok) {
+					toast.success('Product deleted!', {
+						duration: 6000,
+					})
+					setIsDelete(false)
+					fetchProducts()
+				}
 			} catch (error) {
 				console.log(error.message)
 			}
@@ -29,7 +35,10 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 
 				console.log(response)
 
-				setIsDelete(false)
+				if (response.ok) {
+					setIsDelete(false)
+					fetchCategories()
+				}
 
 				// response.status === 201 && router.push('/admin/auth/login')
 			} catch (error) {

@@ -63,7 +63,7 @@ export const BtnCancel = ({ text }) => {
 export const BtnDelete = ({ text }) => {
 	return (
 		<div>
-			<button className=' bg-red-600 border rounded-md text-[#fff] py-[0.3rem] px-[1rem] text-[0.8rem] font-medium w-full'>
+			<button className=' bg-red-600 border rounded-md text-[#fff] py-[0.6rem] px-[1rem] text-[0.8rem] font-medium w-full'>
 				{text}
 			</button>
 		</div>

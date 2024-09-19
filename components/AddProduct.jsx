@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -25,6 +25,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { fetchAllCategories, fetchAllSubCategories } from '../utils/requests'
 import { BtnCancel } from './Buttons'
+import Context from '../context/Context'
+import toast from 'react-hot-toast'
 
 const formSchema = z.object({
 	title: z.string(),
@@ -35,12 +37,16 @@ const formSchema = z.object({
 	sizes: z.string().transform((v) => Number(v) || 0),
 })
 
-const AddProduct = ({ product, categories, setIsAdd }) => {
+const AddProduct = ({ setIsAdd }) => {
 	const [subCategories, setSubCategories] = useState()
 	const [loading, setLoading] = useState(true)
 	const [category, setCategory] = useState()
 	const [currentCategory, setCurrentCategory] = useState()
 	const [data, setData] = useState({})
+
+	const { fetchProducts, categories } = useContext(Context)
+
+	console.log(categories)
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -58,26 +64,6 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 		}
 
 		fetchCategories()
-		// const fetchSubCategories = async () => {
-		// 	try {
-		// 		const resSubCategories = await fetchAllSubCategories()
-
-		// 		console.log(resSubCategories)
-
-		// 		setSubCategories(resSubCategories)
-
-		// 		// setIsAdd(false)
-		// 	} catch (error) {
-		// 		console.error('Error fetching products', error)
-		// 	} finally {
-		// 		setLoading(false)
-
-		// 		// setIsAdd(false)
-		// 	}
-		// }
-
-		console.log(product)
-		// fetchSubCategories()
 	}, [])
 
 	const form = useForm({
@@ -110,14 +96,13 @@ const AddProduct = ({ product, categories, setIsAdd }) => {
 				body: JSON.stringify({ values, category: currentCategory }),
 			})
 
-			console.log(response)
-
 			if (response.ok) {
+				toast.success('Product created!', {
+					duration: 6000,
+				})
 				setIsAdd(false)
+				fetchProducts()
 			}
-
-			// setIsAdd(false)
-			// response.status === 201 && router.push('/admin/auth/login')
 		} catch (error) {
 			console.log(error.message)
 		} finally {

@@ -9,10 +9,10 @@ import AddProduct from '../components/AddProduct'
 import Context from '/context/Context'
 import { Skeleton } from '/components/shadcn/components/ui/skeleton'
 
-const DashboardProducts = ({ productItem, setProductItem, categories }) => {
+const DashboardProducts = () => {
 	const [isAdd, setIsAdd] = useState(false)
 
-	const { loading, setLoading } = useContext(Context)
+	const { loading, setLoading, productItem, categories } = useContext(Context)
 
 	return (
 		<div className=''>

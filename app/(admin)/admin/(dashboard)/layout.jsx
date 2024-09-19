@@ -3,6 +3,7 @@ import { Provider } from '/context/Context'
 import { auth } from '/auth'
 import { redirect } from 'next/navigation'
 import SideNav from '/components/SideNav'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
 	title: 'Kimpactify Store | Find your affordable wears.',
@@ -20,6 +21,7 @@ const DashboardLayout = async ({ children }) => {
 			<html lang='en'>
 				<body>
 					<main className=''>
+						<Toaster />
 						<div className=' bg-[#fff] flex items-start gap-5 fixed right-0 left-0 top-0 bottom-0'>
 							<SideNav />
 							<div className=' my-[2rem] w-full px-[2rem]'>{children}</div>

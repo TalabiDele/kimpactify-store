@@ -6,18 +6,18 @@ import {
 	fetchSubCategories,
 	fetchSubCategoryTitle,
 } from '/utils/requests'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CardDisplay from '/container/CardDisplay'
+import Context from '/context/Context'
 
 const SubCategory = () => {
 	const [products, setProducts] = useState(null)
 	const [title, setTitle] = useState('')
-	const [loading, setLoading] = useState(true)
 	const [category, setCategory] = useState(null)
 
 	const { subcategory } = useParams()
 
-	console.log(subcategory)
+	const { setLoading } = useContext(Context)
 
 	useEffect(() => {
 		const fetchProducts = async () => {

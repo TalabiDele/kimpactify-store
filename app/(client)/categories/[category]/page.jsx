@@ -1,14 +1,16 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { fetchCategories, fetchTitle } from '/utils/requests'
 import CardDisplay from '/container/CardDisplay'
+import Context from '/context/Context'
 
 const Category = () => {
 	const [products, setProducts] = useState(null)
-	const [loading, setLoading] = useState(true)
 	const [title, setTitle] = useState('')
+
+	const { setLoading } = useContext(Context)
 
 	const { category } = useParams()
 

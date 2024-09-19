@@ -1,16 +1,19 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Banner from '/components/Banner'
 import AfricanWear from '/container/AfricanWear'
 import CooperateWears from '/container/CooperateWears'
 import KnitWears from '/container/KnitWears'
 import { fetchCategories } from '/utils/requests'
+import Context from '/context/Context'
 
 const HomePage = () => {
 	const [africanWears, setAfricanWears] = useState()
 	const [corporateWears, setCorporateWears] = useState()
 	const [knitWear, setKnitWear] = useState()
+
+	const { setLoading } = useContext(Context)
 
 	useEffect(() => {
 		const fetchAllCategories = async () => {

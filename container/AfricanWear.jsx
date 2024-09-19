@@ -1,14 +1,18 @@
 'use client'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import Card from '../components/Card'
 import imgOne from '../assets/imgs/cloth-1.png'
 import imgTwo from '../assets/imgs/cloth-2.png'
 import Heading from '../components/Heading'
 import More from '../components/More'
 import { motion } from 'framer-motion'
+import Context from '../context/Context'
+import CardSkeleton from '../components/CardSkeleton'
 
 const AfricanWear = ({ africanWears }) => {
+	const { loading } = useContext(Context)
+
 	return (
 		<motion.div
 			initial={{ x: '-100%' }}
@@ -21,19 +25,29 @@ const AfricanWear = ({ africanWears }) => {
 				<More link={'/categories/african-wears'} />
 			</div>
 			<div className=' flex flex-wrap items-center gap-[1rem]'>
-				{africanWears?.map(
-					(african, index) =>
-						index <= 5 - 1 && (
-							<Card
-								img={imgOne}
-								title={african?.title}
-								description={african?.description}
-								amount={`$${african?.pricing}`}
-								rating={`[${african?.rating}]`}
-								link={`/categories/${african?.category?.param}/${african?.subCategory?.param}/${african?._id}`}
-								key={african?._id}
-							/>
-						)
+				{loading ? (
+					<div className='flex gap-[1rem] items-center flex-wrap'>
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+					</div>
+				) : (
+					africanWears?.map(
+						(african, index) =>
+							index <= 5 - 1 && (
+								<Card
+									img={imgOne}
+									title={african?.title}
+									description={african?.description}
+									amount={`$${african?.pricing}`}
+									rating={`[${african?.rating}]`}
+									link={`/categories/${african?.category?.param}/${african?.subCategory?.param}/${african?._id}`}
+									key={african?._id}
+								/>
+							)
+					)
 				)}
 			</div>
 		</motion.div>

@@ -18,26 +18,20 @@ export const GET = async (request) => {
 }
 
 export const POST = async (request) => {
-	const { values, category, sizes } = await request.json()
-
-	const product = {
-		pricing: values.pricing,
-		quantity: values.quantity,
-		sizes: sizes,
-		title: values.title,
-		subCategory: values.subCategory,
-		category: category,
-	}
-
-	// upload images to cloudinary
-
-	const imageUploadPromises = []
-
-	// for (const image of images) {
-	// }
-
 	try {
 		await connectDB()
+
+		const { values, category, sizes, images } = await request.json()
+
+		const product = {
+			pricing: values.pricing,
+			quantity: values.quantity,
+			sizes: sizes,
+			title: values.title,
+			subCategory: values.subCategory,
+			category: category,
+			image: images,
+		}
 
 		const newProduct = new Product(product)
 		await newProduct.save()

@@ -27,12 +27,14 @@ import {
 	TooltipTrigger,
 } from '/components/shadcn/components/ui/tooltip'
 import { Input } from '/components/shadcn/components/ui/input'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { fetchAllCategories, fetchAllSubCategories } from '../utils/requests'
+import { Label } from '/components/shadcn/components/ui/label'
+import { fetchAllCategories } from '../utils/requests'
 import { BtnCancel } from './Buttons'
 import Context from '../context/Context'
+import { zfd } from 'zod-form-data'
 import toast from 'react-hot-toast'
+import { CldUploadWidget } from 'next-cloudinary'
+import { IoCloudUploadOutline } from 'react-icons/io5'
 
 const formSchema = z.object({
 	title: z.string(),
@@ -50,17 +52,15 @@ const AddProduct = ({ setIsAdd }) => {
 	const [data, setData] = useState({})
 	const [productSizes, setProductSizes] = useState([])
 	const [currentSize, setCurrentSize] = useState()
+	const [images, setImages] = useState([])
+	const [upload, setUpload] = useState([])
 
 	const { fetchProducts, categories } = useContext(Context)
-
-	console.log(categories)
 
 	useEffect(() => {
 		const fetchCategories = async () => {
 			try {
 				const resCategories = await fetchAllCategories()
-
-				console.log(resCategories)
 
 				setCategory(resCategories)
 			} catch (error) {
@@ -86,21 +86,28 @@ const AddProduct = ({ setIsAdd }) => {
 		},
 	})
 
-	const handleSubmit = async (values) => {
-		setData({ values, category: currentCategory })
+	const toBase64 = (file) =>
+		new Promise((resolve, reject) => {
+			const reader = new FileReader()
+			reader.readAsDataURL(file) // Convert file to Base64
+			reader.onload = () => resolve(reader.result)
+			reader.onerror = (error) => reject(error)
+		})
 
-		// console.log(data)
+	const handleSubmit = async (values) => {
+		console.log(images)
 
 		try {
 			const response = await fetch(`/api/products`, {
 				method: 'POST',
 				headers: {
-					'content-type': 'application/json',
+					'content-type': 'multipart/form-data',
 				},
 				body: JSON.stringify({
 					values,
 					category: currentCategory,
 					sizes: productSizes,
+					images,
 				}),
 			})
 
@@ -125,8 +132,6 @@ const AddProduct = ({ setIsAdd }) => {
 
 		const filtered = category?.filter((cat) => values === cat?._id)
 
-		console.log(filtered)
-
 		setSubCategories(filtered[0]?.subCategories)
 	}
 
@@ -138,8 +143,6 @@ const AddProduct = ({ setIsAdd }) => {
 			}
 			return prevItems
 		})
-
-		console.log(productSizes)
 	}
 
 	const handleSelectChange = (value) => {
@@ -148,6 +151,36 @@ const AddProduct = ({ setIsAdd }) => {
 		console.log(filtered[0])
 
 		setCurrentSize(filtered[0])
+	}
+
+	const handleImageChange = async (e) => {
+		const { files } = e.target
+		// const selectedFiles = Array.from(e.target.files || [])
+
+		if (files) {
+			setImages((prev) => [...prev, ...Array.from(files)])
+		}
+		setImages(selectedFiles)
+
+		// console.log(images)
+
+		// const selectedFiles = Array.from(e.target.files || [])
+
+		// const base64Images = await Promise.all(
+		// 	selectedFiles.map((file) => toBase64(file))
+		// )
+
+		// setImages(base64Images)
+	}
+
+	const handleUpload = (results) => {
+		console.log(results)
+
+		if (results.event === 'success') {
+			setImages((prevUrls) => [...prevUrls, results.info.secure_url])
+		}
+
+		console.log(images)
 	}
 
 	return (
@@ -338,6 +371,46 @@ const AddProduct = ({ setIsAdd }) => {
 									</TooltipProvider>
 								))}
 							</div>
+
+							<CldUploadWidget
+								uploadPreset='kimptrendz'
+								onSuccess={(results) => handleUpload(results)}
+							>
+								{({ open }) => {
+									return (
+										<div
+											className=' bg-transparent border border-[#E5E5E5] rounded-md text-sm font-medium p-[0.5rem] flex items-center gap-2 cursor-pointer w-[50%] justify-center'
+											onClick={() => open()}
+										>
+											<IoCloudUploadOutline fontSize={24} />
+											Upload images
+										</div>
+									)
+								}}
+							</CldUploadWidget>
+
+							{/* <div className='grid w-full max-w-sm items-center gap-1.5'>
+								<FormField
+									control={form.control}
+									name='images'
+									render={({ field }) => {
+										return (
+											<FormItem>
+												<FormLabel>Images</FormLabel>
+												<FormControl>
+													<Input
+														type='file'
+														multiple
+														// onChange={handleImageChange}
+														onChange={handleImageChange}
+													/>
+												</FormControl>
+												<FormMessage />
+											</FormItem>
+										)
+									}}
+								/>
+							</div> */}
 
 							<div className=' items-center justify-between flex-row-reverse flex gap-3 mt-[1rem]'>
 								<div className='' onClick={() => setIsAdd(false)}>

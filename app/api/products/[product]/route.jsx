@@ -24,7 +24,7 @@ export const GET = async (request, { params }) => {
 export const PUT = async (request, { params }) => {
 	try {
 		await connectDB()
-		const { values, sizes } = await request.json()
+		const { values, sizes, images } = await request.json()
 
 		const product = {
 			pricing: values.pricing,
@@ -33,6 +33,7 @@ export const PUT = async (request, { params }) => {
 			title: values.title,
 			subCategory: values.subCategory,
 			category: values.category,
+			image: images,
 		}
 
 		const param = params.product

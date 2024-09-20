@@ -33,13 +33,16 @@ import { fetchAllCategories, fetchAllSubCategories } from '../utils/requests'
 import { BtnCancel } from './Buttons'
 import Context from '../context/Context'
 import toast from 'react-hot-toast'
+import { CldUploadWidget } from 'next-cloudinary'
+import { IoCloudUploadOutline } from 'react-icons/io5'
+import Image from 'next/image'
 
 const formSchema = z.object({
 	title: z.string(),
 	category: z.string(),
 	subCategory: z.string(),
-	pricing: z.string().transform((v) => Number(v) || 0),
-	quantity: z.string().transform((v) => Number(v) || 0),
+	pricing: z.number(),
+	quantity: z.number(),
 })
 
 const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
@@ -48,6 +51,7 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 	const [category, setCategory] = useState()
 	const [productSizes, setProductSizes] = useState([])
 	const [currentSize, setCurrentSize] = useState()
+	const [images, setImages] = useState([])
 
 	const { fetchProducts } = useContext(Context)
 
@@ -55,6 +59,7 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 
 	useEffect(() => {
 		setProductSizes(product?.sizes)
+		setImages(product?.image)
 
 		const fetchCategories = async () => {
 			try {
@@ -97,7 +102,7 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 				headers: {
 					'content-type': 'application/json',
 				},
-				body: JSON.stringify({ values, sizes: productSizes }),
+				body: JSON.stringify({ values, sizes: productSizes, images }),
 			})
 
 			console.log(response)
@@ -142,6 +147,16 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 		})
 
 		console.log(productSizes)
+	}
+
+	const handleUpload = (results) => {
+		console.log(results)
+
+		if (results.event === 'success') {
+			setImages((prevUrls) => [...prevUrls, results.info.secure_url])
+		}
+
+		console.log(images)
 	}
 
 	const handleSelectChange = (value) => {
@@ -352,6 +367,36 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 											</TooltipContent>
 										</Tooltip>
 									</TooltipProvider>
+								))}
+							</div>
+
+							<CldUploadWidget
+								uploadPreset='kimptrendz'
+								onSuccess={(results) => handleUpload(results)}
+							>
+								{({ open }) => {
+									return (
+										<div
+											className=' bg-transparent border border-[#E5E5E5] rounded-md text-sm font-medium p-[0.5rem] flex items-center gap-2 cursor-pointer w-[50%] justify-center'
+											onClick={() => open()}
+										>
+											<IoCloudUploadOutline fontSize={24} />
+											Upload images
+										</div>
+									)
+								}}
+							</CldUploadWidget>
+
+							<div className=' flex gap-2'>
+								{images?.map((image, index) => (
+									<div className=' relative w-[3rem] h-[3rem]' key={index}>
+										<Image
+											src={image}
+											fill
+											objectFit='cover'
+											className='rounded-md'
+										/>
+									</div>
 								))}
 							</div>
 

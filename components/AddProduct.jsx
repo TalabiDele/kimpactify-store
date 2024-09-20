@@ -79,20 +79,11 @@ const AddProduct = ({ setIsAdd }) => {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			title: '',
-			// category: '',
 			subCategory: '',
 			quantity: 0,
 			pricing: 0,
 		},
 	})
-
-	const toBase64 = (file) =>
-		new Promise((resolve, reject) => {
-			const reader = new FileReader()
-			reader.readAsDataURL(file) // Convert file to Base64
-			reader.onload = () => resolve(reader.result)
-			reader.onerror = (error) => reject(error)
-		})
 
 	const handleSubmit = async (values) => {
 		console.log(images)
@@ -151,26 +142,6 @@ const AddProduct = ({ setIsAdd }) => {
 		console.log(filtered[0])
 
 		setCurrentSize(filtered[0])
-	}
-
-	const handleImageChange = async (e) => {
-		const { files } = e.target
-		// const selectedFiles = Array.from(e.target.files || [])
-
-		if (files) {
-			setImages((prev) => [...prev, ...Array.from(files)])
-		}
-		setImages(selectedFiles)
-
-		// console.log(images)
-
-		// const selectedFiles = Array.from(e.target.files || [])
-
-		// const base64Images = await Promise.all(
-		// 	selectedFiles.map((file) => toBase64(file))
-		// )
-
-		// setImages(base64Images)
 	}
 
 	const handleUpload = (results) => {

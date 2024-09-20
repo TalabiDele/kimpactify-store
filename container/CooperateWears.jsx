@@ -36,7 +36,7 @@ const CooperateWears = ({ corporateWears }) => {
 				) : (
 					corporateWears?.map((wear) => (
 						<Card
-							img={imgOne}
+							img={wear?.image[0]}
 							title={wear?.title}
 							description={wear?.description}
 							amount={`$${wear?.pricing}`}

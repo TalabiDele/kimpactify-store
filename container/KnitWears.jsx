@@ -39,7 +39,7 @@ const KnitWears = ({ knitWear }) => {
 						(wear, index) =>
 							index <= 5 - 1 && (
 								<Card
-									img={imgOne}
+									img={wear?.image[0]}
 									title={wear?.title}
 									description={wear?.description}
 									amount={`$${wear?.pricing}`}

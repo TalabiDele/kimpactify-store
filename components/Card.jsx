@@ -11,8 +11,8 @@ const Card = ({ img, title, description, amount, rating, id, link }) => {
 				className=' bg-white p-[1rem] rounded-md mb-[2rem] text-[#5C5C5C] w-[15rem] grid  max-sm:mx-auto max-sm:w-[17rem]'
 				style={{ boxShadow: '0px 0px 10px #cfcfcf7d' }}
 			>
-				<div className=' w-[10rem] h-[12rem] justify-self-center'>
-					<Image src={img} alt='' objectFit='cover' />
+				<div className=' w-full h-[12rem] justify-self-center relative mb-[0.5rem]'>
+					<Image src={img} fill className='rounded-t-md' objectFit='cover' />
 				</div>
 				<p className=' font-bold text-[0.8rem]'>{title}</p>
 				<p className=' text-[0.6rem] mt-[0.3rem] border-b border-[#B3B9C4] pb-[0.5rem]'>

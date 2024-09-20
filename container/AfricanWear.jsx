@@ -9,6 +9,7 @@ import More from '../components/More'
 import { motion } from 'framer-motion'
 import Context from '../context/Context'
 import CardSkeleton from '../components/CardSkeleton'
+import { FaProductHunt } from 'react-icons/fa'
 
 const AfricanWear = ({ africanWears }) => {
 	const { loading } = useContext(Context)
@@ -38,7 +39,7 @@ const AfricanWear = ({ africanWears }) => {
 						(african, index) =>
 							index <= 5 - 1 && (
 								<Card
-									img={imgOne}
+									img={african?.image[0]}
 									title={african?.title}
 									description={african?.description}
 									amount={`$${african?.pricing}`}

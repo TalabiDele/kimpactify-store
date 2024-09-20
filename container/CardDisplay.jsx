@@ -37,7 +37,7 @@ const CardDisplay = ({ products, title, category }) => {
 					products?.map((product) => (
 						<Card
 							key={product?._id}
-							img={imgOne}
+							img={product?.image[0]}
 							title={product?.title}
 							description={product?.description}
 							amount={`$${product?.pricing}`}

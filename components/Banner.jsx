@@ -24,10 +24,12 @@ const Banner = ({ heading, text }) => {
 					viewport={{ once: false }}
 					className=' flex bg-[#ffd138] mt-[3rem] rounded-2xl p-[3rem]'
 				>
-					<div className=' w-[60%]'>
-						<h1 className=' font-bold text-[3rem] leading-[1.2]'>{heading}</h1>
-						<p className=' text-sm my-[2rem]'>{text}</p>
-						<div className=' flex gap-[1rem]'>
+					<div className=' w-[60%] max-md:w-[100%] mx-auto text-center'>
+						<h1 className=' font-bold text-[3rem] leading-[1.2] max-md:text-[2rem]'>
+							{heading}
+						</h1>
+						<p className=' text-sm my-[2rem] max-md:my-[1rem]'>{text}</p>
+						<div className=' flex gap-[1rem] max-md:justify-center'>
 							<BtnPrimary text={'Buy now'} />
 							<BtnSecondary text={'Explore more'} />
 						</div>

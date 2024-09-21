@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { Skeleton } from '/components/shadcn/components/ui/skeleton'
 import Context from '../context/Context'
 
-const Banner = () => {
+const Banner = ({ heading, text }) => {
 	const { loading } = useContext(Context)
 
 	return (
@@ -25,14 +25,8 @@ const Banner = () => {
 					className=' flex bg-[#ffd138] mt-[3rem] rounded-2xl p-[3rem]'
 				>
 					<div className=' w-[60%]'>
-						<h1 className=' font-bold text-[3rem] leading-[1.2]'>
-							Lorem Ipsum dolor, Lorem Ipsum dolor
-						</h1>
-						<p className=' text-sm my-[2rem]'>
-							Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem
-							ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum
-							dolor,{' '}
-						</p>
+						<h1 className=' font-bold text-[3rem] leading-[1.2]'>{heading}</h1>
+						<p className=' text-sm my-[2rem]'>{text}</p>
 						<div className=' flex gap-[1rem]'>
 							<BtnPrimary text={'Buy now'} />
 							<BtnSecondary text={'Explore more'} />

@@ -24,6 +24,12 @@ const CategoriesSchema = new Schema({
 			ref: 'SubCategory',
 		},
 	],
+	heading: {
+		type: String,
+	},
+	text: {
+		type: String,
+	},
 })
 
 const Category = models.Category || model('Category', CategoriesSchema)

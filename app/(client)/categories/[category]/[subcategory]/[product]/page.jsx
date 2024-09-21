@@ -1,13 +1,15 @@
 'use client'
 
 import { useParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { fetchProduct } from '/utils/requests'
 import ProductContainer from '/container/ProductContainer'
+import Context from '/context/Context'
 
 const Product = () => {
 	const [productItem, setProductItem] = useState(null)
-	const [loading, setLoading] = useState(true)
+
+	const { setLoading } = useContext(Context)
 
 	const { product } = useParams()
 
@@ -28,7 +30,7 @@ const Product = () => {
 	}, [product])
 
 	return (
-		<div className=' mt-[5rem] w-[50vw] mx-auto'>
+		<div className=' mt-[5rem] w-[80vw] mx-auto'>
 			<ProductContainer product={productItem && productItem[0]} />
 		</div>
 	)

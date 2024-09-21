@@ -5,10 +5,15 @@ import { useParams } from 'next/navigation'
 import { fetchCategories, fetchTitle } from '/utils/requests'
 import CardDisplay from '/container/CardDisplay'
 import Context from '/context/Context'
+import Banner from '/components/Banner'
 
 const Category = () => {
 	const [products, setProducts] = useState(null)
 	const [title, setTitle] = useState('')
+	const [banner, setBanner] = useState({
+		heading: '',
+		text: '',
+	})
 
 	const { setLoading } = useContext(Context)
 
@@ -54,7 +59,11 @@ const Category = () => {
 	// console.log('products', products)
 
 	return (
-		<div>
+		<div className=' w-[95vw] mx-auto'>
+			<Banner
+				text={products[0]?.category?.text}
+				heading={products[0]?.category?.heading}
+			/>
 			<CardDisplay products={products} title={title} />
 		</div>
 	)

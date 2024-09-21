@@ -47,7 +47,12 @@ const HomePage = () => {
 
 	return (
 		<div className=' w-[95vw] max-sm:w-[90vw] mx-auto overflow-x-hidden'>
-			<Banner />
+			<Banner
+				heading={'Lorem Ipsum dolor, Lorem Ipsum dolor'}
+				text={
+					'Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor'
+				}
+			/>
 			<AfricanWear africanWears={africanWears} />
 			<CooperateWears corporateWears={corporateWears} />
 			<KnitWears knitWear={knitWear} />

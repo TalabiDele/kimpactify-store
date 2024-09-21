@@ -9,7 +9,7 @@ const ProductContainer = ({ product }) => {
 
 	return (
 		<div className=''>
-			<div className=' flex justify-between '>
+			<div className=' flex gap-[1rem] '>
 				<ImageDisplay product={product} />
 				<ProductDetails product={product} />
 			</div>

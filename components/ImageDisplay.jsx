@@ -5,7 +5,7 @@ import Image from 'next/image'
 // import shoe from '../assets/imgs/shoe.png'
 
 const ImageDisplay = ({ product }) => {
-	const [active, setActive] = useState(product?.image[0])
+	const [active, setActive] = useState()
 
 	useEffect(() => {
 		setActive(product?.image[0])
@@ -13,15 +13,20 @@ const ImageDisplay = ({ product }) => {
 
 	const handleActive = (url) => {
 		setActive(url)
-
-		console.log(url)
 	}
 
 	return (
 		<div>
 			{product && (
-				<div className=' w-[20rem] mb-[2rem]'>
-					<Image src={`/${active}`} height={300} width={500} alt={active} />
+				<div className=' w-[50vw] h-[50rem] relative mb-[2rem]'>
+					<Image
+						src={`${active}`}
+						fill
+						alt={active}
+						objectFit='cover'
+						objectPosition='center'
+						className='rounded-md'
+					/>
 				</div>
 			)}
 
@@ -31,10 +36,16 @@ const ImageDisplay = ({ product }) => {
 						key={image}
 						className={`${
 							active === image && 'border-2 border-blue-700 rounded-md'
-						} mr-[1rem] p-[0.2rem] cursor-pointer`}
+						} mr-[1rem] p-[0.2rem] cursor-pointer relative h-[5rem] w-[5rem]`}
 						onClick={() => handleActive(image)}
 					>
-						<Image src={`/${image}`} height={80} width={80} alt={image} />
+						<Image
+							src={image}
+							fill
+							alt={image}
+							objectFit='cover'
+							className='rounded-md'
+						/>
 					</div>
 				))}
 			</div>

@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     unoptimized: true,
-    domains: ['http://localhost:3000/']
+    domains: ['res.cloudinary.com', "http://localhost:3000"]
   },
 };
 

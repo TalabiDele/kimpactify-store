@@ -23,7 +23,7 @@ const AfricanWear = ({ africanWears }) => {
 					<Heading text={'African Wears'} />
 					<More link={'/categories/african-wears'} />
 				</div>
-				<div className=' flex flex-wrap items-center gap-[1rem]'>
+				<div className=' flex flex-wrap items-center gap-[1rem] max-lg:justify-between max-xl:justify-start max-[460px]:mx-auto max-md:justify-center'>
 					{loading ? (
 						<div className='flex gap-[1rem] items-center flex-wrap'>
 							<CardSkeleton />

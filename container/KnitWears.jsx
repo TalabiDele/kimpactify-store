@@ -25,7 +25,7 @@ const KnitWears = ({ knitWear }) => {
 				<Heading text={'Knit Wears/Sweaters'} />
 				<More link={'/categories/knit-wears'} />
 			</div>
-			<div className=' flex flex-wrap gap-[1rem] items-center'>
+			<div className=' flex flex-wrap gap-[1rem] items-center max-lg:justify-between max-xl:justify-start max-[460px]:mx-auto max-md:justify-center'>
 				{loading ? (
 					<div className='flex gap-[1rem] items-center flex-wrap'>
 						<CardSkeleton />

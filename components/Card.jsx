@@ -6,9 +6,9 @@ import Link from 'next/link'
 
 const Card = ({ img, title, description, amount, rating, id, link }) => {
 	return (
-		<div className=' max-sm:grid max-sm:justify-center max-sm:w-[90vw]'>
+		<div className='  max-sm:grid max-sm:justify-center'>
 			<div
-				className=' bg-white p-[1rem] rounded-md mb-[2rem] text-[#5C5C5C] w-[15rem] grid  max-sm:mx-auto max-sm:w-[17rem]'
+				className=' bg-white p-[1rem] rounded-md mb-[2rem] text-[#5C5C5C] w-[15rem] grid  max-sm:mx-auto max-sm:w-[13rem] max-md:w-[14rem] max-[460px]:w-[18rem]'
 				style={{ boxShadow: '0px 0px 10px #cfcfcf7d' }}
 			>
 				<div className=' w-full h-[12rem] justify-self-center relative mb-[0.5rem]'>
@@ -18,7 +18,7 @@ const Card = ({ img, title, description, amount, rating, id, link }) => {
 				<p className=' text-[0.6rem] mt-[0.3rem] border-b border-[#B3B9C4] pb-[0.5rem]'>
 					{description}
 				</p>
-				<div className=' flex items-center justify-between mt-[0.5rem]'>
+				<div className=' flex items-center justify-between mt-[0.5rem] max-md:flex-col max-md:items-start max-md:gap-5'>
 					<div className=''>
 						<p className='font-bold text-black mb-[0.3rem]'>{amount}</p>
 						<div className=' flex items-center'>

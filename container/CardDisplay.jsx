@@ -22,9 +22,8 @@ const CardDisplay = ({ products, title, category }) => {
 		>
 			<div className=' flex justify-between items-center mb-[2rem]'>
 				<Heading text={title} />
-				{/* <More link={`/categories/${}`} /> */}
 			</div>
-			<div className=' flex gap-[1rem] items-center flex-wrap'>
+			<div className=' flex gap-[1rem] items-center flex-wrap max-lg:justify-between max-xl:justify-start max-[460px]:mx-auto max-md:justify-center'>
 				{loading ? (
 					<div className='flex gap-[1rem] items-center flex-wrap'>
 						<CardSkeleton />

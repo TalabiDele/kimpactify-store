@@ -61,8 +61,8 @@ const Category = () => {
 	return (
 		<div className=' w-[95vw] mx-auto'>
 			<Banner
-				text={products[0]?.category?.text}
-				heading={products[0]?.category?.heading}
+				text={products && products[0]?.category?.text}
+				heading={products && products[0]?.category?.heading}
 			/>
 			<CardDisplay products={products} title={title} />
 		</div>

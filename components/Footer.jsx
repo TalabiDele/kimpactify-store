@@ -16,7 +16,7 @@ const Footer = () => {
 				<Skeleton className='h-[30vh] w-[100%] mt-[0.5rem]' />
 			) : (
 				<div className=' mt-[4rem] py-[4rem] bg-[#1a1a1a] text-white'>
-					<div className=' flex justify-between text-sm w-[90vw] mx-auto'>
+					<div className=' flex justify-between text-sm w-[90vw] mx-auto flex-wrap max-md:grid max-md:grid-cols-2 max-md:justify-normal max-md:gap-5 max-sm:grid-cols-1'>
 						<div className=' w-[15rem]'>
 							<Image src={logo} alt='' />
 							<p className=''>
@@ -25,7 +25,7 @@ const Footer = () => {
 							</p>
 						</div>
 
-						<ul className=''>
+						<ul className=' max-md:justify-self-center max-sm:justify-self-start'>
 							<li className=' font-medium mb-[1rem]'>Getting started</li>
 							<li className=' mb-[0.5rem]'>
 								<Link href={''}>Home</Link>
@@ -41,7 +41,7 @@ const Footer = () => {
 							</li>
 						</ul>
 
-						<ul className=''>
+						<ul className=' '>
 							<li className=' font-medium mb-[1rem]'>Company</li>
 							<li className=' mb-[0.5rem]'>
 								<Link href={''}>About us</Link>
@@ -54,7 +54,7 @@ const Footer = () => {
 							</li>
 						</ul>
 
-						<ul className=''>
+						<ul className='max-md:justify-self-center max-sm:justify-self-start'>
 							<li className=' font-medium mb-[1rem]'>Resources</li>
 							<li className=' mb-[0.5rem]'>
 								<Link href={''}>Terms & Conditions</Link>

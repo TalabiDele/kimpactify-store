@@ -3,7 +3,7 @@
 import React, { useContext, useState } from 'react'
 import Heading from '../components/Heading'
 import { FaStar } from 'react-icons/fa'
-import { BtnCard, BtnFill } from '../components/Buttons'
+import { BtnStroke, BtnFill } from '../components/Buttons'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 import Context from '../context/Context'
 import toast from 'react-hot-toast'
@@ -70,27 +70,48 @@ const ProductDetails = ({ product }) => {
 
 	return (
 		<div>
-			<div className=''>
-				<Heading text={product?.title} />
+			<div className=' w-[40vw] max-md:w-[90vw]'>
+				<h1 className=' font-bold text-[3rem]'>{product?.title}</h1>
 				<div className=' flex items-center mb-[1rem] mt-[0.5rem]'>
 					<div className='flex items-center mr-[0.2rem]'>
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
+						<FaStar color='#F7D977' fontSize={'1.2rem'} />
+						<FaStar color='#F7D977' fontSize={'1.2rem'} />
+						<FaStar color='#F7D977' fontSize={'1.2rem'} />
+						<FaStar color='#F7D977' fontSize={'1.2rem'} />
+						<FaStar color='#F7D977' fontSize={'1.2rem'} />
 					</div>
 					<p className=' text-[0.6rem]'>[{product?.rating}]</p>
 				</div>
+				<p
+					className=' text-[0.7rem] text-[#727272] mb-[0rem] font-bold'
+					style={{ color: '#727272' }}
+				>
+					Price
+				</p>
 				<p className='font-bold text-3xl text-black mb-[0.3rem]'>
 					${product?.pricing}
 				</p>
-				<p className=' text-[0.6rem] mt-[0.3rem] my-[0.5rem]'>
-					{product?.description}
+				<p
+					className=' text-[0.7rem] text-[#727272] mb-[0rem] font-bold mt-[1rem]'
+					style={{ color: '#727272' }}
+				>
+					Description
 				</p>
-				<div className=' flex items-center w-[5rem] justify-between'>
+				<p className=' text-[0.8rem] w-[70%]'>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
+					sapiente, similique velit nihil animi delectus sint alias magni
+					obcaecati, saepe incidunt aliquid quis dignissimos. Consectetur
+					laudantium modi odio repudiandae tempora.
+				</p>
+				<p
+					className=' text-[0.7rem] text-gray-200 mb-[0.3rem] font-bold mt-[1rem] '
+					style={{ color: '#727272' }}
+				>
+					No. of items
+				</p>
+				<div className=' flex items-center w-[5rem] justify-between gap-2'>
 					<p
-						className=' font-bold text-2xl cursor-pointer'
+						className=' font-bold text-3xl cursor-pointer'
 						onClick={handleMinus}
 					>
 						-
@@ -99,10 +120,10 @@ const ProductDetails = ({ product }) => {
 						type='number'
 						value={quantity}
 						onChange={(e) => setQuantity(e.target.value)}
-						className=' w-[2rem] border border-[#E2E2E2] rounded-lg text-center remove-arrow'
+						className=' w-[4rem] h-[3rem] border border-[#E2E2E2] rounded-lg text-center remove-arrow'
 					/>
 					<p
-						className=' font-bold text-2xl cursor-pointer'
+						className=' font-bold text-3xl cursor-pointer'
 						onClick={handlePlus}
 					>
 						+
@@ -112,7 +133,7 @@ const ProductDetails = ({ product }) => {
 				<div className=' flex gap-[1rem] mt-[1rem]'>
 					<BtnFill text={'Buy now'} />
 					<div className='' onClick={handleCart}>
-						<BtnCard text={'Add to cart'} icon={<MdOutlineShoppingCart />} />
+						<BtnStroke text={'Add to cart'} icon={<MdOutlineShoppingCart />} />
 					</div>
 				</div>
 			</div>

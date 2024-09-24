@@ -18,7 +18,7 @@ const ImageDisplay = ({ product }) => {
 	return (
 		<div>
 			{product && (
-				<div className=' w-[50vw] h-[50rem] relative mb-[2rem]'>
+				<div className=' w-[50vw] h-[50rem] relative mb-[2rem] max-xl:h-[40rem] max-lg:h-[30rem] max-md:w-[90vw]'>
 					<Image
 						src={`${active}`}
 						fill

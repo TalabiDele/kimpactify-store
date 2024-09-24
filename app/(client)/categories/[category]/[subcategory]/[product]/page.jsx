@@ -30,7 +30,7 @@ const Product = () => {
 	}, [product])
 
 	return (
-		<div className=' mt-[5rem] w-[80vw] mx-auto'>
+		<div className=' mt-[5rem] w-[95vw] mx-auto'>
 			<ProductContainer product={productItem && productItem[0]} />
 		</div>
 	)

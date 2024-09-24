@@ -18,7 +18,7 @@ const ImageDisplay = ({ product }) => {
 	return (
 		<div>
 			{product && (
-				<div className=' w-[50vw] h-[50rem] relative mb-[2rem] max-xl:h-[40rem] max-lg:h-[30rem] max-md:w-[90vw]'>
+				<div className=' w-[50vw] h-[50rem] relative mb-[2rem] max-xl:h-[40rem] max-lg:h-[30rem] max-md:w-[90vw] max-md:mx-auto'>
 					<Image
 						src={`${active}`}
 						fill
@@ -30,13 +30,13 @@ const ImageDisplay = ({ product }) => {
 				</div>
 			)}
 
-			<div className=' flex'>
+			<div className=' flex max-md:w-[90vw] max-md:mx-auto'>
 				{product?.image?.map((image) => (
 					<div
 						key={image}
 						className={`${
 							active === image && 'border-2 border-blue-700 rounded-md'
-						} mr-[1rem] p-[0.2rem] cursor-pointer relative h-[5rem] w-[5rem]`}
+						} mr-[1rem] p-[0.2rem] cursor-pointer relative h-[5rem] w-[5rem] max-md:w-[3rem] max-md:h-[3rem]`}
 						onClick={() => handleActive(image)}
 					>
 						<Image

@@ -72,12 +72,14 @@ const CartItem = () => {
 						key={item?._id}
 						className=' mt-[1rem] flex items-center w-[60vw] justify-between border-b border-[#DFE2E6] p-[1rem]'
 					>
-						<Image
-							src={`/${item?.image[0]}`}
-							width={100}
-							height={150}
-							objectFit='cover'
-						/>
+						<div className='relative w-[7rem] h-[7rem]'>
+							<Image
+								src={item?.image[0]}
+								className='rounded-md'
+								fill
+								objectFit='cover'
+							/>
+						</div>
 
 						<div className=' text-sm'>
 							<p className=' font-bold'>{item?.title}</p>

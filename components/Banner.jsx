@@ -24,7 +24,7 @@ const Banner = ({ heading, text }) => {
 					viewport={{ once: false }}
 					className=' flex bg-[#ffd138] mt-[3rem] rounded-2xl p-[3rem]'
 				>
-					<div className=' w-[60%] max-md:w-[100%] mx-auto text-center'>
+					<div className=' w-[60%] max-md:w-[100%] max-md:mx-auto max-md:text-center'>
 						<h1 className=' font-bold text-[3rem] leading-[1.2] max-md:text-[2rem]'>
 							{heading}
 						</h1>

@@ -12,7 +12,7 @@ export async function doCredentialLogin(values) {
 
 		return response
 	} catch (error) {
-		// console.log(error)
+		console.log(error)
 		throw new Error(error)
 	}
 }

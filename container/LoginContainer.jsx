@@ -42,7 +42,7 @@ const LoginContainer = () => {
 		try {
 			const response = await doCredentialLogin(values)
 
-			console.log(response)
+			// console.log(response)
 
 			if (!!response.error) {
 				console.log(response)

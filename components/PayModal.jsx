@@ -11,6 +11,10 @@ const PayModal = ({
 	isPay,
 	setIsPay,
 }) => {
+	const handlePay = (e) => {
+		e.preventDefault()
+	}
+
 	return (
 		<div
 			className={` ${
@@ -21,6 +25,7 @@ const PayModal = ({
 				className={`${
 					isPay ? 'w-[30vw] opacity-[1]' : 'w-0 opacity-0'
 				} bg-[#fff] rounded-md shadow-lg  mx-auto p-[1rem] transition-all ease-in-out duration-75 delay-150 relative`}
+				onSubmit={handlePay}
 			>
 				<div
 					className=' absolute right-[0.2rem] text-3xl top-[0.2rem] cursor-pointer'

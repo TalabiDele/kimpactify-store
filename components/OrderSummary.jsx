@@ -4,12 +4,15 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { BtnFill, BtnWide } from './Buttons'
 import PayModal from './PayModal'
+import { useRouter } from 'next/navigation'
 
-const OrderSummary = ({ orders }) => {
+const OrderSummary = ({ orders, btnText, handleCheckout }) => {
 	const [amount, setAmount] = useState()
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [isPay, setIsPay] = useState(false)
+
+	const router = useRouter()
 
 	const calculateTotal = () => {
 		return orders.reduce((acc, item) => {
@@ -17,15 +20,9 @@ const OrderSummary = ({ orders }) => {
 		}, 0)
 	}
 
-	const handleCheckout = () => {
-		setIsPay(true)
-
-		setAmount(calculateTotal())
-	}
-
 	return (
 		<div>
-			<PayModal
+			{/* <PayModal
 				amount={amount}
 				name={name}
 				setName={setName}
@@ -33,7 +30,7 @@ const OrderSummary = ({ orders }) => {
 				setEmail={setEmail}
 				isPay={isPay}
 				setIsPay={setIsPay}
-			/>
+			/> */}
 			<div className=' w-[25vw] bg-[#fff] shadow-xl rounded-md p-[1rem]'>
 				<h1 className='text-xl font-bold mb-[1rem]'>Order Summary</h1>
 				{orders?.length === 0 ? (
@@ -59,7 +56,7 @@ const OrderSummary = ({ orders }) => {
 				</div>
 
 				<div className=' w-full' onClick={handleCheckout}>
-					<BtnWide text={'Checkout'} />
+					<BtnWide text={btnText} />
 				</div>
 			</div>
 		</div>

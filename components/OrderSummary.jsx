@@ -31,7 +31,7 @@ const OrderSummary = ({ orders, btnText, handleCheckout }) => {
 				isPay={isPay}
 				setIsPay={setIsPay}
 			/> */}
-			<div className=' w-[25vw] bg-[#fff] shadow-xl rounded-md p-[1rem]'>
+			<div className='border rounded-md p-[1rem]'>
 				<h1 className='text-xl font-bold mb-[1rem]'>Order Summary</h1>
 				{orders?.length === 0 ? (
 					<h1 className='text-center'>No item chosen</h1>

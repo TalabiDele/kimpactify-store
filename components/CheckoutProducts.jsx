@@ -6,8 +6,18 @@ import Context from '/context/Context'
 import { useSearchParams } from 'next/navigation'
 import OrderItem from './OrderItem'
 import OrderSummary from './OrderSummary'
+import PayModal from './PayModal'
 
 const CheckoutProducts = () => {
+	const [shippingDetails, setShippingDetails] = useState({
+		name: '',
+		email: '',
+		number: null,
+		address: '',
+	})
+
+	console.log(shippingDetails)
+
 	const itemsParams = useSearchParams()
 
 	const items = itemsParams.get('items')
@@ -23,29 +33,31 @@ const CheckoutProducts = () => {
 	if (items) {
 		try {
 			orders = JSON.parse(decodeURIComponent(items))
-
-			console.log(orders)
 		} catch (error) {
 			console.error('Failed to parse data', error)
 		}
 	}
 
-	const handlePay = () => {
-		console.log('pay')
-	}
+	const handlePay = () => {}
 
 	return (
 		<div>
-			<div className=' flex justify-between'>
-				{orders?.map((order) => (
-					<OrderItem item={order} key={order?._id} />
-				))}
+			<div className=' flex justify-between gap-5'>
+				<div className=''>
+					{orders?.map((order) => (
+						<OrderItem item={order} key={order?._id} />
+					))}
+				</div>
 
-				<OrderSummary
-					orders={orders}
-					btnText={'Place order'}
-					handleCheckout={handlePay}
-				/>
+				<div className=' w-full'>
+					<PayModal setShippingDetails={setShippingDetails} />
+
+					<OrderSummary
+						orders={orders}
+						btnText={'Place order'}
+						handleCheckout={handlePay}
+					/>
+				</div>
 			</div>
 		</div>
 	)

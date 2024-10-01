@@ -11,7 +11,6 @@ const OrdersSchema = new Schema({
 		{
 			type: Schema.Types.ObjectId,
 			ref: 'Products',
-			// ref: Product?.modelName,
 			required: true,
 		},
 	],

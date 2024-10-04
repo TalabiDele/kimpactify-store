@@ -86,8 +86,6 @@ const AddProduct = ({ setIsAdd }) => {
 	})
 
 	const handleSubmit = async (values) => {
-		console.log(images)
-
 		try {
 			const response = await fetch(`/api/products`, {
 				method: 'POST',

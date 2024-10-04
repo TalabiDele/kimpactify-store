@@ -22,15 +22,6 @@ const OrderSummary = ({ orders, btnText, handleCheckout }) => {
 
 	return (
 		<div>
-			{/* <PayModal
-				amount={amount}
-				name={name}
-				setName={setName}
-				email={email}
-				setEmail={setEmail}
-				isPay={isPay}
-				setIsPay={setIsPay}
-			/> */}
 			<div className='border rounded-md p-[1rem]'>
 				<h1 className='text-xl font-bold mb-[1rem]'>Order Summary</h1>
 				{orders?.length === 0 ? (

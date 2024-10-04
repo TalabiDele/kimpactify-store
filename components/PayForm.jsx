@@ -6,6 +6,7 @@ import Heading from './Heading'
 import toast from 'react-hot-toast'
 import { useContext } from 'react'
 import Context from '/context/Context'
+import Loader from './Loader'
 
 export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 	const { isFetching, setIsFetching } = useContext(Context)
@@ -49,28 +50,31 @@ export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 	}
 
 	return (
-		<div className=' fixed left-0 top-0 w-[100vw] h-[100vh] bg-white bg-opacity-75 z-10 flex items-center justify-center'>
-			<div className=' w-[40rem] mx-auto bg-white p-[2rem]'>
-				<div className='flex justify-between mb-[2rem]'>
-					<Heading text={'Make Payment'} />
-					<IoMdClose
-						fontSize={24}
-						onClick={() => setIsPay(false)}
-						className=' cursor-pointer'
-					/>
+		<>
+			{isFetching && <Loader />}
+			<div className=' fixed left-0 top-0 w-[100vw] h-[100vh] bg-white bg-opacity-75 z-10 flex items-center justify-center'>
+				<div className=' w-[40rem] mx-auto bg-white p-[2rem]'>
+					<div className='flex justify-between mb-[2rem]'>
+						<Heading text={'Make Payment'} />
+						<IoMdClose
+							fontSize={24}
+							onClick={() => setIsPay(false)}
+							className=' cursor-pointer'
+						/>
+					</div>
+					<PaymentForm
+						applicationId={appId}
+						locationId={locationId}
+						cardTokenizeResponseReceived={async (token) => {
+							const result = await submitPayment(token.token, amount)
+							handlePay(result)
+							console.log(result)
+						}}
+					>
+						<CreditCard />
+					</PaymentForm>
 				</div>
-				<PaymentForm
-					applicationId={appId}
-					locationId={locationId}
-					cardTokenizeResponseReceived={async (token) => {
-						const result = await submitPayment(token.token, amount)
-						handlePay(result)
-						console.log(result)
-					}}
-				>
-					<CreditCard />
-				</PaymentForm>
 			</div>
-		</div>
+		</>
 	)
 }

@@ -18,25 +18,29 @@ const CheckoutProducts = () => {
 	})
 	const [isPay, setIsPay] = useState(false)
 	const [amount, setAmount] = useState()
+	const [order, setOrder] = useState([])
 
 	console.log(shippingDetails)
 	const itemsParams = useSearchParams()
 	const items = itemsParams.get('items')
 	const { setLoading } = useContext(Context)
 
-	useEffect(() => {
-		setLoading(false)
-	}, [])
-
 	let orders = []
 
 	if (items) {
 		try {
 			orders = JSON.parse(decodeURIComponent(items))
+			// setOrder(orders)
 		} catch (error) {
 			console.error('Failed to parse data', error)
 		}
 	}
+
+	useEffect(() => {
+		setLoading(false)
+
+		setOrder(orders)
+	}, [])
 
 	const handlePay = () => {
 		setIsPay(true)
@@ -63,8 +67,13 @@ const CheckoutProducts = () => {
 
 			<div className=' flex justify-between gap-5'>
 				<div className=''>
-					{orders?.map((order) => (
-						<OrderItem item={order} key={order?._id} />
+					{order?.map((order) => (
+						<OrderItem
+							item={order}
+							order={order}
+							setOrder={setOrder}
+							key={order?._id}
+						/>
 					))}
 				</div>
 
@@ -72,7 +81,7 @@ const CheckoutProducts = () => {
 					<PayModal setShippingDetails={setShippingDetails} />
 
 					<OrderSummary
-						orders={orders}
+						orders={order}
 						btnText={'Place order'}
 						handleCheckout={handlePay}
 					/>

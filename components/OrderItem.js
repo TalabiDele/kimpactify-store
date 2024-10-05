@@ -1,26 +1,52 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaStar } from 'react-icons/fa'
 import { BtnCard, BtnFill } from './Buttons'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
+import Context from '/context/Context'
+import { usePathname } from 'next/navigation'
 
-const OrderItem = ({ item }) => {
+const OrderItem = ({ item, order, setOrder }) => {
+	const { setCart, cart } = useContext(Context)
+	const pathname = usePathname()
+
+	console.log(order)
+
 	const handlePlus = (id, qty) => {
 		console.log(id, qty)
-		setCart((prevItems) =>
-			prevItems.map((item) =>
-				item._id === id ? { ...item, quantity: qty + 1 } : item
+		if (pathname === '/cart') {
+			setCart((prevItems) =>
+				prevItems.map((item) =>
+					item._id === id ? { ...item, quantity: qty + 1 } : item
+				)
 			)
-		)
+		} else {
+			setOrder((prevItems) =>
+				prevItems.map((item) =>
+					item._id === id ? { ...item, quantity: qty + 1 } : item
+				)
+			)
+
+			console.log(order)
+		}
 	}
 
 	const handleMinus = (id, qty) => {
+		console.log('working')
 		if (qty !== 1) {
-			setCart((prevItems) =>
-				prevItems.map((item) =>
-					item._id === id ? { ...item, quantity: qty - 1 } : item
+			if (pathname === '/cart') {
+				setCart((prevItems) =>
+					prevItems.map((item) =>
+						item._id === id ? { ...item, quantity: qty - 1 } : item
+					)
 				)
-			)
+			} else {
+				setOrder((prevItems) =>
+					prevItems.map((item) =>
+						item._id === id ? { ...item, quantity: qty - 1 } : item
+					)
+				)
+			}
 		}
 	}
 
@@ -52,15 +78,15 @@ const OrderItem = ({ item }) => {
 					<p className=''>{item?.description}</p>
 				</div>
 
-				<div className=' flex items-center'>
-					<div className='flex items-center mr-[0.2rem]'>
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
-						<FaStar color='#F7D977' fontSize={'0.7rem'} />
-					</div>
-					<p className=' text-[0.6rem]'>[{item?.rating}]</p>
+				<div className=' flex items-center gap-2'>
+					{item?.selectedSizes?.map((size, index) => (
+						<p
+							className=' bg-blue-100 rounded-md p-[0.3rem] text-sm text-blue-600 cursor-pointer'
+							key={index}
+						>
+							{size}
+						</p>
+					))}
 				</div>
 
 				<div className=' font-bold text-[#1E65FF] text-2xl'>

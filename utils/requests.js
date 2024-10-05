@@ -98,6 +98,22 @@ async function fetchProduct(param) {
 	}
 }
 
+async function fetchOrder(param) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_API_DOMAIN}/orders/${param}`
+		)
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch data')
+		}
+
+		return res.json()
+	} catch (error) {
+		console.log(error)
+	}
+}
+
 async function fetchAllProducts() {
 	try {
 		const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/allProducts`)
@@ -168,4 +184,5 @@ export {
 	fetchAllProducts,
 	fetchAllSubCategories,
 	fetchAllCategories,
+	fetchOrder,
 }

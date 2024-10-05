@@ -167,6 +167,19 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 		setCurrentSize(filtered[0])
 	}
 
+	const handleRemove = (size) => {
+		const filtered = productSizes.filter((sub) => sub !== size)
+		// const filteredIds = subIds.filter((sub) => sub._id !== id)
+
+		console.log(filtered)
+
+		// console.log('ids', filteredIds)
+
+		// setSubIds(filteredIds)
+
+		setProductSizes(filtered)
+	}
+
 	return (
 		<div className=' bg-[#00000098] fixed top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] z-[1000]'>
 			<div className=''>

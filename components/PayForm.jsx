@@ -1,4 +1,5 @@
 'use client'
+
 import { CreditCard, PaymentForm } from 'react-square-web-payments-sdk'
 import { submitPayment } from '/app/actions/actions'
 import { IoMdClose } from 'react-icons/io'
@@ -7,9 +8,12 @@ import toast from 'react-hot-toast'
 import { useContext } from 'react'
 import Context from '/context/Context'
 import Loader from './Loader'
+import { useRouter } from 'next/navigation'
 
 export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 	const { isFetching, setIsFetching } = useContext(Context)
+
+	const router = useRouter()
 
 	const appId = process.env.NEXT_PUBLIC_APP_ID
 	const locationId = process.env.NEXT_PUBLIC_LOCATION_ID
@@ -33,13 +37,16 @@ export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 				}),
 			})
 
+			const data = await response.json()
+
+			// router.push(`/confirmation/${data._id}`)
+
 			if (response.ok) {
+				router.push(`/confirmation/${data._id}`)
 				toast.success('Transaction completed', {
 					duration: 6000,
 				})
 			}
-
-			const data = await response.json()
 
 			console.log(data)
 		} catch (error) {

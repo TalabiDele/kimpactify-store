@@ -39,19 +39,21 @@ const CartItem = () => {
 	}
 
 	return (
-		<div className=' w-[90vw] flex justify-between'>
+		<div className=' w-[90vw] flex justify-between gap-[1rem]'>
 			<div className=''>
 				{cart?.map((item, index) => (
-					<OrderItem item={item} key={item?.id} />
+					<OrderItem item={item} key={item?._id} />
 				))}
 			</div>
 
-			<OrderSummary
-				orders={cart}
-				quantity={quantity}
-				handleCheckout={handleCheckout}
-				btnText={'Proceed to checkout'}
-			/>
+			<div className=' w-full'>
+				<OrderSummary
+					orders={cart}
+					quantity={quantity}
+					handleCheckout={handleCheckout}
+					btnText={'Proceed to checkout'}
+				/>
+			</div>
 		</div>
 	)
 }

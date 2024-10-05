@@ -10,6 +10,7 @@ import toast from 'react-hot-toast'
 
 const ProductDetails = ({ product }) => {
 	const [quantity, setQuantity] = useState(1)
+	const [sizes, setSizes] = useState([])
 
 	const { cart, setCart } = useContext(Context)
 
@@ -26,6 +27,14 @@ const ProductDetails = ({ product }) => {
 	}
 
 	const handleCart = () => {
+		if (sizes.length === 0) {
+			toast.error('Select size', {
+				duration: 6000,
+			})
+
+			return
+		}
+
 		if (cart?.length === 0) {
 			setCart((prevCart) => {
 				return [...prevCart, { ...product, quantity: 1 }]
@@ -57,7 +66,10 @@ const ProductDetails = ({ product }) => {
 								: item
 						)
 					} else {
-						return [...prevCart, { ...product, quantity: 1 }]
+						return [
+							...prevCart,
+							{ ...product, quantity: 1, selectedSizes: sizes },
+						]
 					}
 				})
 
@@ -66,6 +78,21 @@ const ProductDetails = ({ product }) => {
 				})
 			}
 		}
+	}
+
+	const handleSize = (size) => {
+		const newSize = sizes?.filter((e) => e === size)
+
+		console.log(newSize)
+
+		if (newSize?.length === 0) {
+			setSizes([...sizes, size])
+		} else {
+			const removeSize = sizes?.filter((e) => e !== size)
+			setSizes(removeSize)
+		}
+
+		console.log(sizes)
 	}
 
 	return (
@@ -103,6 +130,28 @@ const ProductDetails = ({ product }) => {
 					obcaecati, saepe incidunt aliquid quis dignissimos. Consectetur
 					laudantium modi odio repudiandae tempora.
 				</p>
+				<div className=''>
+					<p
+						className=' text-[0.7rem] text-[#727272] mb-[0.5rem] font-bold mt-[1rem]'
+						style={{ color: '#727272' }}
+					>
+						Sizes
+					</p>
+					<div className=' flex gap-2'>
+						{product?.sizes?.map((size, index) => (
+							<p
+								className={` ${
+									sizes?.includes(size) && 'border border-blue-600 bg-blue-200'
+								}
+								rounded-md p-[0.3rem] text-sm text-blue-600 cursor-pointer`}
+								key={index}
+								onClick={() => handleSize(size)}
+							>
+								{size}
+							</p>
+						))}
+					</div>
+				</div>
 				<p
 					className=' text-[0.7rem] text-gray-200 mb-[0.3rem] font-bold mt-[1rem] '
 					style={{ color: '#727272' }}

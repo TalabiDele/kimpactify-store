@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useContext, useEffect, useState } from 'react'
-import Heading from '../components/Heading'
 import { FaStar } from 'react-icons/fa'
 import { BtnStroke, BtnFill } from '../components/Buttons'
 import { MdOutlineShoppingCart } from 'react-icons/md'

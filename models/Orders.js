@@ -1,6 +1,11 @@
 import { Schema, model, models } from 'mongoose'
 
-const productSchema = new Schema()
+const productSchema = new Schema({
+	name: { type: String, required: true },
+	price: { type: Number, required: true },
+	quantity: { type: Number, required: true },
+	sizes: [{ type: String, required: true }],
+})
 
 const OrdersSchema = new Schema(
 	{
@@ -10,13 +15,7 @@ const OrdersSchema = new Schema(
 		email: {
 			type: String,
 		},
-		products: [
-			{
-				title: String,
-				quantity: Number,
-				size: String,
-			},
-		],
+		products: [productSchema],
 		address: {
 			type: String,
 		},

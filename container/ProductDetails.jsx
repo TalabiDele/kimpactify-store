@@ -1,20 +1,24 @@
 'use client'
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Heading from '../components/Heading'
 import { FaStar } from 'react-icons/fa'
 import { BtnStroke, BtnFill } from '../components/Buttons'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 import Context from '../context/Context'
 import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 const ProductDetails = ({ product }) => {
 	const [quantity, setQuantity] = useState(1)
 	const [sizes, setSizes] = useState([])
+	const [currentProduct, setCurrentProduct] = useState()
+
+	const router = useRouter()
 
 	const { cart, setCart } = useContext(Context)
 
-	console.log('cart', cart, product)
+	useEffect(() => {}, [])
 
 	const handlePlus = () => {
 		setQuantity(quantity + 1)
@@ -37,7 +41,7 @@ const ProductDetails = ({ product }) => {
 
 		if (cart?.length === 0) {
 			setCart((prevCart) => {
-				return [...prevCart, { ...product, quantity: 1 }]
+				return [...prevCart, { ...product, selectedSizes: sizes, quantity: 1 }]
 			})
 
 			toast.success('Item added to cart', {
@@ -59,7 +63,6 @@ const ProductDetails = ({ product }) => {
 					console.log(prevCart)
 
 					if (existingProductIndex !== -1) {
-						// Product already in cart, update the quantity
 						return prevCart.map((item, index) =>
 							index === existingProductIndex
 								? { ...item, quantity: (item.quantity || 1) + 1 }
@@ -77,6 +80,28 @@ const ProductDetails = ({ product }) => {
 					duration: 6000,
 				})
 			}
+		}
+	}
+
+	const handleBuy = async () => {
+		if (sizes.length === 0) {
+			toast.error('Select size', {
+				duration: 6000,
+			})
+
+			return
+		}
+
+		setCurrentProduct([{ ...product, selectedSizes: sizes, quantity: 1 }])
+
+		if (currentProduct) {
+			const serializedOrders = encodeURIComponent(
+				JSON.stringify(currentProduct)
+			)
+
+			console.log(currentProduct)
+
+			router.push(`/checkout?items=${serializedOrders}`)
 		}
 	}
 
@@ -180,7 +205,9 @@ const ProductDetails = ({ product }) => {
 				</div>
 
 				<div className=' flex gap-[1rem] mt-[1rem]'>
-					<BtnFill text={'Buy now'} />
+					<div className='' onClick={handleBuy}>
+						<BtnFill text={'Buy now'} />
+					</div>
 					<div className='' onClick={handleCart}>
 						<BtnStroke text={'Add to cart'} icon={<MdOutlineShoppingCart />} />
 					</div>

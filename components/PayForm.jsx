@@ -5,12 +5,14 @@ import { submitPayment } from '/app/actions/actions'
 import { IoMdClose } from 'react-icons/io'
 import Heading from './Heading'
 import toast from 'react-hot-toast'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import Context from '/context/Context'
 import Loader from './Loader'
 import { useRouter } from 'next/navigation'
 
 export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
+	let products
+
 	const { isFetching, setIsFetching } = useContext(Context)
 
 	const router = useRouter()
@@ -20,9 +22,24 @@ export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 
 	console.log(items)
 
+	const extractProducts = () => {
+		const extracted = items.map((product) => ({
+			name: product.title,
+			price: product.pricing,
+			quantity: product.quantity,
+			sizes: product.selectedSizes,
+		}))
+
+		products = extracted
+
+		console.log('selected', products)
+	}
+
 	const handlePay = async (result) => {
 		setIsPay(false)
 		setIsFetching(true)
+
+		extractProducts()
 
 		try {
 			const response = await fetch(`/api/orders`, {
@@ -33,13 +50,11 @@ export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 				body: JSON.stringify({
 					shippingDetails,
 					result,
-					items,
+					selectedProducts: products,
 				}),
 			})
 
 			const data = await response.json()
-
-			// router.push(`/confirmation/${data._id}`)
 
 			if (response.ok) {
 				router.push(`/confirmation/${data._id}`)
@@ -60,7 +75,7 @@ export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 		<>
 			{isFetching && <Loader />}
 			<div className=' fixed left-0 top-0 w-[100vw] h-[100vh] bg-white bg-opacity-75 z-10 flex items-center justify-center'>
-				<div className=' w-[40rem] mx-auto bg-white p-[2rem]'>
+				<div className=' w-[40rem] mx-auto bg-white p-[2rem] shadow-lg rounded-md'>
 					<div className='flex justify-between mb-[2rem]'>
 						<Heading text={'Make Payment'} />
 						<IoMdClose

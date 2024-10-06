@@ -14,7 +14,7 @@ const shippingDetailsSchema = z.object({
 	address: z.string().min(1, { message: 'Address is required' }), // Non-empty string for address
 })
 
-const PayModal = ({ setShippingDetails }) => {
+const PayModal = ({ setShippingDetails, setIsSave }) => {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [number, setNumber] = useState('')
@@ -81,11 +81,13 @@ const PayModal = ({ setShippingDetails }) => {
 			setAddressError('')
 
 			setIsSubmit(true)
+			setIsSave(true)
 		}
 	}
 
 	const handleChange = () => {
 		setIsSubmit(false)
+		setIsSave(false)
 	}
 
 	return (

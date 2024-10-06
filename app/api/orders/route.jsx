@@ -5,12 +5,14 @@ export const POST = async (request) => {
 	try {
 		await connectDB()
 
-		const { shippingDetails, result, items } = await request.json()
+		const { shippingDetails, result, selectedProducts } = await request.json()
+
+		console.log('selected products', selectedProducts)
 
 		const order = {
 			name: shippingDetails.name,
 			address: shippingDetails.address,
-			products: items,
+			products: selectedProducts,
 			number: shippingDetails.number,
 			transactionID: result.payment.id,
 			deliveryStatus: 'pending',

@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
+import moment from 'moment'
 
 const Confirmation = ({ order }) => {
 	console.log(order)
@@ -11,23 +12,41 @@ const Confirmation = ({ order }) => {
 					<FaCheckCircle />
 				</div>
 				<h1 className='font-semibold text-2xl'>Payment successful</h1>
-				<p className='text-gray-400'>Successfully paid ${order?.amount}</p>
+				<p className='text-gray-400'>
+					Successfully paid{' '}
+					<span className=' font-semibold'>${order?.amount}</span>
+				</p>
 			</div>
 
 			<h1 className=' my-[1rem] font-bold text-xl'>Payment methods</h1>
 
 			<div className=' bg-gray-50 rounded-md p-[1rem]'>
-				<div className='flex justify-between items-center'>
+				<div className='flex justify-between items-center mb-[1rem]'>
 					<p className='text-gray-500'>Transaction ID</p>
-					<p className=''>{order?.transactionID}</p>
+					<p className=' font-semibold uppercase'>{order?.transactionID}</p>
 				</div>
-				<div className='flex justify-between items-center'>
+				<div className='flex justify-between items-center mb-[1rem]'>
+					<p className='text-gray-500'>Date</p>
+					<p className=' font-semibold'>
+						{moment(order?.createdAt).format('MMMM Do YYYY')}
+					</p>
+				</div>
+				<div className='flex justify-between items-center mb-[1rem]'>
 					<p className='text-gray-500'>Products</p>
-					{order?.products?.map((product) => (
-						<p className='' key={product?.id}>
-							{order?.transactionID}
-						</p>
-					))}
+					<div className=''>
+						{order?.products?.map((product) => (
+							<p className=' font-semibold' key={product?.id}>
+								{product?.name} <span>${product?.price}</span>{' '}
+								<span className=' text-sm font-medium'>
+									(x{product?.quantity})
+								</span>
+							</p>
+						))}
+					</div>
+				</div>
+				<div className='flex justify-between items-center mb-[1rem]'>
+					<p className='text-gray-500'>Amount</p>
+					<p className=' font-semibold'>${order?.amount}</p>
 				</div>
 			</div>
 		</div>

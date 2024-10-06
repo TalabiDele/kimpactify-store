@@ -10,8 +10,6 @@ export const GET = async (request, { params }) => {
 		const order = await Order.find({
 			_id: param,
 		})
-			.populate('products')
-			.exec()
 
 		return new Response(JSON.stringify(order), {
 			status: 200,

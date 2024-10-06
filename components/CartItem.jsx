@@ -14,6 +14,8 @@ const CartItem = () => {
 
 	const router = useRouter()
 
+	console.log(cart)
+
 	useEffect(() => {
 		setOrders(cart)
 
@@ -34,8 +36,6 @@ const CartItem = () => {
 		// setIsPay(true)
 
 		router.push(`/checkout?items=${serializedOrders}`)
-
-		setAmount(calculateTotal())
 	}
 
 	return (

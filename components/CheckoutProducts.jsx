@@ -8,6 +8,7 @@ import OrderItem from './OrderItem'
 import OrderSummary from './OrderSummary'
 import PayModal from './PayModal'
 import PayForm from './PayForm'
+import toast from 'react-hot-toast'
 
 const CheckoutProducts = () => {
 	const [shippingDetails, setShippingDetails] = useState({
@@ -19,6 +20,7 @@ const CheckoutProducts = () => {
 	const [isPay, setIsPay] = useState(false)
 	const [amount, setAmount] = useState()
 	const [order, setOrder] = useState([])
+	const [isSave, setIsSave] = useState(false)
 
 	console.log(shippingDetails)
 	const itemsParams = useSearchParams()
@@ -43,6 +45,15 @@ const CheckoutProducts = () => {
 	}, [])
 
 	const handlePay = () => {
+		if (!isSave) {
+			toast.error('Please complete & save shipping details', {
+				duration: 6000,
+			})
+			return
+		}
+
+		console.log(shippingDetails)
+
 		setIsPay(true)
 	}
 
@@ -78,7 +89,10 @@ const CheckoutProducts = () => {
 				</div>
 
 				<div className=' w-full'>
-					<PayModal setShippingDetails={setShippingDetails} />
+					<PayModal
+						setShippingDetails={setShippingDetails}
+						setIsSave={setIsSave}
+					/>
 
 					<OrderSummary
 						orders={order}

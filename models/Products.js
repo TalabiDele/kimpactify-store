@@ -44,6 +44,12 @@ const ProductSchema = new Schema(
 				type: String,
 			},
 		],
+		orders: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Order',
+			},
+		],
 	},
 	{
 		timestamps: true,

@@ -8,23 +8,23 @@ export const GET = async (request, { params }) => {
 
 		const param = params.subCategory
 
-		console.log('param', param)
+		//('param', param)
 
 		const categories = await SubCategory.find({ param: param })
 
-		console.log('api categories', categories[0]._id)
+		//('api categories', categories[0]._id)
 
 		const products = await Product.find({
 			subCategory: categories[0]?._id,
 		})
 
-		console.log('products', products)
+		//('products', products)
 
 		return new Response(JSON.stringify(products), {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response('Something went wrong', { status: 500 })
 	}
 }

@@ -23,13 +23,13 @@ const SubCategory = () => {
 		const fetchProducts = async () => {
 			if (!subcategory) return
 
-			console.log(subcategory)
+			//(subcategory)
 
 			try {
 				const productCategory = await fetchSubCategories(subcategory)
 				setProducts(productCategory)
 
-				console.log(productCategory)
+				//(productCategory)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
@@ -56,16 +56,16 @@ const SubCategory = () => {
 			try {
 				const productCategory = await fetchSubCategories(subcategory)
 
-				console.log('product category', productCategory)
+				//('product category', productCategory)
 
 				if (productCategory) {
-					console.log(productCategory[0]?._id)
+					//(productCategory[0]?._id)
 					const categoryTitle = await fetchCategoryTitle(
 						productCategory[0]?._id
 					)
 					setCategory(categoryTitle[0])
 
-					console.log(categoryTitle)
+					//(categoryTitle)
 				}
 			} catch (error) {
 				console.error('Error fetching products', error)

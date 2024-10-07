@@ -10,10 +10,10 @@ const OrderItem = ({ item, order, setOrder }) => {
 	const { setCart, cart } = useContext(Context)
 	const pathname = usePathname()
 
-	console.log(order)
+	//(order)
 
 	const handlePlus = (id, qty) => {
-		console.log(id, qty)
+		//(id, qty)
 		if (pathname === '/cart') {
 			setCart((prevItems) =>
 				prevItems.map((item) =>
@@ -27,12 +27,12 @@ const OrderItem = ({ item, order, setOrder }) => {
 				)
 			)
 
-			console.log(order)
+			//(order)
 		}
 	}
 
 	const handleMinus = (id, qty) => {
-		console.log('working')
+		//('working')
 		if (qty !== 1) {
 			if (pathname === '/cart') {
 				setCart((prevItems) =>
@@ -53,7 +53,7 @@ const OrderItem = ({ item, order, setOrder }) => {
 	const handleRemove = (id) => {
 		const filteredItems = cart?.filter((item) => item._id !== id)
 
-		console.log(filteredItems)
+		//(filteredItems)
 		setCart(filteredItems)
 
 		toast.success('Product removed from cart!', {

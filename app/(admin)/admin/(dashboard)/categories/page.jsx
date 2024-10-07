@@ -17,7 +17,7 @@ const AdminCategories = () => {
 			try {
 				const resCategories = await fetchAllCategories()
 
-				console.log(resCategories)
+				//(resCategories)
 
 				setCategories(resCategories)
 			} catch (error) {

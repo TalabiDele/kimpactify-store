@@ -59,7 +59,7 @@ const ProductDetails = ({ product }) => {
 						(item) => item._id === product._id
 					)
 
-					console.log(prevCart)
+					//(prevCart)
 
 					if (existingProductIndex !== -1) {
 						return prevCart.map((item, index) =>
@@ -98,7 +98,7 @@ const ProductDetails = ({ product }) => {
 				JSON.stringify(currentProduct)
 			)
 
-			console.log(currentProduct)
+			//(currentProduct)
 
 			router.push(`/checkout?items=${serializedOrders}`)
 		}
@@ -107,7 +107,7 @@ const ProductDetails = ({ product }) => {
 	const handleSize = (size) => {
 		const newSize = sizes?.filter((e) => e === size)
 
-		console.log(newSize)
+		//(newSize)
 
 		if (newSize?.length === 0) {
 			setSizes([...sizes, size])
@@ -116,7 +116,7 @@ const ProductDetails = ({ product }) => {
 			setSizes(removeSize)
 		}
 
-		console.log(sizes)
+		//(sizes)
 	}
 
 	return (

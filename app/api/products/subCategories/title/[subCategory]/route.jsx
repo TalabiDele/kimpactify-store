@@ -11,13 +11,13 @@ export const GET = async (request, { params }) => {
 
 		const categories = await SubCategory.find({ param: slug })
 
-		console.log('categories', categories)
+		//('categories', categories)
 
 		return new Response(JSON.stringify(categories), {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response('Something went wrong', { status: 500 })
 	}
 }

@@ -14,12 +14,12 @@ const CartItem = () => {
 
 	const router = useRouter()
 
-	console.log(cart)
+	//(cart)
 
 	useEffect(() => {
 		setOrders(cart)
 
-		console.log(orders)
+		//(orders)
 	}, [cart, orders])
 
 	const serializedOrders = encodeURIComponent(JSON.stringify(orders))
@@ -28,8 +28,7 @@ const CartItem = () => {
 		// setOrders((prevItems) =>
 		// 	prevItems.map((item) => item?._id === id && setQuantity(e.target.value))
 		// )
-
-		console.log(e.target.value)
+		//(e.target.value)
 	}
 
 	const handleCheckout = () => {

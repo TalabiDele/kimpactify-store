@@ -6,7 +6,7 @@ import Context from '../context/Context'
 import toast from 'react-hot-toast'
 
 const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
-	console.log(id)
+	//(id)
 
 	const { fetchProducts, fetchCategories } = useContext(Context)
 
@@ -25,7 +25,7 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 					fetchProducts()
 				}
 			} catch (error) {
-				console.log(error.message)
+				//(error.message)
 			}
 		} else {
 			try {
@@ -33,7 +33,7 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 					method: 'DELETE',
 				})
 
-				console.log(response)
+				//(response)
 
 				if (response.ok) {
 					fetchCategories()
@@ -43,7 +43,7 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 
 				// response.status === 201 && router.push('/admin/auth/login')
 			} catch (error) {
-				console.log(error.message)
+				//(error.message)
 			}
 		}
 	}

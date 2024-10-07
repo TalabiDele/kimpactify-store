@@ -27,7 +27,7 @@ const Category = () => {
 				const productCategory = await fetchCategories(category)
 				setProducts(productCategory)
 
-				console.log(productCategory)
+				//(productCategory)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {
@@ -56,7 +56,7 @@ const Category = () => {
 		fetchCategoryTitle()
 	}, [category])
 
-	// console.log('products', products)
+	// //('products', products)
 
 	return (
 		<div className=' w-[95vw] mx-auto'>

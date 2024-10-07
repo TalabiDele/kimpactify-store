@@ -21,7 +21,7 @@ export const GET = async (request, { params }) => {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response('Something went wrong', { status: 500 })
 	}
 }
@@ -33,17 +33,17 @@ export const PUT = async (request, { params }) => {
 
 		// const data = await request.json()
 
-		console.log(values)
+		//(values)
 
 		const subCategoryValues = {
 			title: values.title,
 			subCategories: subIds,
 		}
 
-		// console.log(values)
+		// //(values)
 		const param = params.category
 
-		// console.log(values)
+		// //(values)
 
 		const existingCategory = await Category.findById(param)
 		if (!existingCategory) {
@@ -63,7 +63,7 @@ export const PUT = async (request, { params }) => {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response(error, { status: 500 })
 	}
 }
@@ -81,7 +81,7 @@ export const DELETE = async (request, { params }) => {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response(error, { status: 500 })
 	}
 }

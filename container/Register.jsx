@@ -48,7 +48,7 @@ const Register = () => {
 		},
 	})
 
-	// console.log(form)
+	// //(form)
 
 	const handleSubmit = async (values) => {
 		try {
@@ -66,7 +66,7 @@ const Register = () => {
 
 			response.status === 201 && router.push('/admin/auth/login')
 		} catch (error) {
-			console.log(error.message)
+			//(error.message)
 		}
 	}
 

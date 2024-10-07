@@ -15,7 +15,7 @@ export const GET = async (request) => {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response('Something went wrong', { status: 500 })
 	}
 }
@@ -29,7 +29,7 @@ export const POST = async (request) => {
 		subCategories: subIds,
 	}
 
-	console.log(category)
+	//(category)
 
 	try {
 		await connectDB()
@@ -41,7 +41,7 @@ export const POST = async (request) => {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response('Something went wrong', { status: 500 })
 	}
 }

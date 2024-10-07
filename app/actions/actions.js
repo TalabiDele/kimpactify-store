@@ -24,6 +24,6 @@ export async function submitPayment(sourceId, amount) {
 		})
 		return result
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }

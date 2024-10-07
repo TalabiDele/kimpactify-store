@@ -19,8 +19,8 @@ const ImageDisplay = ({ product }) => {
 	// const handleNext = () => {
 	// 	if (imageIndex <= product?.image?.length - 1) {
 	// 		setImageIndex(imageIndex + 1)
-	// 		console.log(product?.image?.length - 1, imageIndex)
-	// 		console.log(imageIndex)
+	// 		//(product?.image?.length - 1, imageIndex)
+	// 		//(imageIndex)
 
 	// 		setActive(product?.image[imageIndex])
 	// 	}

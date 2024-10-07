@@ -10,7 +10,7 @@ async function fetchCategories(category) {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
@@ -26,7 +26,7 @@ async function fetchTitle(param) {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
@@ -42,12 +42,12 @@ async function fetchSubCategories(subCategory) {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
 async function fetchSubCategoryTitle(param) {
-	// console.log(param)
+	// //(param)
 
 	try {
 		const res = await fetch(
@@ -60,12 +60,12 @@ async function fetchSubCategoryTitle(param) {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
 async function fetchCategoryTitle(param) {
-	console.log(param)
+	//(param)
 
 	try {
 		const res = await fetch(
@@ -78,7 +78,7 @@ async function fetchCategoryTitle(param) {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
@@ -94,7 +94,7 @@ async function fetchProduct(param) {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
@@ -110,7 +110,7 @@ async function fetchOrder(param) {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
@@ -124,7 +124,7 @@ async function fetchAllProducts() {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
@@ -138,7 +138,7 @@ async function fetchAllCategories() {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
@@ -154,7 +154,7 @@ async function fetchAllSubCategories() {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 
@@ -170,7 +170,7 @@ async function editProduct(request) {
 
 		return res.json()
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 

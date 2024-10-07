@@ -5,7 +5,7 @@ import { BtnFill } from './Buttons'
 import Link from 'next/link'
 
 const Confirmation = ({ order }) => {
-	console.log(order)
+	//(order)
 
 	return (
 		<div className=' w-[60vw] mx-auto my-[2rem] rounded-md border p-[2rem] max-lg:w-[90vw]'>

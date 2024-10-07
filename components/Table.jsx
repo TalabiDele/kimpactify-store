@@ -32,12 +32,12 @@ export function ProductTable({ productItem, categories }) {
 
 		setProductEdit(prod)
 
-		console.log(prod)
+		//(prod)
 	}
 
 	const handleDelete = (item) => {
 		setIsDelete(true)
-		console.log(item)
+		//(item)
 
 		setProductEdit(item)
 	}

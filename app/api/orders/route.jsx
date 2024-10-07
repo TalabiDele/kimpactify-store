@@ -7,7 +7,7 @@ export const POST = async (request) => {
 
 		const { shippingDetails, result, selectedProducts } = await request.json()
 
-		console.log('selected products', selectedProducts)
+		//('selected products', selectedProducts)
 
 		const order = {
 			name: shippingDetails.name,
@@ -28,7 +28,7 @@ export const POST = async (request) => {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response('Something went wrong', { status: 500 })
 	}
 }

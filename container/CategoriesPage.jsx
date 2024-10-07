@@ -6,7 +6,7 @@ import React, { useContext } from 'react'
 const CategoriesPage = () => {
 	const { categories } = useContext(Context)
 
-	console.log(categories)
+	//(categories)
 
 	return (
 		<div>

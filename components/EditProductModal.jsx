@@ -55,7 +55,7 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 
 	const { fetchProducts } = useContext(Context)
 
-	console.log(product)
+	//(product)
 
 	useEffect(() => {
 		setProductSizes(product?.sizes)
@@ -65,7 +65,7 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 			try {
 				const resCategories = await fetchAllCategories()
 
-				console.log(resCategories)
+				//(resCategories)
 
 				setCategory(resCategories)
 			} catch (error) {
@@ -94,7 +94,7 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 	const handleSubmit = async (values) => {
 		// values.preventDefault()
 
-		console.log(values)
+		//(values)
 
 		try {
 			const response = await fetch(`/api/products/${product?._id}`, {
@@ -105,7 +105,7 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 				body: JSON.stringify({ values, sizes: productSizes, images }),
 			})
 
-			console.log(response)
+			//(response)
 
 			const data = await response.json()
 
@@ -117,22 +117,22 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 				fetchProducts()
 			}
 
-			console.log(data)
+			//(data)
 
 			// response.status === 201 && router.push('/admin/auth/login')
 		} catch (error) {
-			console.log(error.message)
+			//(error.message)
 		}
 	}
 
 	const handleOnChange = (values) => {
 		// form.onChange()
 
-		console.log(values, category)
+		//(values, category)
 
 		const filtered = category?.filter((cat) => values === cat?._id)
 
-		console.log(filtered)
+		//(filtered)
 
 		setSubCategories(filtered[0]?.subCategories)
 	}
@@ -146,23 +146,23 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 			return prevItems
 		})
 
-		console.log(productSizes)
+		//(productSizes)
 	}
 
 	const handleUpload = (results) => {
-		console.log(results)
+		//(results)
 
 		if (results.event === 'success') {
 			setImages((prevUrls) => [...prevUrls, results.info.secure_url])
 		}
 
-		console.log(images)
+		//(images)
 	}
 
 	const handleSelectChange = (value) => {
 		const filtered = sizes.filter((size) => size === value)
 
-		console.log(filtered[0])
+		//(filtered[0])
 
 		setCurrentSize(filtered[0])
 	}
@@ -171,9 +171,9 @@ const EditProductModal = ({ product, categories, isEdit, setIsEdit }) => {
 		const filtered = productSizes.filter((sub) => sub !== size)
 		// const filteredIds = subIds.filter((sub) => sub._id !== id)
 
-		console.log(filtered)
+		//(filtered)
 
-		// console.log('ids', filteredIds)
+		// //('ids', filteredIds)
 
 		// setSubIds(filteredIds)
 

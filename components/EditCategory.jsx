@@ -41,7 +41,7 @@ const formSchema = z.object({
 })
 
 const EditCategories = ({ category, setIsEdit }) => {
-	console.log('current', category)
+	//('current', category)
 
 	const [subCategories, setSubCategories] = useState()
 	const [loading, setLoading] = useState(true)
@@ -61,7 +61,7 @@ const EditCategories = ({ category, setIsEdit }) => {
 			try {
 				const resSubCategories = await fetchAllSubCategories()
 
-				console.log(resSubCategories)
+				//(resSubCategories)
 
 				setSubCategories(resSubCategories)
 			} catch (error) {
@@ -71,7 +71,7 @@ const EditCategories = ({ category, setIsEdit }) => {
 			}
 		}
 
-		// console.log(product)
+		// //(product)
 		fetchSubCategories()
 	}, [])
 
@@ -84,13 +84,13 @@ const EditCategories = ({ category, setIsEdit }) => {
 	})
 
 	const addSubCategories = () => {
-		console.log('current category', currentCategory)
+		//('current category', currentCategory)
 
 		const sub = subCategories?.filter((sub) => currentCategory === sub?._id)
 
 		setSubIds([...subIds, currentCategory])
 
-		console.log(subIds, currentCategory)
+		//(subIds, currentCategory)
 		// setCategorySub([...categorySub, sub[0]])
 
 		setCategorySub((prevItems) => {
@@ -101,17 +101,17 @@ const EditCategories = ({ category, setIsEdit }) => {
 			return prevItems
 		})
 
-		console.log(categorySub)
+		//(categorySub)
 
 		// setCategorySub(categorySub.push(currentCategory))
 
-		// console.log(categorySub)
+		// //(categorySub)
 	}
 
 	const handleSubmit = async (values) => {
 		// values.preventDefault()
 
-		console.log(values)
+		//(values)
 
 		try {
 			const response = await fetch(
@@ -133,7 +133,7 @@ const EditCategories = ({ category, setIsEdit }) => {
 				toast.success(`${data.title} has been edited!`, { duration: 6000 })
 			}
 		} catch (error) {
-			console.log(error.message)
+			//(error.message)
 		}
 	}
 
@@ -145,7 +145,7 @@ const EditCategories = ({ category, setIsEdit }) => {
 		const filtered = categorySub.filter((sub) => sub._id !== id)
 		const filteredIds = subIds.filter((sub) => sub._id !== id)
 
-		console.log('ids', filteredIds)
+		//('ids', filteredIds)
 
 		setSubIds(filteredIds)
 

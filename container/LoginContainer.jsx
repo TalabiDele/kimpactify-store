@@ -36,16 +36,16 @@ const LoginContainer = () => {
 		},
 	})
 
-	// console.log(form)
+	// //(form)
 
 	const handleSubmit = async (values) => {
 		try {
 			const response = await doCredentialLogin(values)
 
-			// console.log(response)
+			// //(response)
 
 			if (!!response.error) {
-				console.log(response)
+				//(response)
 				toast.error('Invalid credentials', {
 					duration: 5000,
 				})

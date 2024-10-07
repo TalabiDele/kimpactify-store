@@ -108,14 +108,14 @@ const AddProduct = ({ setIsAdd }) => {
 				fetchProducts()
 			}
 		} catch (error) {
-			console.log(error.message)
+			//(error.message)
 		} finally {
 			setIsAdd(false)
 		}
 	}
 
 	const handleOnChange = (values) => {
-		console.log(values)
+		//(values)
 
 		setCurrentCategory(values)
 
@@ -137,19 +137,19 @@ const AddProduct = ({ setIsAdd }) => {
 	const handleSelectChange = (value) => {
 		const filtered = sizes.filter((size) => size === value)
 
-		console.log(filtered[0])
+		//(filtered[0])
 
 		setCurrentSize(filtered[0])
 	}
 
 	const handleUpload = (results) => {
-		console.log(results)
+		//(results)
 
 		if (results.event === 'success') {
 			setImages((prevUrls) => [...prevUrls, results.info.secure_url])
 		}
 
-		console.log(images)
+		//(images)
 	}
 
 	return (

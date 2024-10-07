@@ -54,7 +54,7 @@ const AddCategory = ({ setIsAdd }) => {
 			try {
 				const resSubCategories = await fetchAllSubCategories()
 
-				console.log(resSubCategories)
+				//(resSubCategories)
 
 				setSubCategories(resSubCategories)
 
@@ -81,7 +81,7 @@ const AddCategory = ({ setIsAdd }) => {
 	const handleSubmit = async (values) => {
 		// values.preventDefault()
 
-		console.log(values)
+		//(values)
 
 		try {
 			const response = await fetch(`/api/products/categories`, {
@@ -100,11 +100,11 @@ const AddCategory = ({ setIsAdd }) => {
 				toast.success('Category created!', { duration: 6000 })
 			}
 
-			console.log(data)
+			//(data)
 
 			// response.status === 201 && router.push('/admin/auth/login')
 		} catch (error) {
-			console.log(error.message)
+			//(error.message)
 		}
 	}
 
@@ -117,7 +117,7 @@ const AddCategory = ({ setIsAdd }) => {
 			return prevItems
 		})
 
-		console.log(subIds)
+		//(subIds)
 
 		setCategorySub((prevItems) => {
 			// Check if the item with the same id exists
@@ -132,7 +132,7 @@ const AddCategory = ({ setIsAdd }) => {
 		const filtered = categorySub.filter((sub) => sub._id !== id)
 		const filteredIds = subIds.filter((sub) => sub._id !== id)
 
-		console.log('ids', filteredIds)
+		//('ids', filteredIds)
 
 		setSubIds(filteredIds)
 
@@ -142,7 +142,7 @@ const AddCategory = ({ setIsAdd }) => {
 	const handleChange = (value) => {
 		const filtered = subCategories.filter((sub) => sub?._id === value)
 
-		console.log(filtered[0])
+		//(filtered[0])
 
 		setCurrentCategory(filtered[0])
 	}

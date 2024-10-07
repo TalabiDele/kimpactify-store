@@ -33,12 +33,12 @@ export function CategoryTable({ categories }) {
 
 		setCategoryEdit(category)
 
-		console.log(categoryEdit)
+		//(categoryEdit)
 	}
 
 	const handleDelete = (item) => {
 		setIsDelete(true)
-		console.log(item)
+		//(item)
 
 		setCategoryEdit(item._id)
 	}

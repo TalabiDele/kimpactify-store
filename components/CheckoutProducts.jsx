@@ -22,7 +22,7 @@ const CheckoutProducts = () => {
 	const [order, setOrder] = useState([])
 	const [isSave, setIsSave] = useState(false)
 
-	console.log(shippingDetails)
+	//(shippingDetails)
 	const itemsParams = useSearchParams()
 	const items = itemsParams.get('items')
 	const { setLoading } = useContext(Context)
@@ -52,7 +52,7 @@ const CheckoutProducts = () => {
 			return
 		}
 
-		console.log(shippingDetails)
+		//(shippingDetails)
 
 		setIsPay(true)
 	}

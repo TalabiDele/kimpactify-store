@@ -5,7 +5,7 @@ import ImageDisplay from '../components/ImageDisplay'
 import ProductDetails from './ProductDetails'
 
 const ProductContainer = ({ product }) => {
-	console.log(product)
+	//(product)
 
 	return (
 		<div className=''>

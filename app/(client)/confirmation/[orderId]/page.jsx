@@ -21,7 +21,7 @@ const ConfirmationPage = () => {
 				const resOrder = await fetchOrder(orderId)
 				setOrder(resOrder[0])
 
-				console.log(resOrder)
+				//(resOrder)
 			} catch (error) {
 				console.error('Error fetching order', error)
 			} finally {

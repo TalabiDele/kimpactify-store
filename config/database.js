@@ -7,16 +7,16 @@ const connectDB = async () => {
 
 	// If the database is already connected don't connect again
 	if (connected) {
-		console.log('Mongodb is already connected...')
+		//('Mongodb is already connected...')
 		return
 	}
 
 	try {
 		await mongoose.connect(process.env.MONGODB_URI)
 		connected = true
-		console.log('MongoDB connected...')
+		//('MongoDB connected...')
 	} catch (error) {
-		console.log(error)
+		//(error)
 	}
 }
 

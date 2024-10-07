@@ -16,7 +16,7 @@ export const GET = async (request, { params }) => {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response('Something went wrong', { status: 500 })
 	}
 }
@@ -52,7 +52,7 @@ export const PUT = async (request, { params }) => {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response(error, { status: 500 })
 	}
 }
@@ -70,7 +70,7 @@ export const DELETE = async (request, { params }) => {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response(error, { status: 500 })
 	}
 }

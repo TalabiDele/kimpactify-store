@@ -6,7 +6,7 @@ import connectDb from '/config/database'
 export const POST = async (request) => {
 	const { name, email, password } = await request.json()
 
-	console.log(name, email, password)
+	//(name, email, password)
 
 	await connectDb()
 

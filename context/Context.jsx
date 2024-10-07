@@ -22,7 +22,7 @@ export const Provider = ({ children }) => {
 		try {
 			const resProduct = await fetchAllProducts()
 
-			console.log(resProduct)
+			//(resProduct)
 
 			setProductItem(resProduct)
 		} catch (error) {
@@ -36,7 +36,7 @@ export const Provider = ({ children }) => {
 		try {
 			const resCategories = await fetchAllCategories()
 
-			console.log(resCategories)
+			//(resCategories)
 
 			setCategories(resCategories)
 		} catch (error) {

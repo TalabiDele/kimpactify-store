@@ -39,7 +39,7 @@ const PayModal = ({ setShippingDetails, setIsSave }) => {
 
 		if (!validationResult.success) {
 			// Handle validation errors
-			console.log(validationResult.error.format())
+			//(validationResult.error.format())
 			const errors = validationResult.error.format()
 
 			if (errors?.name?._errors) {
@@ -67,7 +67,7 @@ const PayModal = ({ setShippingDetails, setIsSave }) => {
 			}
 		} else {
 			// Proceed with form submission (valid data)
-			console.log('Form data is valid:', validationResult.data)
+			//('Form data is valid:', validationResult.data)
 			setShippingDetails({
 				name,
 				email,

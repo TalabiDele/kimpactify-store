@@ -20,7 +20,7 @@ export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 	const appId = process.env.NEXT_PUBLIC_APP_ID
 	const locationId = process.env.NEXT_PUBLIC_LOCATION_ID
 
-	console.log(items)
+	//(items)
 
 	const extractProducts = () => {
 		const extracted = items.map((product) => ({
@@ -32,7 +32,7 @@ export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 
 		products = extracted
 
-		console.log('selected', products)
+		//('selected', products)
 	}
 
 	const handlePay = async (result) => {
@@ -63,9 +63,9 @@ export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 				})
 			}
 
-			console.log(data)
+			//(data)
 		} catch (error) {
-			console.log(error.message)
+			//(error.message)
 		} finally {
 			setIsFetching(false)
 		}
@@ -90,7 +90,7 @@ export default function PayForm({ setIsPay, shippingDetails, items, amount }) {
 						cardTokenizeResponseReceived={async (token) => {
 							const result = await submitPayment(token.token, amount)
 							handlePay(result)
-							console.log(result)
+							//(result)
 						}}
 					>
 						<CreditCard />

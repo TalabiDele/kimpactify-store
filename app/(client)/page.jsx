@@ -30,7 +30,7 @@ const HomePage = () => {
 
 				setKnitWear(fetchKnitCategory)
 
-				console.log(africanCategory)
+				//(africanCategory)
 			} catch (error) {
 				console.error('Error fetching products', error)
 			} finally {

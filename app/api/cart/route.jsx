@@ -7,13 +7,13 @@ export const GET = async (request) => {
 
 		const products = await Product.find({})
 
-		console.log(products)
+		//(products)
 
 		return new Response(JSON.stringify(products), {
 			status: 200,
 		})
 	} catch (error) {
-		console.log(error)
+		//(error)
 		return new Response('Something went wrong', { status: 500 })
 	}
 }

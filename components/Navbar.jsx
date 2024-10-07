@@ -30,7 +30,7 @@ const Navbar = () => {
 					{loading ? (
 						<Skeleton className='h-[3rem] w-[3rem] rounded-full mt-[0.5rem]' />
 					) : (
-						<Image src={logo} alt='' />
+						<Image src={logo} alt='' width={100} height={100} />
 					)}
 
 					<div className=' gap-5 items-center hidden max-md:flex'>
@@ -105,7 +105,7 @@ const Navbar = () => {
 						</div>
 					</div>
 
-					<ul className=' flex justify-between w-[40vw] items-center text-sm font-medium max-md:hidden'>
+					<ul className=' flex justify-between w-[30vw] items-center text-sm font-medium max-md:hidden'>
 						<li>
 							{loading ? (
 								<Skeleton className='h-3 w-[3rem] mt-[0.5rem]' />

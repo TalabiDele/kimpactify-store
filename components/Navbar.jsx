@@ -176,7 +176,11 @@ const Navbar = () => {
 			</div>
 			{isCategory && (
 				<div className=' max-md:hidden'>
-					<CategoryNav isCategory={isCategory} setIsCategory={setIsCategory} />
+					<CategoryNav
+						isCategory={isCategory}
+						setIsCategory={setIsCategory}
+						setIsOpen={setIsOpen}
+					/>
 				</div>
 			)}
 		</div>

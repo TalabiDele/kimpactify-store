@@ -29,7 +29,7 @@ const Card = ({ img, title, description, amount, rating, id, link }) => {
 								<FaStar color='#F7D977' fontSize={'0.7rem'} />
 								<FaStar color='#F7D977' fontSize={'0.7rem'} />
 							</div>
-							<p className=' text-[0.6rem]'>{rating}</p>
+							{/* <p className=' text-[0.6rem]'>{rating}</p> */}
 						</div>
 					</div>
 

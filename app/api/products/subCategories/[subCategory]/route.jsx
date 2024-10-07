@@ -8,7 +8,7 @@ export const GET = async (request, { params }) => {
 
 		const param = params.subCategory
 
-		console.log(param)
+		console.log('param', param)
 
 		const categories = await SubCategory.find({ param: param })
 

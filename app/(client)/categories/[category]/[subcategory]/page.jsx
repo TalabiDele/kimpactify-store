@@ -23,6 +23,8 @@ const SubCategory = () => {
 		const fetchProducts = async () => {
 			if (!subcategory) return
 
+			console.log(subcategory)
+
 			try {
 				const productCategory = await fetchSubCategories(subcategory)
 				setProducts(productCategory)

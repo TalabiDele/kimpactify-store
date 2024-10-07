@@ -85,13 +85,12 @@ const Navbar = () => {
 											</Link>
 										</li>
 										<li onMouseEnter={() => setIsCategory(true)}>
-											<Link
-												href={'/categories'}
-												className=' flex items-center gap-1 w-full justify-between'
+											<div
+												className=' flex items-center gap-1 w-full justify-between cursor-pointer'
 												onClick={() => setIsOpen(false)}
 											>
 												Categories <IoChevronForward />
-											</Link>
+											</div>
 										</li>
 										{isCategory && (
 											<CategoryNav
@@ -111,7 +110,9 @@ const Navbar = () => {
 							{loading ? (
 								<Skeleton className='h-3 w-[3rem] mt-[0.5rem]' />
 							) : (
-								<Link href={'/'}>Home</Link>
+								<Link href={'/'} onClick={() => setIsCategory(false)}>
+									Home
+								</Link>
 							)}
 						</li>
 						{/* <li>
@@ -125,7 +126,9 @@ const Navbar = () => {
 							{loading ? (
 								<Skeleton className='h-3 w-[3rem] mt-[0.5rem]' />
 							) : (
-								<Link href={'/products'}>Products</Link>
+								<Link href={'/products'} onClick={() => setIsCategory(false)}>
+									Products
+								</Link>
 							)}
 						</li>
 						<li
@@ -135,16 +138,23 @@ const Navbar = () => {
 							{loading ? (
 								<Skeleton className='h-3 w-[3rem] mt-[0.5rem]' />
 							) : (
-								<Link href={'/categories'} className=' flex items-center gap-1'>
+								<div
+									className=' flex items-center gap-1 cursor-pointer'
+									onClick={() => setIsCategory(false)}
+								>
 									Categories <IoChevronForward />
-								</Link>
+								</div>
 							)}
 						</li>
 						<li>
 							{loading ? (
 								<Skeleton className='h-3 w-[3rem] mt-[0.5rem]' />
 							) : (
-								<Link href={'/cart'} className=' relative'>
+								<Link
+									href={'/cart'}
+									className=' relative'
+									onClick={() => setIsCategory(false)}
+								>
 									<BsCart3 className='' fontSize={20} />
 									<div className=' text-sm bg-black text-[#fff] text-center rounded-full absolute w-[1rem] h-[1rem] flex items-center justify-center -top-[0.5rem] -right-[0.5rem]'>
 										{cart?.length}
@@ -152,7 +162,7 @@ const Navbar = () => {
 								</Link>
 							)}
 						</li>
-						<li>
+						{/* <li>
 							{loading ? (
 								<Skeleton className='h-3 w-[3rem] mt-[0.5rem]' />
 							) : (
@@ -160,7 +170,7 @@ const Navbar = () => {
 									Sign in
 								</button>
 							)}
-						</li>
+						</li> */}
 					</ul>
 				</div>
 			</div>

@@ -9,7 +9,7 @@ const ProductContainer = ({ product }) => {
 
 	return (
 		<div className=''>
-			<div className=' flex justify-between w-full max-md:flex-col'>
+			<div className=' flex justify-between gap-[1rem] w-full max-md:flex-col'>
 				<ImageDisplay product={product} />
 				<ProductDetails product={product} />
 			</div>

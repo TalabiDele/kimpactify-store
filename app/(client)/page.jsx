@@ -48,9 +48,9 @@ const HomePage = () => {
 	return (
 		<div className=' w-[95vw] max-sm:w-[90vw] mx-auto overflow-x-hidden'>
 			<Banner
-				heading={'Lorem Ipsum dolor, Lorem Ipsum dolor'}
+				heading={'Elevate Your Style with Timeless Fashion'}
 				text={
-					'Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor'
+					'Discover curated collections of luxurious fabrics, bold designs, and the season’s must-haves. Define your look with effortless elegance, from statement pieces to wardrobe essentials'
 				}
 			/>
 			<AfricanWear africanWears={africanWears} />

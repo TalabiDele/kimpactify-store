@@ -24,30 +24,28 @@ const CooperateWears = ({ corporateWears }) => {
 				<Heading text={'Cooperate Wears'} />
 				<More link={'/categories/corporate-wears'} />
 			</div>
-			<div className=' flex justify-center w-[95vw] mx-auto'>
-				<div className=' flex flex-wrap gap-[1rem] items-center max-lg:justify-between max-xl:justify-start max-[460px]:mx-auto '>
-					{loading ? (
-						<div className='flex gap-[1rem] items-center flex-wrap'>
-							<CardSkeleton />
-							<CardSkeleton />
-							<CardSkeleton />
-							<CardSkeleton />
-							<CardSkeleton />
-						</div>
-					) : (
-						corporateWears?.map((wear) => (
-							<Card
-								img={wear?.image[0]}
-								title={wear?.title}
-								description={wear?.description}
-								amount={`$${wear?.pricing}`}
-								rating={`[${wear?.rating}]`}
-								link={`/categories/${wear?.category?.param}/${wear?.subCategory?.param}/${wear?._id}`}
-								key={wear?._id}
-							/>
-						))
-					)}
-				</div>
+			<div className=' flex flex-wrap gap-[1rem] items-center max-lg:justify-between max-xl:justify-start max-[460px]:mx-auto '>
+				{loading ? (
+					<div className='flex gap-[1rem] items-center flex-wrap'>
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+					</div>
+				) : (
+					corporateWears?.map((wear) => (
+						<Card
+							img={wear?.image[0]}
+							title={wear?.title}
+							description={wear?.description}
+							amount={`$${wear?.pricing}`}
+							rating={`[${wear?.rating}]`}
+							link={`/categories/${wear?.category?.param}/${wear?.subCategory?.param}/${wear?._id}`}
+							key={wear?._id}
+						/>
+					))
+				)}
 			</div>
 		</motion.div>
 	)

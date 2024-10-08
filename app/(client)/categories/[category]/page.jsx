@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { Suspense, useContext, useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { fetchCategories, fetchTitle } from '/utils/requests'
 import CardDisplay from '/container/CardDisplay'
 import Context from '/context/Context'
 import Banner from '/components/Banner'
+import CardSkeleton from '/components/CardSkeleton'
 
 const Category = () => {
 	const [products, setProducts] = useState(null)
@@ -15,7 +16,7 @@ const Category = () => {
 		text: '',
 	})
 
-	const { setLoading } = useContext(Context)
+	const { setLoading, loading } = useContext(Context)
 
 	const { category } = useParams()
 
@@ -59,13 +60,37 @@ const Category = () => {
 	// //('products', products)
 
 	return (
-		<div className=' w-[95vw] mx-auto'>
-			<Banner
-				text={products && products[0]?.category?.text}
-				heading={products && products[0]?.category?.heading}
-			/>
-			<CardDisplay products={products} title={title} />
-		</div>
+		<Suspense
+			fallback={
+				<>
+					<div className='flex gap-[1rem] items-center flex-wrap w-[95vw] mx-auto max-md:flex-col'>
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+					</div>
+				</>
+			}
+		>
+			<div className=' w-[95vw] mx-auto'>
+				<Banner
+					text={products && products[0]?.category?.text}
+					heading={products && products[0]?.category?.heading}
+				/>
+				{loading ? (
+					<div className='flex gap-[1rem] items-center flex-wrap w-[95vw] mx-auto max-md:flex-col'>
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+						<CardSkeleton />
+					</div>
+				) : (
+					<CardDisplay products={products} title={title} />
+				)}
+			</div>
+		</Suspense>
 	)
 }
 

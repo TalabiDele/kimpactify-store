@@ -10,11 +10,7 @@ const Banner = ({ heading, text }) => {
 	const { loading } = useContext(Context)
 
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			whileInView={{ opacity: 1 }}
-			viewport={{ once: false }}
-		>
+		<motion.div>
 			{loading ? (
 				<Skeleton className='h-[20rem] w-full mt-[0.5rem]' />
 			) : (

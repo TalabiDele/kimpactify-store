@@ -17,7 +17,7 @@ const SubCategory = () => {
 
 	const { subcategory } = useParams()
 
-	const { setLoading } = useContext(Context)
+	const { setLoading, loading } = useContext(Context)
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -81,11 +81,21 @@ const SubCategory = () => {
 
 	return (
 		<div>
-			<CardDisplay
-				products={products}
-				title={title?.title}
-				category={category}
-			/>
+			{loading ? (
+				<div className='flex gap-[1rem] items-center flex-wrap w-[95vw] mx-auto max-md:flex-col'>
+					<CardSkeleton />
+					<CardSkeleton />
+					<CardSkeleton />
+					<CardSkeleton />
+					<CardSkeleton />
+				</div>
+			) : (
+				<CardDisplay
+					products={products}
+					title={title?.title}
+					category={category}
+				/>
+			)}
 		</div>
 	)
 }

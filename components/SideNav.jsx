@@ -19,11 +19,11 @@ const SideNav = () => {
 	const { loading, setLoading } = useContext(Context)
 
 	const navItems = [
-		{
-			name: 'Dashboard',
-			link: '/admin/dashboard',
-			icon: <IoHome />,
-		},
+		// {
+		// 	name: 'Dashboard',
+		// 	link: '/admin/dashboard',
+		// 	icon: <IoHome />,
+		// },
 		{
 			name: 'Products',
 			link: '/admin/products',
@@ -39,11 +39,11 @@ const SideNav = () => {
 			link: '/admin/subcategories',
 			icon: <MdCategory />,
 		},
-		{
-			name: 'Transactions',
-			link: '/admin/transactions',
-			icon: <FaMoneyCheck />,
-		},
+		// {
+		// 	name: 'Transactions',
+		// 	link: '/admin/transactions',
+		// 	icon: <FaMoneyCheck />,
+		// },
 	]
 
 	return (

@@ -19,6 +19,8 @@ import Link from 'next/link'
 import { doCredentialLogin } from '/app/actions'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
+import { Loader2 } from 'lucide-react'
 
 const formSchema = z.object({
 	email: z.string().email(),
@@ -26,6 +28,8 @@ const formSchema = z.object({
 })
 
 const LoginContainer = () => {
+	const [isLoading, setIsLoading] = useState(false)
+
 	const router = useRouter()
 
 	const form = useForm({
@@ -39,6 +43,8 @@ const LoginContainer = () => {
 	// //(form)
 
 	const handleSubmit = async (values) => {
+		setIsLoading(true)
+
 		try {
 			const response = await doCredentialLogin(values)
 
@@ -50,12 +56,14 @@ const LoginContainer = () => {
 					duration: 5000,
 				})
 			} else {
-				router.push('/admin/dashboard')
+				router.push('/admin/products')
 			}
 		} catch (error) {
 			toast.error('Invalid credentials', {
 				duration: 5000,
 			})
+		} finally {
+			setIsLoading(false)
 		}
 	}
 
@@ -96,9 +104,16 @@ const LoginContainer = () => {
 							</FormItem>
 						)}
 					/>
-					<Button type='submit' className='mt-[1rem]'>
-						Login
-					</Button>
+					{isLoading ? (
+						<Button disabled className='mt-[1rem]'>
+							<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+							Logging in
+						</Button>
+					) : (
+						<Button type='submit' className='mt-[1rem]'>
+							Login
+						</Button>
+					)}
 				</form>
 				<p className=' mt-[1rem] text-sm'>
 					Don't have an account?{' '}

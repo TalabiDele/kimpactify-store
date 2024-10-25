@@ -17,6 +17,8 @@ import {
 import { Input } from '/components/shadcn/components/ui/input'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { Loader2 } from 'lucide-react'
 
 const formSchema = z
 	.object({
@@ -36,6 +38,8 @@ const formSchema = z
 	)
 
 const Register = () => {
+	const [isLoading, setIsLoading] = useState(false)
+
 	const router = useRouter()
 
 	const form = useForm({
@@ -51,6 +55,8 @@ const Register = () => {
 	// //(form)
 
 	const handleSubmit = async (values) => {
+		setIsLoading(true)
+
 		try {
 			const response = await fetch(`/api/register`, {
 				method: 'POST',
@@ -67,6 +73,8 @@ const Register = () => {
 			response.status === 201 && router.push('/admin/auth/login')
 		} catch (error) {
 			//(error.message)
+		} finally {
+			setIsLoading(false)
 		}
 	}
 
@@ -139,9 +147,16 @@ const Register = () => {
 							</FormItem>
 						)}
 					/>
-					<Button type='submit' className='mt-[1rem]'>
-						Submit
-					</Button>
+					{isLoading ? (
+						<Button disabled className='mt-[1rem]'>
+							<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+							Logging in
+						</Button>
+					) : (
+						<Button type='submit' className='mt-[1rem]'>
+							Submit
+						</Button>
+					)}
 				</form>
 
 				<p className=' mt-[1rem] text-sm'>

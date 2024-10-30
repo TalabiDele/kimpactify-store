@@ -19,6 +19,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Loader2 } from 'lucide-react'
+import logo from '/assets/imgs/kimptrendz-logo.png'
+import Image from 'next/image'
 
 const formSchema = z
 	.object({
@@ -81,10 +83,12 @@ const Register = () => {
 	return (
 		<Form {...form}>
 			<div className='flex items-center h-[100vh] flex-col justify-center'>
+				<Image src={logo} width={100} height={100} alt='logo' />
 				<form
 					onSubmit={form.handleSubmit(handleSubmit)}
 					className='w-[30vw] mx-auto border border-gray-500 rounded-lg p-[1rem] grid gap-3'
 				>
+					<h1 className=' text-2xl font-bold'>Register</h1>
 					<FormField
 						control={form.control}
 						name='fullName'

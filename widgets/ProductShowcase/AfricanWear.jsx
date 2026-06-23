@@ -1,0 +1,57 @@
+'use client'
+
+import React, { useContext } from 'react'
+import Card from '/shared/ui/Card'
+import Heading from '/shared/ui/Heading'
+import More from '/shared/ui/More'
+import { motion } from 'framer-motion'
+import Context from '/shared/config/Context'
+import CardSkeleton from '/shared/ui/CardSkeleton'
+
+const AfricanWear = ({ africanWears }) => {
+	const { loading } = useContext(Context)
+
+	return (
+		<div className=''>
+			<motion.div
+				initial={{ opacity: 0 }}
+				whileInView={{ opacity: 1 }}
+				transition={{ duration: 0.8, ease: 'easeOut' }}
+				className=' mt-[3rem]'
+			>
+				<div className=' flex justify-between items-center mb-[2rem]'>
+					<Heading text={'African Wears'} />
+					<More link={'/categories/african-wears'} />
+				</div>
+				<div className=' flex flex-wrap items-center gap-[1rem] max-lg:justify-between max-xl:justify-start max-[460px]:mx-auto'>
+					{loading ? (
+						<div className='flex gap-[1rem] items-center flex-wrap'>
+							<CardSkeleton />
+							<CardSkeleton />
+							<CardSkeleton />
+							<CardSkeleton />
+							<CardSkeleton />
+						</div>
+					) : (
+						africanWears?.map(
+							(african, index) =>
+								index <= 5 - 1 && (
+									<Card
+										img={african?.image[0]}
+										title={african?.title}
+										description={african?.description}
+										amount={`$${african?.pricing}`}
+										rating={`[${african?.rating}]`}
+										link={`/categories/${african?.category?.param}/${african?.subCategory?.param}/${african?._id}`}
+										key={african?._id}
+									/>
+								)
+						)
+					)}
+				</div>
+			</motion.div>
+		</div>
+	)
+}
+
+export default AfricanWear

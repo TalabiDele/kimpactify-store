@@ -1,61 +1,52 @@
-'use client'
+import Banner from '/widgets/Banner/Banner'
+import AfricanWear from '/widgets/ProductShowcase/AfricanWear'
+import CooperateWears from '/widgets/ProductShowcase/CooperateWears'
+import KnitWears from '/widgets/ProductShowcase/KnitWears'
+import { fetchCategories } from '/shared/api/requests'
+import HomeDiscoverCard from '/features/CategoryNavigation/HomeDiscoverCard'
+import TopPicks from '/widgets/ProductShowcase/TopPicks'
 
-import { useContext, useEffect, useState } from 'react'
-import Banner from '/components/Banner'
-import AfricanWear from '/container/AfricanWear'
-import CooperateWears from '/container/CooperateWears'
-import KnitWears from '/container/KnitWears'
-import { fetchCategories } from '/utils/requests'
-import Context from '/context/Context'
+const HomePage = async () => {
+	let africanWears = null
+	let corporateWears = null
+	let knitWear = null
 
-const HomePage = () => {
-	const [africanWears, setAfricanWears] = useState()
-	const [corporateWears, setCorporateWears] = useState()
-	const [knitWear, setKnitWear] = useState()
+	try {
+		// Fetch all categories concurrently for maximum speed
+		const [africanRes, corporateRes, knitRes] = await Promise.all([
+			fetchCategories('african-wears'),
+			fetchCategories('corporate-wears'),
+			fetchCategories('knit-wears')
+		])
+		
+		africanWears = africanRes
+		corporateWears = corporateRes
+		knitWear = knitRes
+	} catch (error) {
+		console.error('Error fetching products for SSR', error)
+	}
 
-	const { setLoading } = useContext(Context)
-
-	useEffect(() => {
-		const fetchAllCategories = async () => {
-			try {
-				const africanCategory = await fetchCategories('african-wears')
-
-				const corporateCategory = await fetchCategories('corporate-wears')
-
-				const fetchKnitCategory = await fetchCategories('knit-wears')
-
-				setAfricanWears(africanCategory)
-
-				setCorporateWears(corporateCategory)
-
-				setKnitWear(fetchKnitCategory)
-
-				//(africanCategory)
-			} catch (error) {
-				console.error('Error fetching products', error)
-			} finally {
-				setLoading(false)
-			}
-
-			// if(products === null) {
-
-			// }
-		}
-
-		fetchAllCategories()
-	}, [])
+	const allProducts = [...(africanWears || []), ...(corporateWears || []), ...(knitWear || [])]
 
 	return (
-		<div className=' w-[95vw] max-sm:w-[90vw] mx-auto overflow-x-hidden'>
+		<div className=' w-[95vw] max-sm:w-[90vw] mx-auto overflow-x-hidden mb-24'>
 			<Banner
 				heading={'Elevate Your Style with Timeless Fashion'}
 				text={
 					'Discover curated collections of luxurious fabrics, bold designs, and the season’s must-haves. Define your look with effortless elegance, from statement pieces to wardrobe essentials'
 				}
 			/>
-			<AfricanWear africanWears={africanWears} />
-			<CooperateWears corporateWears={corporateWears} />
-			<KnitWears knitWear={knitWear} />
+			
+			<div className='mt-20 flex flex-col lg:flex-row gap-12 items-start relative'>
+				<HomeDiscoverCard />
+				
+				<div className='flex-1 flex flex-col gap-12 overflow-hidden w-full'>
+					<TopPicks products={allProducts} />
+					<AfricanWear africanWears={africanWears} />
+					<CooperateWears corporateWears={corporateWears} />
+					<KnitWears knitWear={knitWear} />
+				</div>
+			</div>
 		</div>
 	)
 }

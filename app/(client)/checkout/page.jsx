@@ -1,10 +1,10 @@
 'use client'
 
 import React, { Suspense, useContext } from 'react'
-import Heading from '/components/Heading'
-import CheckoutProducts from '/components/CheckoutProducts'
-import Context from '/context/Context'
-import Loader from '/components/Loader'
+import Heading from '/shared/ui/Heading'
+import CheckoutProducts from '/features/Cart/CheckoutProducts'
+import Context from '/shared/config/Context'
+import Loader from '/shared/ui/Loader'
 
 const CheckoutPage = () => {
 	const { isFetching } = useContext(Context)
@@ -12,8 +12,7 @@ const CheckoutPage = () => {
 	return (
 		<Suspense fallback={<div>Loading...</div>}>
 			{isFetching && <Loader />}
-			<div className=' w-[95vw] mx-auto mt-[2rem]'>
-				<Heading text='Checkout' />
+			<div className=' w-[95vw] mx-auto mt-[5rem]'>
 				<CheckoutProducts />
 			</div>
 		</Suspense>

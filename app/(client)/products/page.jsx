@@ -1,19 +1,22 @@
-'use client'
+import React, { Suspense } from 'react'
+import ProductsFilterContainer from '/features/ProductFilter/ProductsFilterContainer'
+import { fetchAllProducts } from '/shared/api/requests'
+import { ProductsSkeleton } from '/shared/ui/ProductsSkeleton'
 
-import React, { useContext, useEffect } from 'react'
-import ProductsPage from '/container/ProductsPage'
-import Context from '/context/Context'
+const ProductPage = async () => {
+	let products = null
 
-const ProductPage = () => {
-	const { fetchProducts } = useContext(Context)
-
-	useEffect(() => {
-		fetchProducts()
-	}, [])
+	try {
+		products = await fetchAllProducts()
+	} catch (error) {
+		console.error('Error fetching all products for SSR', error)
+	}
 
 	return (
 		<div>
-			<ProductsPage />
+			<Suspense fallback={<ProductsSkeleton />}>
+				<ProductsFilterContainer initialProducts={products} />
+			</Suspense>
 		</div>
 	)
 }

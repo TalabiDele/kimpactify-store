@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useContext, useEffect, useState } from 'react'
-import DashboardCategories from '/container/DashboardCategories'
-import { fetchAllCategories } from '/utils/requests'
-import Context from '/context/Context'
+import DashboardCategories from '/widgets/Admin/DashboardCategories'
+import { fetchAllCategories } from '/shared/api/requests'
+import Context from '/shared/config/Context'
 
 const AdminCategories = () => {
 	const [categories, setCategories] = useState()

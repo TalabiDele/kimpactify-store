@@ -6,7 +6,11 @@ export const GET = async (request) => {
 	try {
 		await connectDB()
 
-		const products = await Product.find({}).populate('subCategory')
+		const products = await Product.find({})
+			.select('_id title description pricing rating image category subCategory sizes quantity')
+			.populate('subCategory', 'param name')
+			.populate('category', 'param name')
+			.lean()
 
 		return new Response(JSON.stringify(products), {
 			status: 200,

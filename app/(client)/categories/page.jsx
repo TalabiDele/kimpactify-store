@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useContext, useEffect } from 'react'
-import Context from '/context/Context'
-import CategoriesPage from '/container/CategoriesPage'
+import Context from '/shared/config/Context'
+import CategoriesPage from '/widgets/CategoryGrid/CategoriesPage'
 
 const page = () => {
 	const { fetchCategories } = useContext(Context)

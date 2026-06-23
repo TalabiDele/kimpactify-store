@@ -2,10 +2,10 @@
 
 import { useParams } from 'next/navigation'
 import React, { Suspense, useContext, useEffect, useState } from 'react'
-import { fetchProduct } from '/utils/requests'
-import ProductContainer from '/container/ProductContainer'
-import Context from '/context/Context'
-import ProductSkeleton from '/components/ProductSkeleton'
+import { fetchProduct } from '/shared/api/requests'
+import ProductContainer from '/widgets/ProductDetails/ProductContainer'
+import Context from '/shared/config/Context'
+import ProductSkeleton from '/shared/ui/ProductSkeleton'
 
 const Product = () => {
 	const [productItem, setProductItem] = useState(null)

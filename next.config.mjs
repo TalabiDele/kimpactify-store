@@ -2,8 +2,11 @@
 
 const nextConfig = {
   images: {
-    unoptimized: true,
-    domains: ['res.cloudinary.com', "http://localhost:3000"]
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
+      { protocol: 'http', hostname: 'localhost', port: '3000' }
+    ]
   },
 };
 

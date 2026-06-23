@@ -1,8 +1,8 @@
 import '/assets/styles/globals.css'
-import { Provider } from '/context/Context'
+import { Provider } from '/shared/config/Context'
 import { auth } from '/auth'
 import { redirect } from 'next/navigation'
-import SideNav from '/components/SideNav'
+import SideNav from '/widgets/Admin/SideNav'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata = {

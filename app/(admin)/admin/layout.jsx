@@ -1,5 +1,5 @@
 import '/assets/styles/globals.css'
-import { Provider } from '/context/Context'
+import { Provider } from '/shared/config/Context'
 
 export const metadata = {
 	title: 'Kimpactify Store | Find your affordable wears.',

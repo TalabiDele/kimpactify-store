@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useEffect, useContext } from 'react'
-import DashboardProducts from '/container/DashboardProducts'
-import { fetchAllProducts, fetchAllCategories } from '/utils/requests'
-import Context from '/context/Context'
+import DashboardProducts from '/widgets/Admin/DashboardProducts'
+import { fetchAllProducts, fetchAllCategories } from '/shared/api/requests'
+import Context from '/shared/config/Context'
 
 const ProductsPage = () => {
 	const [productItem, setProductItem] = useState()

@@ -1,4 +1,4 @@
-import LoginContainer from '/container/LoginContainer'
+import LoginContainer from '/features/Auth/LoginContainer'
 import React from 'react'
 
 const page = () => {

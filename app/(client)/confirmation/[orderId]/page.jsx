@@ -2,10 +2,10 @@
 
 import Image from 'next/image'
 import React, { useContext, useEffect, useState } from 'react'
-import Confirmation from '/components/Confirmation'
+import Confirmation from '/features/Checkout/Confirmation'
 import { useParams } from 'next/navigation'
-import Context from '/context/Context'
-import { fetchOrder } from '/utils/requests'
+import Context from '/shared/config/Context'
+import { fetchOrder } from '/shared/api/requests'
 
 const ConfirmationPage = () => {
 	const [order, setOrder] = useState()

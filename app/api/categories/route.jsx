@@ -1,5 +1,6 @@
 import connectDB from '../../../config/database'
 import Category from '../../../models/Categories'
+import SubCategory from '../../../models/SubCategories'
 
 export const GET = async (request) => {
 	try {

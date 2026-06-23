@@ -1,6 +1,7 @@
 import Category from '../../../../../models/Categories'
 import connectDB from '../../../../../config/database'
 import Product from '../../../../../models/Products'
+import SubCategory from '../../../../../models/SubCategories'
 
 export const GET = async (request, { params }) => {
 	try {

@@ -1,9 +1,4 @@
 import { Schema, model, models } from 'mongoose'
-// import Category from './Categories'
-// import Product from '/models/Products'
-
-const Product = require('/models/Products')
-const Category = require('/models/Categories')
 
 const SubCategorySchema = new Schema({
 	param: {
@@ -12,7 +7,7 @@ const SubCategorySchema = new Schema({
 	products: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: 'Products',
+			ref: 'Product',
 			// ref: Product.modelName,
 			required: true,
 		},
@@ -23,7 +18,7 @@ const SubCategorySchema = new Schema({
 	category: {
 		type: Schema.Types.ObjectId,
 		// ref: Category.modelName,
-		ref: 'Categories',
+		ref: 'Category',
 	},
 })
 

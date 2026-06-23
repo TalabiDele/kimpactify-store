@@ -3,7 +3,7 @@
 import React, { useContext } from "react";
 import { RiBox3Fill } from "react-icons/ri";
 import { BiSolidCategoryAlt } from "react-icons/bi";
-import { MdCategory, MdLogout } from "react-icons/md";
+import { MdCategory, MdLogout, MdDashboard, MdListAlt } from "react-icons/md";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "/assets/imgs/kimptrendz-logo.png";
@@ -18,6 +18,11 @@ const SideNav = () => {
 
   const navItems = [
     {
+      name: "Dashboard",
+      link: "/admin/dashboard",
+      icon: <MdDashboard size={20} />,
+    },
+    {
       name: "Products",
       link: "/admin/products",
       icon: <RiBox3Fill size={20} />,
@@ -26,6 +31,11 @@ const SideNav = () => {
       name: "Categories",
       link: "/admin/categories",
       icon: <BiSolidCategoryAlt size={20} />,
+    },
+    {
+      name: "Orders",
+      link: "/admin/orders",
+      icon: <MdListAlt size={20} />,
     },
     {
       name: "Sub Categories",

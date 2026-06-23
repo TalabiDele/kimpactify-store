@@ -31,6 +31,7 @@ export const PUT = async (request, { params }) => {
 			quantity: values.quantity,
 			sizes: sizes,
 			title: values.title,
+			description: values.description,
 			subCategory: values.subCategory,
 			category: values.category,
 			image: images,

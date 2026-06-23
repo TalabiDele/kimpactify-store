@@ -20,99 +20,78 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '/shared/ui/shadcn/components/ui/select'
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger,
-} from '/shared/ui/shadcn/components/ui/tooltip'
 import { Input } from '/shared/ui/shadcn/components/ui/input'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { fetchAllSubCategories } from '/shared/api/requests'
-import { BtnCancel } from '/shared/ui/Buttons'
 import Context from '/shared/config/Context'
 import toast from 'react-hot-toast'
+import { Modal, ModalFooter } from '/shared/ui/Modal'
+import { Loader2, Plus, X } from 'lucide-react'
 
 const formSchema = z.object({
-	title: z.string(),
-	// subCategory: z.string(),
-	// sizes: z.string().transform((v) => Number(v) || 0),
+	title: z.string().min(2, "Title must be at least 2 characters"),
 })
 
 const EditCategories = ({ category, setIsEdit }) => {
-	//('current', category)
-
-	const [subCategories, setSubCategories] = useState()
+	const [subCategories, setSubCategories] = useState([])
 	const [loading, setLoading] = useState(true)
-	const [currentCategory, setCurrentCategory] = useState()
+	const [isSubmitting, setIsSubmitting] = useState(false)
+	const [currentCategory, setCurrentCategory] = useState(null)
 	const [categorySub, setCategorySub] = useState([])
 	const [subIds, setSubIds] = useState([])
 
 	const { fetchCategories } = useContext(Context)
 
 	useEffect(() => {
-		if (category?.subCategories.length > 0) {
-			setCategorySub(category?.subCategories)
-			setSubIds(category?.subCategories)
+		if (category?.subCategories?.length > 0) {
+			setCategorySub(category.subCategories)
+			// Assume subCategories here is array of IDs or objects, handling IDs:
+			setSubIds(category.subCategories.map(s => s._id || s))
 		}
 
 		const fetchSubCategories = async () => {
 			try {
 				const resSubCategories = await fetchAllSubCategories()
-
-				//(resSubCategories)
-
-				setSubCategories(resSubCategories)
+				setSubCategories(resSubCategories || [])
 			} catch (error) {
-				console.error('Error fetching products', error)
+				console.error('Error fetching subcategories', error)
 			} finally {
 				setLoading(false)
 			}
 		}
 
-		// //(product)
 		fetchSubCategories()
-	}, [])
+	}, [category])
 
 	const form = useForm({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			title: category?.title,
-			// subCategory: category?.subCategory?._id,
+			title: category?.title || '',
 		},
 	})
 
 	const addSubCategories = () => {
-		//('current category', currentCategory)
-
+		if (!currentCategory) return
+		
 		const sub = subCategories?.filter((sub) => currentCategory === sub?._id)
+		if (sub && sub.length > 0) {
+			setSubIds((prev) => {
+				if (!prev.includes(currentCategory)) {
+					return [...prev, currentCategory]
+				}
+				return prev
+			})
 
-		setSubIds([...subIds, currentCategory])
-
-		//(subIds, currentCategory)
-		// setCategorySub([...categorySub, sub[0]])
-
-		setCategorySub((prevItems) => {
-			// Check if the item with the same id exists
-			if (!prevItems.some((item) => item._id === sub[0]._id)) {
-				return [...prevItems, sub[0]]
-			}
-			return prevItems
-		})
-
-		//(categorySub)
-
-		// setCategorySub(categorySub.push(currentCategory))
-
-		// //(categorySub)
+			setCategorySub((prevItems) => {
+				if (!prevItems.some((item) => item._id === sub[0]._id)) {
+					return [...prevItems, sub[0]]
+				}
+				return prevItems
+			})
+		}
 	}
 
 	const handleSubmit = async (values) => {
-		// values.preventDefault()
-
-		//(values)
-
+		setIsSubmitting(true)
 		try {
 			const response = await fetch(
 				`/api/products/categories/${category?._id}`,
@@ -130,10 +109,15 @@ const EditCategories = ({ category, setIsEdit }) => {
 			if (response.ok) {
 				fetchCategories()
 				setIsEdit(false)
-				toast.success(`${data.title} has been edited!`, { duration: 6000 })
+				toast.success(`${data.title || 'Category'} has been edited!`, { duration: 6000 })
+			} else {
+				toast.error('Failed to edit category')
 			}
 		} catch (error) {
-			//(error.message)
+			console.error(error)
+			toast.error('Failed to edit category')
+		} finally {
+			setIsSubmitting(false)
 		}
 	}
 
@@ -142,119 +126,104 @@ const EditCategories = ({ category, setIsEdit }) => {
 	}
 
 	const handleRemove = (id) => {
-		const filtered = categorySub.filter((sub) => sub._id !== id)
-		const filteredIds = subIds.filter((sub) => sub._id !== id)
-
-		//('ids', filteredIds)
-
-		setSubIds(filteredIds)
-
-		setCategorySub(filtered)
+		setCategorySub((prev) => prev.filter((sub) => sub._id !== id))
+		setSubIds((prev) => prev.filter((subId) => subId !== id))
 	}
 
 	return (
-		<div className=' bg-[#00000098] fixed top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] z-[1000]'>
-			<div className=''>
-				<Form {...form}>
-					<div className='flex items-center h-[100vh] flex-col justify-center'>
-						<form
-							onSubmit={form.handleSubmit(handleSubmit)}
-							className='w-[30vw] mx-auto bg-white rounded-lg p-[1rem] grid gap-3'
-						>
-							<div className=' flex gap-3 w-full'>
-								<FormField
-									control={form.control}
-									name='title'
-									render={({ field }) => {
-										return (
-											<FormItem className='w-full'>
-												<FormLabel>Title</FormLabel>
-												<FormControl>
-													<Input
-														placeholder='Enter category title'
-														type='text'
-														{...field}
-													/>
-												</FormControl>
-												<FormMessage />
-											</FormItem>
-										)
-									}}
-								/>
-							</div>
-
-							<div className='flex gap-4 justify-between w-[100%] items-end'>
-								<FormField
-									className='w-full'
-									control={form.control}
-									name='subCategory'
-									render={({ field }) => (
-										<FormItem className='w-full'>
-											<FormLabel>Sub Category</FormLabel>
-											<Select
-												// onValueChange={field.onChange}
-												onValueChange={handleChange}
-												defaultValue={field.value}
-												onChange={handleChange}
-											>
-												<FormControl>
-													<SelectTrigger>
-														<SelectValue placeholder='Select a sub category' />
-													</SelectTrigger>
-												</FormControl>
-												<SelectContent>
-													{subCategories?.map((category) => (
-														<SelectItem value={category._id} key={category.id}>
-															{category.title}
-														</SelectItem>
-													))}
-												</SelectContent>
-											</Select>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<div className='' onClick={addSubCategories}>
-									<div className='mt-[1rem] cursor-pointer bg-[#000] text-white rounded-md font-medium p-[0.5rem]'>
-										Add
-									</div>
-								</div>
-							</div>
-
-							<div className=' flex gap-2 items-center flex-wrap'>
-								{categorySub?.map((sub) => (
-									<TooltipProvider>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<p
-													className=' bg-blue-100 rounded-md p-[0.3rem] text-sm text-blue-600 cursor-pointer'
-													key={sub?._id}
-													onClick={() => handleRemove(sub._id)}
-												>
-													{sub?.title}
-												</p>
-											</TooltipTrigger>
-											<TooltipContent>
-												<p>Click to remove</p>
-											</TooltipContent>
-										</Tooltip>
-									</TooltipProvider>
-								))}
-							</div>
-
-							<div className=' items-center justify-between flex-row-reverse flex gap-3 mt-[1rem]'>
-								<div className='' onClick={() => setIsEdit(false)}>
-									<BtnCancel text={'Cancel'} />
-								</div>
-								<Button type='submit' className=' py-[0.3rem]'>
-									Submit
-								</Button>
-							</div>
-						</form>
+		<Modal isOpen={true} onClose={() => setIsEdit(false)} title="Edit Category">
+			<Form {...form}>
+				<form onSubmit={form.handleSubmit(handleSubmit)} className='flex flex-col gap-6'>
+					
+					<div className="w-full">
+						<FormField
+							control={form.control}
+							name='title'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-500">Title</FormLabel>
+									<FormControl>
+										<Input
+											placeholder='e.g. Menswear'
+											className="h-12 bg-slate-50 border-slate-200 focus-visible:ring-[#ffd138] focus-visible:border-[#ffd138] transition-all rounded-xl text-slate-900 font-medium placeholder:text-slate-400"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 					</div>
-				</Form>
-			</div>
-		</div>
+
+					<div>
+						<FormLabel className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 block">Link Sub Categories</FormLabel>
+						<div className="flex gap-2">
+							<Select onValueChange={handleChange} value={currentCategory || ''}>
+								<SelectTrigger className="h-12 bg-slate-50 border-slate-200 focus:ring-[#ffd138] transition-all rounded-xl text-slate-900 font-medium flex-1">
+									<SelectValue placeholder='Select a sub category' />
+								</SelectTrigger>
+								<SelectContent>
+									{subCategories?.map((cat) => (
+										<SelectItem value={cat._id} key={cat._id}>
+											{cat.title}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+							<Button 
+								type="button" 
+								onClick={addSubCategories}
+								className="h-12 w-12 p-0 bg-slate-900 hover:bg-slate-800 text-white rounded-xl shadow-sm transition-all"
+							>
+								<Plus size={20} />
+							</Button>
+						</div>
+					</div>
+
+					{categorySub.length > 0 && (
+						<div className="flex flex-wrap gap-2 p-4 bg-slate-50 rounded-xl border border-slate-100">
+							{categorySub.map((sub) => (
+								<div 
+									key={sub._id || sub} 
+									className="flex items-center gap-2 bg-white border border-[#ffd138]/50 text-yellow-700 px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm"
+								>
+									{sub.title || sub.name || "Sub Category"}
+									<button 
+										type="button" 
+										onClick={() => handleRemove(sub._id || sub)}
+										className="text-yellow-600 hover:text-red-500 transition-colors"
+									>
+										<X size={14} strokeWidth={3} />
+									</button>
+								</div>
+							))}
+						</div>
+					)}
+
+					<ModalFooter>
+						<Button 
+							type='button' 
+							variant="outline" 
+							onClick={() => setIsEdit(false)}
+							className="h-11 px-6 rounded-xl font-bold text-slate-600 border-slate-200 hover:bg-slate-100"
+						>
+							Cancel
+						</Button>
+						<Button 
+							type='submit' 
+							disabled={isSubmitting}
+							className="h-11 px-8 rounded-xl font-bold uppercase tracking-widest bg-[#ffd138] hover:bg-[#e6bb32] text-slate-900 transition-all shadow-sm hover:-translate-y-0.5"
+						>
+							{isSubmitting ? (
+								<><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...</>
+							) : (
+								'Save Changes'
+							)}
+						</Button>
+					</ModalFooter>
+				</form>
+			</Form>
+		</Modal>
 	)
 }
 

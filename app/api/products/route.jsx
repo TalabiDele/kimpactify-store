@@ -2,6 +2,8 @@ import connectDB from '../../../config/database'
 import Product from '../../../models/Products'
 import cloudinary from '/config/cloudinary'
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (request) => {
 	try {
 		await connectDB()
@@ -32,6 +34,7 @@ export const POST = async (request) => {
 			quantity: values.quantity,
 			sizes: sizes,
 			title: values.title,
+			description: values.description,
 			subCategory: values.subCategory,
 			category: category,
 			image: images,

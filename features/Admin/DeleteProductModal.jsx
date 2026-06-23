@@ -1,16 +1,18 @@
 'use client'
 
-import React, { useContext } from 'react'
-import { BtnCancel, BtnDelete } from '/shared/ui/Buttons'
+import React, { useContext, useState } from 'react'
+import { Button } from '/shared/ui/shadcn/components/ui/button'
 import Context from '/shared/config/Context'
 import toast from 'react-hot-toast'
+import { Modal, ModalFooter } from '/shared/ui/Modal'
+import { AlertTriangle, Loader2 } from 'lucide-react'
 
 const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
-	//(id)
-
 	const { fetchProducts, fetchCategories } = useContext(Context)
+	const [isDeleting, setIsDeleting] = useState(false)
 
 	const handleDelete = async () => {
+		setIsDeleting(true)
 		if (type === 'product') {
 			try {
 				const response = await fetch(`/api/products/${id._id}`, {
@@ -23,9 +25,14 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 					})
 					setIsDelete(false)
 					fetchProducts()
+				} else {
+					toast.error('Failed to delete product')
 				}
 			} catch (error) {
-				//(error.message)
+				console.error(error)
+				toast.error('Failed to delete product')
+			} finally {
+				setIsDeleting(false)
 			}
 		} else {
 			try {
@@ -33,39 +40,63 @@ const DeleteProduct = ({ id, isDelete, setIsDelete, type }) => {
 					method: 'DELETE',
 				})
 
-				//(response)
-
 				if (response.ok) {
 					fetchCategories()
 					setIsDelete(false)
 					toast.success('Category deleted!', { duration: 6000 })
+				} else {
+					toast.error('Failed to delete category')
 				}
-
-				// response.status === 201 && router.push('/admin/auth/login')
 			} catch (error) {
-				//(error.message)
+				console.error(error)
+				toast.error('Failed to delete category')
+			} finally {
+				setIsDeleting(false)
 			}
 		}
 	}
 
 	return (
-		<div className=' bg-[#00000098] fixed top-0 bottom-0 right-0 left-0 w-[100vw] h-[100vh] z-[1000]'>
-			<div className=''>
-				<div className='flex items-center h-[100vh] flex-col justify-center'>
-					<div className='w-[30vw] mx-auto bg-white rounded-lg p-[1rem] grid gap-3 justify-items-center'>
-						<h1 className=''>Are you sure you want to delete {type}?</h1>
-						<div className=' flex gap-4'>
-							<div className='' onClick={() => setIsDelete(false)}>
-								<BtnCancel text={'Cancel'} />
-							</div>
-							<div className='' onClick={handleDelete}>
-								<BtnDelete text={'Delete'} />
-							</div>
-						</div>
-					</div>
+		<Modal 
+			isOpen={isDelete} 
+			onClose={() => setIsDelete(false)} 
+			title={`Delete ${type === 'product' ? 'Product' : 'Category'}`}
+			isDestructive={true}
+		>
+			<div className="flex flex-col items-center justify-center py-6 text-center">
+				<div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 shadow-inner">
+					<AlertTriangle size={32} className="text-red-600" />
 				</div>
+				
+				<h3 className="text-xl font-bold text-slate-900 mb-2">Are you absolutely sure?</h3>
+				<p className="text-slate-500 max-w-[300px] leading-relaxed">
+					This action cannot be undone. This will permanently delete the <span className="font-bold text-slate-700">{type}</span> from our servers.
+				</p>
 			</div>
-		</div>
+
+			<ModalFooter>
+				<Button 
+					type='button' 
+					variant="outline" 
+					onClick={() => setIsDelete(false)}
+					className="h-11 px-6 rounded-xl font-bold text-slate-600 border-slate-200 hover:bg-slate-100"
+				>
+					Cancel
+				</Button>
+				<Button 
+					type='button' 
+					onClick={handleDelete}
+					disabled={isDeleting}
+					className="h-11 px-8 rounded-xl font-bold uppercase tracking-widest bg-red-600 hover:bg-red-700 text-white transition-all shadow-sm hover:-translate-y-0.5"
+				>
+					{isDeleting ? (
+						<><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Deleting...</>
+					) : (
+						'Delete Permanently'
+					)}
+				</Button>
+			</ModalFooter>
+		</Modal>
 	)
 }
 

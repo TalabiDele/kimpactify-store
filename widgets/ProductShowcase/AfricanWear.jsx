@@ -38,6 +38,7 @@ const AfricanWear = ({ africanWears }) => {
 								index <= 5 - 1 && (
 									<Card
 										img={african?.image[0]}
+										images={african?.image}
 										title={african?.title}
 										description={african?.description}
 										amount={`$${african?.pricing}`}

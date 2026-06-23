@@ -153,6 +153,7 @@ const SubCategory = () => {
 										<Card
 											id={product._id}
 											img={product.image[0]}
+											images={product.image}
 											title={product.title}
 											description={product.description}
 											amount={`$${product.pricing}`}

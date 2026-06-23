@@ -3,37 +3,80 @@ import React from 'react'
 import { FaStar } from 'react-icons/fa'
 import { BtnCard } from './Buttons'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
-const Card = ({ img, title, description, amount, rating, id, link, fullWidth }) => {
-	const blurUrl = typeof img === 'string' && img.includes('upload') 
-		? img.replace('/upload/', '/upload/w_20,e_blur:1000,q_auto,f_webp/') 
+const Card = ({ img, images, title, description, amount, rating, id, link, fullWidth }) => {
+	const [isHovered, setIsHovered] = React.useState(false)
+	const [currentIndex, setCurrentIndex] = React.useState(0)
+	
+	const displayImages = images?.length > 0 ? images : (img ? [img] : [])
+	const hasMultipleImages = displayImages.length > 1
+	
+	React.useEffect(() => {
+		let interval
+		if (isHovered && hasMultipleImages) {
+			interval = setInterval(() => {
+				setCurrentIndex((prev) => (prev + 1) % displayImages.length)
+			}, 1500) // Slide every 1.5s
+		} else {
+			setCurrentIndex(0)
+		}
+		return () => clearInterval(interval)
+	}, [isHovered, hasMultipleImages, displayImages.length])
+
+	const currentImg = displayImages[currentIndex]
+	const blurUrl = typeof currentImg === 'string' && currentImg.includes('upload') 
+		? currentImg.replace('/upload/', '/upload/w_20,e_blur:1000,q_auto,f_webp/') 
 		: undefined;
 
 	return (
 		<motion.div 
 			className={`cursor-pointer group h-full ${fullWidth ? 'w-full' : 'max-sm:grid max-sm:justify-center'}`}
 			whileHover={{ opacity: 0.85, transition: { duration: 0.2, ease: "easeInOut" } }}
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
 		>
 			<Link href={link} className="h-full block">
 				<div
 					className={`bg-white rounded-2xl overflow-hidden mb-[2rem] text-[#333] grid border border-gray-200 transition-colors duration-300 hover:border-gray-400 h-full flex flex-col ${fullWidth ? 'w-full' : 'w-[16rem] max-sm:mx-auto max-sm:w-[13rem] max-md:w-[14rem] max-[460px]:w-[18rem]'}`}
 				>
 					<div className={`w-full relative overflow-hidden bg-gray-50 ${fullWidth ? 'h-[24rem]' : 'h-[14rem]'}`}>
-						<Image 
-							src={img} 
-							fill 
-							className='object-cover group-hover:scale-105 transition-transform duration-500 ease-out' 
-							alt={title}
-							placeholder={blurUrl ? "blur" : "empty"}
-							blurDataURL={blurUrl}
-							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-						/>
+						<AnimatePresence mode="wait">
+							<motion.div
+								key={currentIndex}
+								initial={{ opacity: 0, scale: 1.05 }}
+								animate={{ opacity: 1, scale: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.4 }}
+								className="absolute inset-0"
+							>
+								<Image 
+									src={currentImg} 
+									fill 
+									className='object-cover' 
+									alt={title}
+									placeholder={blurUrl ? "blur" : "empty"}
+									blurDataURL={blurUrl}
+									sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+								/>
+							</motion.div>
+						</AnimatePresence>
+						
+						{hasMultipleImages && (
+							<div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+								{displayImages.map((_, idx) => (
+									<div 
+										key={idx}
+										className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-4 bg-white shadow-sm' : 'w-1.5 bg-white/50'}`}
+									/>
+								))}
+							</div>
+						)}
 					</div>
 					<div className="p-5 flex flex-col justify-between flex-grow">
 						<div>
 							<h3 className='font-bold text-[1rem] leading-tight text-slate-900 truncate'>{title}</h3>
-							<p className='text-[0.75rem] mt-2 text-slate-500 line-clamp-2 leading-relaxed'>
+							<p className='text-[0.75rem] mt-2 text-slate-500 line-clamp-3 leading-relaxed'>
 								{description}
 							</p>
 						</div>

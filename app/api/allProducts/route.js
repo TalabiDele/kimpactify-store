@@ -1,6 +1,8 @@
 import connectDB from '/config/database'
 import Product from '/models/Products'
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (request) => {
 	try {
 		await connectDB()
